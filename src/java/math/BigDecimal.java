@@ -1,19 +1,17 @@
 /*
- * @(#)BigDecimal.java	1.11 01/12/12
+ * @(#)BigDecimal.java	1.11 2001年12月12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002年 Sun Microsystems，Inc.保留所有权利。
+ * SUN专有/机密。使用受许可条款约束。
  */
 
 package java.math;
 
 /**
- * Immutable, arbitrary-precision signed decimal numbers.  A BigDecimal
- * consists of an arbitrary precision integer value and a non-negative
- * integer scale, which represents the number of decimal digits to the
- * right of the decimal point.  (The number represented by the BigDecimal
- * is intVal/10**scale.)  BigDecimals provide operations for basic arithmetic,
- * scale manipulation, comparison, format conversion and hashing.
+ * 不可变的、任意精度的有符号十进制数字。
+ * BigDecimal 由任意精度数值（正数或负数）组成。
+ * 表示数字的小数位在小数点右边（BigDecimal表示的数字/10来表示）
+ * BigDecimals 提供基本算数运算、比例运算、比较、格式转换和hash。
  *
  * <p>The BigDecimal class gives its user complete control over rounding
  * behavior, forcing the user to explicitly specify a rounding behavior for
