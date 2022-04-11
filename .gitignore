@@ -27,11 +27,9 @@ dependency-reduced-pom.xml
 *.iml
 *.ipr
 *.iws
-*.idea
 
 #过滤文件夹target,.idea
 /target
-/.idea
 /out
 
 #编译文件
