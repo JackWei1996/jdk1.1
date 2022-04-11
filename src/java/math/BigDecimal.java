@@ -2,45 +2,35 @@
  * @(#)BigDecimal.java	1.11 2001年12月12
  *
  * 版权所有 2002年 Sun Microsystems，Inc.保留所有权利。
- * SUN专有/机密。使用受许可条款约束。
+ * SUN 所有者/机密。使用受许可条款约束。
  */
 
 package java.math;
 
 /**
- * 不可变的、任意精度的有符号十进制数字。
- * BigDecimal 由任意精度数值（正数或负数）组成。
- * 表示数字的小数位在小数点右边（BigDecimal表示的数字/10来表示）
- * BigDecimals 提供基本算数运算、比例运算、比较、格式转换和hash。
+ * 不可变的、任意精度的有符号十进制数字，可以由BigDecimal类来表示。
+ * 其表示数字的小数位在小数点右边（比如0.123456）
+ * BigDecimals类并提供基本算数运算、精确的比例运算、数值比较、格式转换和hash。
  *
- * <p>The BigDecimal class gives its user complete control over rounding
- * behavior, forcing the user to explicitly specify a rounding behavior for
- * operations capable of discarding precision (divide and setScale).  Eight
- * <em>rounding modes</em> are provided for this purpose.
+ * BigDecimal类可以使用户能够完全控制精度问题，用户可指定能够丢弃精度（除法运算和比例缩放）的操作。
+ * 为此提供了八种舍入模式可供选择。
  *
- * Two types of operations are provided for manipulating the scale of a
- * BigDecimal: scaling/rounding operations and decimal point motion operations.
- * Scaling/Rounding operations (SetScale) return a BigDecimal whose value is
- * approximately (or exactly) equal to that of the operand, but whose scale is
- * the specified value; that is, they increase or decrease the precision
- * of the number with minimal effect on its value.  Decimal point motion
- * operations (movePointLeft and movePointRight) return a BigDecimal created
- * from the operand by moving the decimal point a specified distance in the
- * specified direction; that is, they change a number's value without affecting
- * its precision.
+ * BigDecimal类提供了两种情况来操作数值：缩放/舍入和小数点移动。
+ * 缩放/舍入操作将返回一个BigDecimal值为近似值来等于操作数，而不影响精度。
+ * 小数点移动分为左移和右移，通过移动小数点指定的距离，使其值改变，却不影响它的精度。
  *
  * @see BigInteger
- * @version 	1.11, 01/12/12
+ * @version 	1.11, 2001/12/12
  * @author      Josh Bloch
  */
 public class BigDecimal extends Number {
     private BigInteger intVal;
     private int	       scale = 0;
 
-    /* Appease the serialization gods */
+    /* 安抚众神 */
     private static final long serialVersionUID = 6108874887143696463L;
 
-    // Constructors
+    // 构造器
 
     /**
      * Constructs a BigDecimal from a string containing an optional minus
