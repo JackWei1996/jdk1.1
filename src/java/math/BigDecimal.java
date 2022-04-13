@@ -8,20 +8,21 @@
 package java.math;
 
 /**
- * 不可变的、任意精度的有符号十进制数字，可以由BigDecimal类来表示。
- * 其表示数字的小数位在小数点右边（比如0.123456）
- * BigDecimals类并提供基本算数运算、精确的比例运算、数值比较、格式转换和hash。
+ * 不可变的、任意精度的有符号十进制数。 BigDecimal 由任意精度整数值和非负整数刻度组成，表示小数点右侧的小数位数。
+ * （BigDecimal 表示的数字是 intVal/10**scale）BigDecimal 提供基本算术、比例操作、比较、格式转换和散列的操作。
  *
- * BigDecimal类可以使用户能够完全控制精度问题，用户可指定能够丢弃精度（除法运算和比例缩放）的操作。
- * 为此提供了八种舍入模式可供选择。
+ * BigDecimal 类让用户可以完全控制舍入行为，强制用户为能够丢弃精度的操作（除法和SetScale）显式指定舍入行为。为此提供了八种舍入模式。
  *
- * BigDecimal类提供了两种情况来操作数值：缩放/舍入和小数点移动。
- * 缩放/舍入操作将返回一个BigDecimal值为近似值来等于操作数，而不影响精度。
- * 小数点移动分为左移和右移，通过移动小数点指定的距离，使其值改变，却不影响它的精度。
+ * 为操纵 BigDecimal 的比例提供了两种类型的操作：缩放/舍入操作和小数点运动操作。
+ * 缩放/舍入操作 (SetScale) 返回一个 BigDecimal，其值大约（或完全）等于操作数的值，但其比例为指定值；
+ *     也就是说，它们会增加或减少数字的精度，而对其值的影响最小。
+ * 小数点移动操作（movePointLeft 和 movePointRight）返回一个 BigDecimal，
+ *     该 BigDecimal 通过将小数点沿指定方向移动指定距离从而操作数；
+ *     也就是说，它们在不影响其精度的情况下更改数字的值。
  *
  * @see BigInteger
  * @version 	1.11, 2001/12/12
- * @author      Josh Bloch
+ * @author      Josh Bloch（乔什·布洛赫）
  */
 public class BigDecimal extends Number {
     private BigInteger intVal;
@@ -33,28 +34,23 @@ public class BigDecimal extends Number {
     // 构造器
 
     /**
-     * Constructs a BigDecimal from a string containing an optional minus
-     * sign followed by a sequence of zero or more decimal digits, optionally
-     * followed by a fraction, which consists of a decimal point followed by
-     * zero or more decimal digits.  The string must contain at least one
-     * digit in the integer or fractional part.  The scale of the resulting
-     * BigDecimal will be the number of digits to the right of the decimal
-     * point in the string, or 0 if the string contains no decimal point.
-     * The character-to-digit mapping is provided by Character.digit.
-     * Any extraneous characters (including whitespace) will result in
-     * a NumberFormatException.
+     * 从包含可选负号的字符串构造 BigDecimal，该字符串后跟零个或多个小数位的序列，
+	 * 可选地后跟一个分数，该分数由一个小数点后跟零个或多个小数位组成。
+	 * 字符串的整数或小数部分必须至少包含一位数字。
+	 * 生成的 BigDecimal 的比例将是字符串中小数点右侧的位数，如果字符串不包含小数点，则为 0。
+	 * 字符到数字的映射由 Character.digit 提供。任何无关字符（包括空格）都将导致 NumberFormatException。
      */
     public BigDecimal(String val) throws NumberFormatException {
 	int pointPos = val.indexOf('.');
-	if (pointPos == -1) {			 /* e.g. "123" */
+	if (pointPos == -1) {			 /* e.g.（例如） "123" */
 	    intVal = new BigInteger(val);
-	} else if (pointPos == val.length()-1) { /* e.g. "123." */
+	} else if (pointPos == val.length()-1) { /* e.g.（例如） "123." */
 	    intVal = new BigInteger(val.substring(0, val.length()-1));
-	} else {    /* Fraction part exists */
+	} else {    /* 分数部分存在 */
 	    String fracString = val.substring(pointPos+1);
 	    scale = fracString.length();
 	    BigInteger fraction =  new BigInteger(fracString);
-	    if (fraction.signum() < 0)		 /* ".-123" illegal! */
+	    if (fraction.signum() < 0)		 /* ".-123" 非法的数字! */
 		throw new NumberFormatException();
 
 	    if (pointPos==0) {			 /* e.g.  ".123" */
@@ -72,18 +68,15 @@ public class BigDecimal extends Number {
     }
 
     /**
-     * Translates a double into a BigDecimal.  The scale of the BigDecimal
-     * is the smallest value such that (10**scale * val) is an integer.
-     * A double whose value is -infinity, +infinity or NaN will result in a
-     * NumberFormatException.
+     * 将 double 转换为 BigDecimal。 BigDecimal 的小数位数是使 (10**scale * val) 为整数的最小值。
+	 * 值为 -infinity（无穷）、+infinity 或 NaN 的 double 将导致 NumberFormatException。
      */
     public BigDecimal(double val) throws NumberFormatException{
 	if (Double.isInfinite(val) || Double.isNaN(val))
 	    throw new NumberFormatException("Infinite or NaN");
 
 	/*
-	 * Translate the double into sign, exponent and mantissa, according
-	 * to the formulae in JLS, Section 20.10.22.
+	 * 根据 JLS 第 20.10.22 节中的公式，将双精度数转换为符号、指数和尾数。
 	 */
 	long valBits = Double.doubleToLongBits(val);
 	int sign = ((valBits >> 63)==0 ? 1 : -1);
@@ -91,24 +84,23 @@ public class BigDecimal extends Number {
 	long mantissa = (exponent==0 ? (valBits & ((1L<<52) - 1)) << 1
 				     : (valBits & ((1L<<52) - 1)) | (1L<<52));
 	exponent -= 1075;
-	/* At this point, val == sign * mantissa * 2**exponent */
+	/* 此时, val == sign * mantissa * 2**exponent */
 
 	/*
-	 * Special case zero to to supress nonterminating normalization
-	 * and bogus scale calculation.
+	 * 特殊情况为零以抑制非终止归一化和虚假比例计算。
 	 */
 	if (mantissa == 0) {
 	    intVal = BigInteger.valueOf(0);
 	    return;
 	}
 
-	/* Normalize */
-	while((mantissa & 1) == 0) {    /*  i.e., Mantissa is even */
+	/* Normalize（标准化） */
+	while((mantissa & 1) == 0) {    /*  i.e.（那就是，换句话说）, 尾数是偶数 */
 	    mantissa >>= 1;
 	    exponent++;
 	}
 
-	/* Calculate intVal and scale */
+	/* 计算 intVal 和比例 */
 	intVal = BigInteger.valueOf(sign*mantissa);
 	if (exponent < 0) {
 	    intVal = intVal.multiply(BigInteger.valueOf(5).pow(-exponent));
@@ -119,17 +111,15 @@ public class BigDecimal extends Number {
     }
 
     /**
-     * Translates a BigInteger into a BigDecimal.  The scale of the BigDecimal
-     * is zero.
+     * 将 BigInteger 转换为 BigDecimal。 BigDecimal 的小数位数为零
      */
     public BigDecimal(BigInteger val) {
 	intVal = val;
     }
 
     /**
-     * Translates a BigInteger and a scale into a BigDecimal.  The value
-     * of the BigDecimal is (BigInteger/10**scale).  A negative scale
-     * will result in a NumberFormatException.
+     * 将 BigInteger 根据比例转换为 BigDecimal。 BigDecimal 的值为 (BigInteger/10**scale)。
+	 * 负比例将导致 NumberFormatException
      */
     public BigDecimal(BigInteger val, int scale) throws NumberFormatException {
 	if (scale < 0)
@@ -140,14 +130,12 @@ public class BigDecimal extends Number {
     }
 
 
-    // Static Factory Methods
+    // Static Factory Methods（静态工厂方法）
 
     /**
-     * Returns a BigDecimal with a value of (val/10**scale).  This factory
-     * is provided in preference to a (long) constructor because it allows
-     * for reuse of frequently used BigDecimals (like 0 and 1), obviating
-     * the need for exported constants.  A negative scale will result in a
-     * NumberFormatException.
+     * 返回值为 (val/10**scale) 的 BigDecimal。
+	 * 该工厂优先于构造函数提供，因为它允许重用经常使用的 BigDecimal（如 0 和 1），从而无需导出常量。
+	 * 负比例将导致 NumberFormatException
      */
     public static BigDecimal valueOf(long val, int scale)
 	    throws NumberFormatException {
@@ -155,21 +143,18 @@ public class BigDecimal extends Number {
     }
 
     /**
-     * Returns a BigDecimal with the given value and a scale of zero.
-     * This factory is provided in preference to a (long) constructor
-     * because it allows for reuse of frequently used BigDecimals (like
-     * 0 and 1), obviating the need for exported constants.
+     * 返回具有给定值和零刻度的 BigDecimal。该工厂优先于构造函数提供，
+	 * 因为它允许重用经常使用的 BigDecimal（如 0 和 1），从而无需导出常量
      */
     public static BigDecimal valueOf(long val) {
 	return valueOf(val, 0);
     }
 
 
-    // Arithmetic Operations
+    // Arithmetic Operations（算术运算）
 
     /**
-     * Returns a BigDecimal whose value is (this + val), and whose scale is
-     * MAX(this.scale(), val.scale).
+     * 返回一个 BigDecimal，其值为 (this + val)，其比例为 MAX(this.scale(), val.scale)。
      */
     public BigDecimal add(BigDecimal val){
 	BigDecimal arg[] = new BigDecimal[2];
@@ -179,8 +164,7 @@ public class BigDecimal extends Number {
     }
 
     /**
-     * Returns a BigDecimal whose value is (this - val), and whose scale is
-     * MAX(this.scale(), val.scale).
+     * 返回一个 BigDecimal，其值为 (this - val)，其比例为 MAX(this.scale(), val.scale)。
      */
     public BigDecimal subtract(BigDecimal val){
 	BigDecimal arg[] = new BigDecimal[2];
@@ -191,22 +175,18 @@ public class BigDecimal extends Number {
     }
 
     /**
-     * Returns a BigDecimal whose value is (this * val), and whose scale is
-     * this.scale() + val.scale.
+     * 返回一个 BigDecimal，其值为 (this * val)，其比例为 this.scale() + val.scale。
      */
     public BigDecimal multiply(BigDecimal val){
 	return new BigDecimal(intVal.multiply(val.intVal), scale+val.scale);
     }
 
     /**
-     * Returns a BigDecimal whose value is (this / val), and whose scale
-     * is as specified.  If rounding must be performed to generate a
-     * result with the given scale, the specified rounding mode is
-     * applied.  Throws an ArithmeticException if val == 0, scale < 0,
-     * or the rounding mode is ROUND_UNNECESSARY and the specified scale
-     * is insufficient to represent the result of the division exactly.
-     * Throws an IllegalArgumentException if roundingMode does not
-     * represent a valid rounding mode.
+     * 返回一个 BigDecimal，其值为 (this / val)，其舍人模式为指定的。
+	 * 如果必须执行舍入以生成具有给定比例的结果，则应用指定舍入模式。
+	 * 如果 val == 0、scale < 0 或舍入模式为 ROUND_UNNECESSARY
+	 *     并且指定的比例不足以准确表示除法的结果，则引发 ArithmeticException。
+	 * 如果 roundingMode 不表示有效的舍入模式，则引发 IllegalArgumentException
      */
     public BigDecimal divide(BigDecimal val, int scale, int roundingMode)
 	    throws ArithmeticException, IllegalArgumentException {
@@ -216,8 +196,7 @@ public class BigDecimal extends Number {
 	    throw new IllegalArgumentException("Invalid rounding mode");
 
 	/*
-	 * Rescale dividend or divisor (whichever can be "upscaled" to
-	 * produce correctly scaled quotient).
+	 * 重新调整被除数或除数（无论哪个可以“放大”以产生正确缩放的商）。
 	 */
 	BigDecimal dividend, divisor;
 	if (scale + val.scale >= this.scale) {
@@ -228,39 +207,39 @@ public class BigDecimal extends Number {
 	    divisor = val.setScale(this.scale - scale);
 	}
 
-	/* Do the division and return result if it's exact */
+	/* 如果准确，则进行除法并返回结果 */
 	BigInteger i[] = dividend.intVal.divideAndRemainder(divisor.intVal);
 	BigInteger q = i[0], r = i[1];
 	if (r.signum() == 0)
 	    return new BigDecimal(q, scale);
-	else if (roundingMode == ROUND_UNNECESSARY) /* Rounding prohibited */
+	else if (roundingMode == ROUND_UNNECESSARY) /* Rounding prohibited（禁止四舍五入） */
 	    throw new ArithmeticException("Rounding necessary");
 
-	/* Round as appropriate */
-	int signum = dividend.signum() * divisor.signum(); /* Sign of result */
+	/* 适当取整 */
+	int signum = dividend.signum() * divisor.signum(); /* Sign of result（结果的标志） */
 	boolean increment;
-	if (roundingMode == ROUND_UP) {		    /* Away from zero */
+	if (roundingMode == ROUND_UP) {		    /* Away from zero（远离零） */
 	    increment = true;
-	} else if (roundingMode == ROUND_DOWN) {    /* Towards zero */
+	} else if (roundingMode == ROUND_DOWN) {    /* Towards zero （趋于零）*/
 	    increment = false;
-	} else if (roundingMode == ROUND_CEILING) { /* Towards +infinity */
+	} else if (roundingMode == ROUND_CEILING) { /* Towards +infinity （趋于正无穷大）*/
 	    increment = (signum > 0);
-	} else if (roundingMode == ROUND_FLOOR) {   /* Towards -infinity */
+	} else if (roundingMode == ROUND_FLOOR) {   /* Towards -infinity （趋于负无穷大）*/
 	    increment = (signum < 0);
-	} else { /* Remaining modes based on nearest-neighbor determination */
+	} else { /* 基于最近邻确定的剩余模式 */
 	    int cmpFracHalf = r.abs().multiply(BigInteger.valueOf(2)).
 					 compareTo(divisor.intVal.abs());
-	    if (cmpFracHalf < 0) {	   /* We're closer to higher digit */
+	    if (cmpFracHalf < 0) {	   /* 我们更接近更高的数字 */
 		increment = false;
-	    } else if (cmpFracHalf > 0) {  /* We're closer to lower digit */
+	    } else if (cmpFracHalf > 0) {  /* 我们更接近低位数 */
 		increment = true;
-	    } else { 			   /* We're dead-center */
+	    } else { 			   /* We're dead-center (我们死定了)*/
 		if (roundingMode == ROUND_HALF_UP)
 		    increment = true;
 		else if (roundingMode == ROUND_HALF_DOWN)
 		    increment = false;
 		else  /* roundingMode == ROUND_HALF_EVEN */
-		    increment = q.testBit(0);	/* true iff q is odd */
+		    increment = q.testBit(0);	/* true iff q is odd（当且仅当q为奇数） */
 	    }
 	}
 	return (increment
@@ -269,12 +248,10 @@ public class BigDecimal extends Number {
     }
 
     /**
-     * Returns a BigDecimal whose value is (this / val), and whose scale
-     * is this.scale().  If rounding must be performed to generate a
-     * result with the given scale, the specified rounding mode is
-     * applied.  Throws an ArithmeticException if val == 0.  Throws
-     * an IllegalArgumentException if roundingMode does not represent a
-     * valid rounding mode.
+     * 返回一个 BigDecimal，其值为 (this / val)，其刻度为 this.scale()。
+	 * 如果必须执行舍入以生成具有给定比例的结果，则应用指定的舍入模式。
+	 * 如果 val == 0，则引发 ArithmeticException。
+	 * 如果 roundingMode 不代表有效的舍入模式，则引发 IllegalArgumentException
      */
     public BigDecimal divide(BigDecimal val, int roundingMode)
 	throws ArithmeticException, IllegalArgumentException{
@@ -282,112 +259,91 @@ public class BigDecimal extends Number {
     }
 
    /**
-    * Returns a BigDecimal whose value is the absolute value of this
-    * number, and whose scale is this.scale().
+    * 返回一个 BigDecimal，其值为该数字的绝对值，其刻度为 this.scale()
     */
     public BigDecimal abs(){
 	return (signum() < 0 ? negate() : this);
     }
 
     /**
-     * Returns a BigDecimal whose value is -1 * this, and whose scale is
-     * this.scale().
+     * 返回一个 BigDecimal，其值为 -1 * this，其比例为 this.scale()
      */
     public BigDecimal negate(){
 	return new BigDecimal(intVal.negate(), scale);
     }
 
     /**
-     * Returns the signum function of this number (i.e., -1, 0 or 1 as
-     * the value of this number is negative, zero or positive).
+     * 返回此数字的符号函数（即，-1、0 或 1，因为此数字的值为负、零或正）。
      */
     public int signum(){
 	return intVal.signum();
     }
 
     /**
-     * Returns the scale of this number.
+     * 返回scale
      */
     public int scale(){
 	return scale;
     }
 
 
-    // Rounding Modes
+    // Rounding Modes(舍入模式)
 
     /**
-     * Always increment the digit prior to a non-zero discarded fraction.
-     * Note that this rounding mode never decreases the magnitude.
-     * (Rounds away from zero.)
+     * 始终在非零丢弃分数之前增加数字。请注意，这种舍入模式永远不会降低幅度。 （从零四舍五入。）
      */
     public final static int ROUND_UP = 		 0;
 
     /**
-     * Never increment the digit prior to a discarded fraction (i.e.,
-     * truncate).  Note that this rounding mode never increases the magnitude.
-     * (Rounds towards zero.)
+     * 永远不要在丢弃的分数之前增加数字（即截断）。请注意，这种舍入模式永远不会增加幅度。 （向零舍入。）
      */
     public final static int ROUND_DOWN = 	 1;
 
     /**
-     * If the BigDecimal is positive, behave as for ROUND_UP; if negative,
-     * behave as for ROUND_DOWN.  Note that this rounding mode never decreases
-     * the value.  (Rounds towards positive infinity.)
+     * 如果 BigDecimal 为正数，则与 ROUND_UP 一样；如果为负，则表现与 ROUND_DOWN 相同。
+	 * 请注意，此舍入模式永远不会减少该值。 （向正无穷大四舍五入。）
      */
     public final static int ROUND_CEILING = 	 2;
 
     /**
-     * If the BigDecimal is positive, behave as for ROUND_DOWN; if negative
-     * behave as for ROUND_UP.  Note that this rounding mode never increases
-     * the value.  (Rounds towards negative infinity.)
+     * 如果 BigDecimal 为正，则与 ROUND_DOWN 一样；如果为负，则表现为 ROUND_UP。
+	 * 请注意，此舍入模式永远不会增加该值。 （向负无穷舍入。）
      */
     public final static int ROUND_FLOOR = 	 3;
 
     /**
-     * Behave as for ROUND_UP if the discarded fraction is >= .5; otherwise,
-     * behave as for ROUND_DOWN.  (Rounds towards "nearest neighbor" unless
-     * both neighbors are equidistant, in which case rounds up.)
+     * 如果丢弃的分数 >= .5，则与 ROUND_UP 一样；否则，行为与 ROUND_DOWN 相同。
+	 * （向“最近的邻居”四舍五入，除非两个邻居是等距的，在这种情况下四舍五入。）
      */
     public final static int ROUND_HALF_UP = 	 4;
 
     /**
-     * Behave as for ROUND_UP if the discarded fraction is > .5; otherwise,
-     * behave as for ROUND_DOWN.   (Rounds towards "nearest neighbor" unless
-     * both neighbors are equidistant, in which case rounds down.)
+     * 如果丢弃的分数 > .5，则与 ROUND_UP 一样；否则，行为与 ROUND_DOWN 相同。
+	 * （向“最近的邻居”四舍五入，除非两个邻居是等距的，在这种情况下向下舍入。）
      */
     public final static int ROUND_HALF_DOWN = 	 5;
 
     /**
-     * Behave as for ROUND_HALF_UP if the digit to the left of the discarded
-     * fraction is odd; behave as for ROUND_HALF_DOWN if it's even.  (Rounds
-     * towards the "nearest neighbor" unless both neighbors are equidistant,
-     * in which case, rounds towards the even neighbor.)
+     * 如果丢弃的分数左边的数字是奇数，则与 ROUND_HALF_UP 一样；如果它是偶数，则表现为 ROUND_HALF_DOWN。
+	 * （向“最近的邻居”四舍五入，除非两个邻居距离相等，在这种情况下，向偶数邻居四舍五入。）
      */
     public final static int ROUND_HALF_EVEN = 	 6;
 
     /**
-     * This "pseudo-rounding-mode" is actually an assertion that the requested
-     * operation has an exact result, hence no rounding is necessary.  If this
-     * rounding mode is specified on an operation that yields an inexact result,
-     * an arithmetic exception is thrown.
+     * 这种“伪舍入模式”实际上是断言所请求的操作具有精确的结果，因此不需要舍入。
+	 * 如果在产生不精确结果的操作上指定此舍入模式，则会引发算术异常。
      */
     public final static int ROUND_UNNECESSARY =  7;
 
 
-    // Scaling/Rounding Operations
+    // Scaling/Rounding Operations（缩放四舍五入操作）
 
     /**
-     * Returns a BigDecimal whose scale is the specified value, and whose
-     * integer value is determined by multiplying or dividing this BigDecimal's
-     * integer value by the appropriate power of ten to maintain the overall
-     * value.  If the scale is reduced by the operation, the integer value
-     * must be divided (rather than multiplied), and precision may be lost;
-     * in this case, the specified rounding mode is applied to the division.
-     * Throws an ArithmeticException if scale is negative, or the rounding
-     * mode is ROUND_UNNECESSARY and it is impossible to perform the
-     * specified scaling operation without loss of precision.  Throws an
-     * IllegalArgumentException if roundingMode does not represent a valid
-     * rounding mode.
+     * 返回一个 BigDecimal，其比例为指定值，其整数值是通过将此 BigDecimal 的整数值乘以或除以适当的 10 次方来确定的，以保持整体值。
+	 * 如果通过操作缩小比例，则整数值必须除（而不是相乘），可能会丢失精度；在这种情况下，指定的舍入模式应用于除法。
+	 * 如果 scale 为负数，或者舍入模式为 ROUND_UNNECESSARY 并且不可能在不损失精度的情况下执行指定的缩放操作，
+	 * 则引发 ArithmeticException。
+	 * 如果 roundingMode 不表示有效的舍入模式，则引发 IllegalArgumentException。
      */
     public BigDecimal setScale(int scale, int roundingMode)
 	throws ArithmeticException, IllegalArgumentException {
@@ -396,7 +352,7 @@ public class BigDecimal extends Number {
 	if (roundingMode < ROUND_UP || roundingMode > ROUND_UNNECESSARY)
 	    throw new IllegalArgumentException("Invalid rounding mode");
 
-	/* Handle the easy cases */
+	/* Handle the easy cases（处理简单的案件） */
 	if (scale == this.scale)
 	    return this;
 	else if (scale > this.scale)
@@ -407,17 +363,12 @@ public class BigDecimal extends Number {
     }
 
     /**
-     * Returns a BigDecimal whose scale is the specified value, and whose
-     * value is exactly equal to this number's.  Throws an ArithmeticException
-     * if this is not possible.  This call is typically used to increase
-     * the scale, in which case it is guaranteed that there exists a BigDecimal
-     * of the specified scale and the correct value.  The call can also be used
-     * to reduce the scale if the caller knows that the number has sufficiently
-     * many zeros at the end of its fractional part (i.e., factors of ten in
-     * its integer value) to allow for the rescaling without loss of precision.
-     * Note that this call returns the same result as the two argument version
-     * of setScale, but saves the caller the trouble of specifying a rounding
-     * mode in cases where it is irrelevant.
+     * 返回一个 BigDecimal，它的比例是指定的值，并且它的值正好等于这个数字的值。
+	 * 如果这是不可能的，则抛出 ArithmeticException。
+	 * 此调用通常用于增加比例，在这种情况下，可以保证存在指定比例的 BigDecimal 和正确的值。
+	 * 如果调用者知道该数字在其小数部分的末尾有足够多的零（即，其整数值中的 10 倍）以允许在不损失精度的情况下重新缩放，
+	 * 则该调用也可用于减小比例。
+	 * 请注意，此调用返回与 setScale 的两个参数版本相同的结果，但在不相关的情况下为调用者省去了指定舍入模式的麻烦。
      */
     public BigDecimal setScale(int scale)
 	throws ArithmeticException, IllegalArgumentException
@@ -426,50 +377,43 @@ public class BigDecimal extends Number {
     }
 
 
-    // Decimal Point Motion Operations
+    // Decimal Point Motion Operations（小数点运动运算）
 
     /**
-     * Returns a BigDecimal which is equivalent to this one with the decimal
-     * point moved n places to the left.  If n is non-negative, the call merely
-     * adds n to the scale.  If n is negative, the call is equivalent to
-     * movePointRight(-n).  (The BigDecimal returned by this call has value
-     * (this * 10**-n) and scale MAX(this.scale()+n, 0).)
+     * 返回一个 BigDecimal，它等价于小数点向左移动 n 位。如果 n 为非负数，则调用仅将 n 添加到标度中。
+	 * 如果 n 为负数，则调用等效于 movePointRight(-n)。
+	 * （此调用返回的 BigDecimal 具有值 (this * 10**-n) 和 scale MAX(this.scale()+n, 0)。）
      */
     public BigDecimal movePointLeft(int n){
 	return (n>=0 ? new BigDecimal(intVal, scale+n) : movePointRight(-n));
     }
 
     /**
-     * Moves the decimal point the specified number of places to the right.
-     * If this number's scale is >= n, the call merely subtracts n from the
-     * scale; otherwise, it sets the scale to zero, and multiplies the integer
-     * value by 10 ** (n - this.scale).  If n is negative, the call is
-     * equivalent to movePointLeft(-n). (The BigDecimal returned by this call
-     * has value (this * 10**n) and scale MAX(this.scale()-n, 0).)
+     * 将小数点向右移动指定的位数。如果这个数字的比例 >= n，调用只是从比例中减去 n；
+	 * 否则，它将比例设置为零，并将整数值乘以 10 ** (n - this.scale)。
+	 * 如果 n 为负数，则调用等效于 movePointLeft(-n)。
+	 * （此调用返回的 BigDecimal 具有值 (this * 10**n) 和 scale MAX(this.scale()-n, 0)。）
      */
     public BigDecimal movePointRight(int n){
 	return (scale >= n ? new BigDecimal(intVal, scale-n)
 		           : new BigDecimal(timesTenToThe(intVal, n-scale),0));
     }
 
-    // Comparison Operations
+    // Comparison Operations（比较操作）
 
     /**
-     * Returns -1, 0 or 1 as this number is less than, equal to, or greater
-     * than val.  Two BigDecimals that are equal in value but have a
-     * different scale (e.g., 2.0, 2.00) are considered equal by this method.
-     * This method is provided in preference to individual methods for each
-     * of the six boolean comparison operators (<, ==, >, >=, !=, <=).  The
-     * suggested idiom for performing these comparisons is:  (x.compareTo(y)
-     * <op> 0), where <op> is one of the six comparison operators.
+     * 返回 -1、0 或 1，因为此数字小于、等于或大于 val。
+	 * 此方法认为两个值相等但比例不同（例如，2.0、2.00）的 BigDecimal 是相等的。
+	 * 此方法优先于六个布尔比较运算符（<、==、>、>=、!=、<=）中的每一个的单独方法提供。
+	 * 执行这些比较的建议习语是：(x.compareTo(y)  0), 其中   是六个比较运算符之一。
      */
     public int compareTo(BigDecimal val){
-	/* Optimization: would run fine without the next three lines */
+	/* Optimization: would run fine without the next three lines（优化：没有接下来的三行就可以正常运行） */
 	int sigDiff = signum() - val.signum();
 	if (sigDiff != 0)
 	    return (sigDiff > 0 ? 1 : -1);
 
-	/* If signs match, scale and compare intVals */
+	/* 如果符号匹配，缩放并比较 intVals */
 	BigDecimal arg[] = new BigDecimal[2];
 	arg[0] = this;	arg[1] = val;
 	matchScale(arg);
@@ -477,10 +421,9 @@ public class BigDecimal extends Number {
     }
 
     /**
-     * Returns true iff x is a BigDecimal whose value is equal to this number.
-     * This method is provided so that BigDecimals can be used as hash keys.
-     * Unlike compareTo, this method considers two BigDecimals equal only
-     * if they are equal in value and scale.
+     * 如果 x 是一个 BigDecimal，其值等于该数字，则返回 true。
+	 * 提供此方法以便 BigDecimals 可以用作散列键。
+	 * 与 compareTo 不同，此方法仅当两个 BigDecimal 的值和比例相等时才认为它们相等。
      */
     public boolean equals(Object x){
 	if (!(x instanceof BigDecimal))
@@ -491,60 +434,52 @@ public class BigDecimal extends Number {
     }
 
     /**
-     * Returns the BigDecimal whose value is the lesser of this and val.
-     * If the values are equal (as defined by the compareTo operator),
-     * either may be returned.
+     * 返回值为 this 和 val 中较小值的 BigDecimal。如果值相等（由 compareTo 运算符定义），则可以返回任何一个。
      */
     public BigDecimal min(BigDecimal val){
 	return (compareTo(val)<0 ? this : val);
     }
 
     /**
-     * Returns the BigDecimal whose value is the greater of this and val.
-     * If the values are equal (as defined by the compareTo operator),
-     * either may be returned.
+     * 返回值为 this 和 val 中较大者的 BigDecimal。如果值相等（由 compareTo 运算符定义），则可以返回任何一个。
      */
     public BigDecimal max(BigDecimal val){
 	return (compareTo(val)>0 ? this : val);
     }
 
 
-    // Hash Function
+    // Hash Function（哈希函数）
 
     /**
-     * Computes a hash code for this object.  Note that two BigDecimals
-     * that are numerically equal but differ in scale (e.g., 2.0, 2.00) will
-     * not generally have the same hash code.
+     * 计算此对象的哈希码。请注意，数值相等但比例不同的两个 BigDecimal（例如，2.0、2.00）通常不会具有相同的哈希码。
      */
     public int hashCode(){
 	return 37*intVal.hashCode() + scale;
     }
 
-    // Format Converters
+    // Format Converters（格式转换器）
 
     /**
-     * Returns the string representation of this number.  The digit-to-
-     * character mapping provided by Character.forDigit is used.  The minus
-     * sign and decimal point are used to indicate sign and scale.  (This
-     * representation is compatible with the (String, int) constructor.)
+     * 返回此数字的字符串表示形式。使用 Character.forDigit 提供的数字到字符映射。
+	 * 减号和小数点用于表示符号和比例。 （此表示与 (String, int) 构造函数兼容。）
      */
     public String toString(){
-	if (scale == 0)	/* No decimal point */
+	if (scale == 0)	/* No decimal point（没有小数点） */
 	    return intVal.toString();
 
-	/* Insert decimal point */
+	/* Insert decimal point （插入小数点）*/
 	StringBuffer buf;
 	String intString = intVal.abs().toString();
 	int signum = signum();
 	int insertionPoint = intString.length() - scale;
-	if (insertionPoint == 0) {  /* Point goes right before intVal */
+	if (insertionPoint == 0) {  /* Point goes right before intVal（点在 intVal 之前） */
 	    return (signum<0 ? "-0." : "0.") + intString;
-	} else if (insertionPoint > 0) { /* Point goes inside intVal */
+	} else if (insertionPoint > 0) { /* Point goes inside intVal（点进入 intVal） */
 	    buf = new StringBuffer(intString);
 	    buf.insert(insertionPoint, '.');
 	    if (signum < 0)
 		buf.insert(0, '-');
-	} else { /* We must insert zeros between point and intVal */
+	} else { /* We must insert zeros between point and intVal(我们必须在 point 和 intVal 之间插入零) */
 	    buf = new StringBuffer(3-insertionPoint + intString.length());
 	    buf.append(signum<0 ? "-0." : "0.");
 	    for (int i=0; i<-insertionPoint; i++)
@@ -555,9 +490,7 @@ public class BigDecimal extends Number {
     }
 
     /**
-     * Converts this number to a BigInteger.  Standard narrowing primitive
-     * conversion as per The Java Language Specification.  In particular,
-     * note that any fractional part of this number will be truncated.
+     * 将此数字转换为 BigInteger。根据 Java 语言规范的标准缩小原语转换。特别要注意，此数字的任何小数部分都将被截断。
      */
     public BigInteger toBigInteger(){
 	return (scale==0 ? intVal
@@ -565,49 +498,40 @@ public class BigDecimal extends Number {
     }
 
     /**
-     * Converts this number to an int.  Standard narrowing primitive conversion
-     * as per The Java Language Specification.  In particular, note that any
-     * fractional part of this number will be truncated.
+     * 将此数字转换为 int。根据 Java 语言规范的标准缩小原语转换。特别要注意，此数字的任何小数部分都将被截断。
      */
     public int intValue(){
 	return toBigInteger().intValue();
     }
 
     /**
-     * Converts this number to a long.  Standard narrowing primitive conversion
-     * as per The Java Language Specification.  In particular, note that any
-     * fractional part of this number will be truncated.
+     * 将此数字转换为长整数。根据 Java 语言规范的标准缩小原语转换。特别要注意，此数字的任何小数部分都将被截断。
      */
     public long longValue(){
 	return toBigInteger().longValue();
     }
 
     /**
-     * Converts this number to a float.  Similar to the double-to-float
-     * narrowing primitive conversion defined in The Java Language
-     * Specification: if the number has too great a magnitude to represent
-     * as a float, it will be converted to infinity or negative infinity,
-     * as appropriate.
+     * 将此数字转换为浮点数。
+	 * 类似于 Java 语言规范中定义的双浮点数缩小原语转换：如果数字的幅度太大而无法表示为浮点数，它将酌情转换为无穷大或负无穷大。
      */
     public float floatValue(){
-	/* Somewhat inefficient, but guaranteed to work. */
+	/* Somewhat inefficient, but guaranteed to work. （有点低效，但保证可以工作。）*/
 	return Float.valueOf(this.toString()).floatValue();
     }
 
     /**
-     * Converts the number to a double.  Similar to the double-to-float
-     * narrowing primitive conversion defined in The Java Language
-     * Specification: if the number has too great a magnitude to represent
-     * as a double, it will be converted to infinity or negative infinity,
-     * as appropriate.
+     * 将数字转换为双精度数。
+	 * 类似于 Java 语言规范中定义的 double 到 float 的缩小原语转换：
+	 * 如果数字的幅度太大而无法表示为 double，则将酌情将其转换为无穷大或负无穷大。
      */
     public double doubleValue(){
-	/* Somewhat inefficient, but guaranteed to work. */
+	/* Somewhat inefficient, but guaranteed to work. （有点低效，但保证可以工作。） */
 	return Double.valueOf(this.toString()).doubleValue();
     }
 
 
-    // Private "Helper" Methods
+    // Private "Helper" Methods（私有“助手”方法）
 
     /* Returns (a * 10^b) */
     private static BigInteger timesTenToThe(BigInteger a, int b) {
@@ -615,8 +539,7 @@ public class BigDecimal extends Number {
     }
 
     /*
-     * If the scales of val[0] and val[1] differ, rescale (non-destructively)
-     * the lower-scaled BigDecimal so they match.
+     * 如果 val[0] 和 val[1] 的比例不同，则重新缩放（非破坏性地）较低比例的 BigDecimal 以使其匹配。
      */
     private static void matchScale(BigDecimal[] val) {
 	if (val[0].scale < val[1].scale)
@@ -626,15 +549,14 @@ public class BigDecimal extends Number {
     }
 
     /**
-     * Reconstitute the <tt>BigDecimal</tt> instance from a stream (that is,
-     * deserialize it).
+     * 从流中重构 BigDecimal 实例（即反序列化它）。
      */
     private synchronized void readObject(java.io.ObjectInputStream s)
         throws java.io.IOException, ClassNotFoundException {
-        // Read in all fields
+        // Read in all fields（读取所有字段）
 	s.defaultReadObject();
 
-        // Validate scale factor
+        // Validate scale factor(验证scale因子)
         if (scale < 0)
 	    throw new java.io.StreamCorruptedException(
                                       "BigDecimal: Negative scale");
