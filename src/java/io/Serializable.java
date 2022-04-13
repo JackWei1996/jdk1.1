@@ -38,7 +38,7 @@ package java.io;
  * 这可以处理类已经演变为添加新字段的情况。该方法不需要关注属于其超类或子类的状态。
  * 通过使用writeObject方法或使用DataOutput支持的原始数据类型的方法将各个字段写入ObjectOutputStream来保存对象的状态。
  *
- * @author  名可名，非常名
+ * @author  unascribed（名可名，非常名）
  * @version 1.8, 2001/12/12
  * @see ObjectOutputStream
  * @see ObjectInputStream

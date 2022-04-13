@@ -27,7 +27,7 @@ public class BigDecimal extends Number {
     private BigInteger intVal;
     private int	       scale = 0;
 
-    /* 安抚众神 */
+    /* Appease the serialization gods（安抚众神） */
     private static final long serialVersionUID = 6108874887143696463L;
 
     // 构造器
