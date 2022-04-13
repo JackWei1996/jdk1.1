@@ -1,25 +1,20 @@
 /*
- * @(#)Number.java	1.22 01/12/12
+ * @(#)Number.java	1.22 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。
+ * SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.lang;
 
 /**
- * The abstract class <code>Number</code> is the superclass of 
- * classes <code>Byte</code>, <code>Double</code>, <code>Float</code>,
- * <code>Integer</code>, <code>Long</code>, and <code>Short</code>.
- * <p>
- * Subclasses of <code>Number</code> must provide methods to convert 
- * the represented numeric value to <code>byte</code>, <code>double</code>,
- * <code>float</code>, <code>int</code>, <code>long</code>, and
- * <code>short</code>.
  *
- * @author	Lee Boynton
- * @author	Arthur van Hoff
- * @version 1.22, 12/12/01
+ * 抽象类 Number 是类 Byte、 Double、Float、Integer、Long 和 Short 的超类。
+ * Number 的子类必须提供将表示的数值转换为 byte、double、float、int、long 和 short 的方法。
+ *
+ * @author	Lee Boynton（李博因顿）
+ * @author	Arthur van Hoff（阿瑟·范霍夫）
+ * @version 1.22, 2001/12/12
  * @see     Byte
  * @see     Double
  * @see     Float
@@ -30,51 +25,41 @@ package java.lang;
  */
 public abstract class Number implements java.io.Serializable {
     /**
-     * Returns the value of the specified number as an <code>int</code>.
-     * This may involve rounding.
+     * 以 int 形式返回指定数字的值。这可能涉及四舍五入。
      *
-     * @return  the numeric value represented by this object after conversion
-     *          to type <code>int</code>.
+     * @return  转换为 int 的值
      * @since   JDK1.0
      */
     public abstract int intValue();
 
     /**
-     * Returns the value of the specified number as a <code>long</code>.
-     * This may involve rounding.
+     * 以 long 形式返回指定数字的值。这可能涉及四舍五入。
      *
-     * @return  the numeric value represented by this object after conversion
-     *          to type <code>long</code>.
+     * @return  转换为 long 的值
      * @since   JDK1.0
      */
     public abstract long longValue();
 
     /**
-     * Returns the value of the specified number as a <code>float</code>.
-     * This may involve rounding.
+     * 以 float 形式返回指定数字的值。这可能涉及四舍五入。
      *
-     * @return  the numeric value represented by this object after conversion
-     *          to type <code>float</code>.
+     * @return  转换为 float 的值
      * @since   JDK1.0
      */
     public abstract float floatValue();
 
     /**
-     * Returns the value of the specified number as a <code>double</code>.
-     * This may involve rounding.
+     * 以 double 形式返回指定数字的值。这可能涉及四舍五入。
      *
-     * @return  the numeric value represented by this object after conversion
-     *          to type <code>double</code>.
+     * @return  转换为 double 的值
      * @since   JDK1.0
      */
     public abstract double doubleValue();
 
     /**
-     * Returns the value of the specified number as a <code>byte</code>.
-     * This may involve rounding or truncation.
+     * 以 byte 形式返回指定数字的值。这可能涉及四舍五入。
      *
-     * @return  the numeric value represented by this object after conversion
-     *          to type <code>byte</code>.
+     * @return  转换为 byte 的值
      * @since   JDK1.1
      */
     public byte byteValue() {
@@ -82,17 +67,15 @@ public abstract class Number implements java.io.Serializable {
     }
 
     /**
-     * Returns the value of the specified number as a <code>short</code>.
-     * This may involve rounding or truncation.
+     * 以 short 形式返回指定数字的值。这可能涉及四舍五入。
      *
-     * @return  the numeric value represented by this object after conversion
-     *          to type <code>short</code>.
+     * @return  转换为 short 的值
      * @since   JDK1.1
      */
     public short shortValue() {
 	return (short)intValue();
     }
 
-    /** use serialVersionUID from JDK 1.0.2 for interoperability */
+    /** 使用 JDK 1.0.2 中的 serialVersionUID 以实现互操作性 */
     private static final long serialVersionUID = -8742448824652078965L;
 }
