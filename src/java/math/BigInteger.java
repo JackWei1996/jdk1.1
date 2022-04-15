@@ -42,33 +42,26 @@ import java.util.Random;
 public class BigInteger extends Number {
 
     /*
-     * The number is internally stored in "minimal" sign-magnitude format
-     * (i.e., no BigIntegers have a leading zero byte in their magnitudes).
-     * Zero is represented with a signum of 0 (and a zero-length magnitude).
-     * Thus, there is exactly one representation for each value.
+     * 该数字以“最小”符号幅度格式在内部存储（即，没有 BigInteger 在其幅度中具有前导零字节）。
+     * 零用符号 0 表示（和零长度幅度）。因此，每个值都有一个表示。
      */
     private int signum;
     private byte[] magnitude;
 
     /*
-     * These "redundant fields" are initialized with recognizable nonsense
-     * values, and cached the first time they are needed (or never, if they
-     * aren't needed).
+     * 这些“冗余字段”使用可识别的无意义值进行初始化，并在第一次需要它们时缓存（或者永远不会，如果不需要它们）。
      */
     private int bitCount =  -1;
     private int bitLength = -1;
-    private int firstNonzeroByteNum = -2;  /* Only used for negative numbers */
+    private int firstNonzeroByteNum = -2;  /* 仅用于负数 */
     private int lowestSetBit = -2;
 
     //Constructors
 
     /**
-     * Translates a byte array containing the two's-complement representation
-     * of a (signed) integer into a BigInteger.  The input array is assumed to
-     * be big-endian (i.e., the most significant byte is in the [0] position).
-     * (The most significant bit of the most significant byte is the sign bit.)
-     * The array must contain at least one byte or a NumberFormatException
-     * will be thrown.
+     * 将包含（有符号）整数的二进制补码表示的字节数组转换为 BigInteger。
+	 * 输入数组假定为大端（即最高有效字节位于 [0] 位置）。 （最高有效字节的最高有效位是符号位。）
+	 * 数组必须至少包含一个字节，否则将抛出 NumberFormatException
      */
     public BigInteger(byte[] val) throws NumberFormatException{
 	if (val.length == 0)
@@ -84,14 +77,10 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Translates the sign-magnitude representation of an integer into a
-     * BigInteger.  The sign is represented as an integer signum value (-1 for
-     * negative, 0 for zero, 1 for positive).  The magnitude is represented
-     * as a big-endian byte array (i.e., the most significant byte is in the
-     * [0] position).  An invalid signum value or a 0 signum value coupled
-     * with a nonzero magnitude will result in a NumberFormatException.
-     * A zero length magnitude array is permissible, and will result in
-     * in a value of 0 (irrespective of the given signum value).
+     * 将整数的符号大小表示转换为 BigInteger。符号表示为整数符号值（-1 表示负数，0 表示零，1 表示正数）。
+	 * 幅度表示为大端字节数组（即，最高有效字节位于 [0] 位置）。
+	 * 无效的符号值或 0 符号值加上非零幅度将导致 NumberFormatException。
+	 * 长度为零的幅度数组是允许的，并且将导致值 0（与给定的符号值无关）。
      */
     public BigInteger(int signum, byte[] magnitude)
     throws NumberFormatException{
@@ -110,12 +99,10 @@ public class BigInteger extends Number {
     }
     
     /**
-     * Translates a string containing an optional minus sign followed by a
-     * sequence of one or more digits in the specified radix into a BigInteger.
-     * The character-to-digit mapping is provided by Character.digit.
-     * Any extraneous characters (including whitespace), or a radix outside
-     * the range from Character.MIN_RADIX(2) to Character.MAX_RADIX(36),
-     * inclusive, will result in a NumberFormatException.
+     * 将包含可选减号的字符串后跟指定基数中的一个或多个数字的序列转换为 BigInteger。
+	 * 字符到数字的映射由 Character.digit 提供。
+	 * 任何无关的字符（包括空格），或从 Character.MIN_RADIX(2) 到 Character.MAX_RADIX(36) 范围之外的基数，
+	 * 包括在内，都将导致 NumberFormatException。
      */
     public BigInteger(String val, int radix) throws NumberFormatException {
 	int cursor = 0, numDigits;
@@ -125,7 +112,7 @@ public class BigInteger extends Number {
 	if (val.length() == 0)
 	    throw new NumberFormatException("Zero length BigInteger");
 
-	/* Check for leading minus sign */
+	/* 检查前导减号 */
 	signum = 1;
 	if (val.charAt(0) == '-') {
 	    if (val.length() == 1)
@@ -134,7 +121,7 @@ public class BigInteger extends Number {
 	    cursor = 1;
 	}
 
-	/* Skip leading zeros and compute number of digits in magnitude */
+	/* 跳过前导零并计算数量级的位数 */
 	while (cursor<val.length() && val.charAt(cursor)==ZERO_CHAR)
 	    cursor++;
 	if (cursor==val.length()) {
@@ -145,14 +132,14 @@ public class BigInteger extends Number {
 	    numDigits = val.length() - cursor;
 	}
 
-	/* Process first (potentially short) digit group, if necessary */
+	/* 如有必要，处理第一个（可能很短）数字组 */
 	int firstGroupLen = numDigits % digitsPerLong[radix];
 	if (firstGroupLen == 0)
 	    firstGroupLen = digitsPerLong[radix];
 	String group = val.substring(cursor, cursor += firstGroupLen);
 	BigInteger tmp = valueOf(Long.parseLong(group, radix));
 
-	/* Process remaining digit groups */
+	/* 处理剩余的数字组 */
 	while (cursor < val.length()) {
 	    group = val.substring(cursor, cursor += digitsPerLong[radix]);
 	    long groupVal = Long.parseLong(group, radix);
@@ -165,21 +152,16 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Translates a string containing an optional minus sign followed by a
-     * sequence of one or more decimal digits into a BigInteger.  The
-     * character-to-digit mapping is provided by Character.digit.
-     * Any extraneous characters (including whitespace) will result in a
-     * NumberFormatException. 
+     * 将包含可选减号后跟一个或多个十进制数字序列的字符串转换为 BigInteger。
+	 * 字符到数字的映射由 Character.digit 提供。任何无关字符（包括空格）都将导致 NumberFormatException。
      */
     public BigInteger(String val) throws NumberFormatException {
 	this(val, 10);
     }
 
     /**
-     * Returns a random number uniformly distributed on [0, 2**numBits - 1]
-     * (assuming a fair source of random bits is provided in rndSrc).
-     * Note that this constructor always returns a non-negative BigInteger.
-     * Throws an IllegalArgumentException if numBits < 0.
+     * 返回一个均匀分布在 [0, 2**numBits - 1] 上的随机数（假设在 rndSrc 中提供了一个公平的随机位来源）。
+	 * 请注意，此构造函数始终返回非负 BigInteger。如果 numBits < 0，则引发 IllegalArgumentException。
      */
     public BigInteger(int numBits, Random rndSrc)
     throws IllegalArgumentException {
@@ -193,7 +175,7 @@ public class BigInteger extends Number {
 	int numBytes = (numBits+7)/8;
 	byte[] randomBits = new byte[numBytes];
 
-	/* Generate random bytes and mask out any excess bits */
+	/* 生成随机字节并屏蔽掉任何多余的位 */
 	if (numBytes > 0) {
 	    rndSrc.nextBytes(randomBits);
 	    int excessBits = 8*numBytes - numBits;
@@ -204,13 +186,10 @@ public class BigInteger extends Number {
 
 
     /**
-     * Returns a randomly selected BigInteger with the specified bitLength
-     * that is probably prime.  The certainty parameter is a measure of
-     * the uncertainty that the caller is willing to tolerate: the probability
-     * that the number is prime will exceed 1 - 1/2**certainty.  The execution
-     * time is proportional to the value of the certainty parameter.  The
-     * given random number generator is used to select candidates to be
-     * tested for primality.  Throws an ArithmeticException if bitLength < 2.
+     * 返回一个随机选择的 BigInteger，其指定的 bitLength 可能是素数。
+	 * 确定性参数是调用者愿意容忍的不确定性的度量：数字为素数的概率将超过 1 - 1/2**确定性。
+	 * 执行时间与确定性参数的值成正比。给定的随机数生成器用于选择要测试素性的候选者。
+	 * 如果 bitLength < 2，则引发 ArithmeticException。
      */
     public BigInteger(int bitLength, int certainty, Random rnd) {
 	if (bitLength < 2)
@@ -219,8 +198,7 @@ public class BigInteger extends Number {
 	BigInteger p;
 	do {
 	    /*
-	     * Select a candidate of exactly the right length.  Note that
-	     * Plumb's generator doesn't handle bitLength<=16 properly.
+	     * 选择一个长度正好合适的候选人。请注意，Plumb 的生成器不能正确处理 bitLength<=16。
 	     */
 	    do {
 		p = new BigInteger(bitLength-1, rnd).setBit(bitLength-1);
@@ -236,9 +214,7 @@ public class BigInteger extends Number {
 
 
     /**
-     * This private constructor differs from its public cousin
-     * with the arguments reversed in two ways: it assumes that its
-     * arguments are correct, and it doesn't copy the magnitude array.
+     * 这个私有构造函数不同于它的公有构造函数，它的参数在两个方面被颠倒了：假设它的参数是正确的，并且它不复制幅度数组。
      */
     private BigInteger(byte[] magnitude, int signum) {
 	this.signum = (magnitude.length==0 ? 0 : signum);
@@ -246,16 +222,13 @@ public class BigInteger extends Number {
     }
 
 
-    //Static Factory Methods
+    //Static Factory Methods（静态工厂方法）
 
     /**
-     * Returns a BigInteger with the specified value.  This factory is provided
-     * in preference to a (long) constructor because it allows for reuse
-     * of frequently used BigIntegers (like 0 and 1), obviating the need for
-     * exported constants.
+     * 返回具有指定值的 BigInteger。该工厂优先于（长）构造函数提供，因为它允许重用经常使用的 BigInteger（如 0 和 1），从而无需导出常量。
      */
     public static BigInteger valueOf(long val) {
-	/* If -MAX_CONSTANT < val < MAX_CONSTANT, return stashed constant */
+	/* 如果 -MAX_CONSTANT < val < MAX_CONSTANT，则返回隐藏的常量 */
 	if (val == 0)
 	    return ZERO;
 	if (val > 0 && val <= MAX_CONSTANT)
@@ -263,7 +236,7 @@ public class BigInteger extends Number {
 	else if (val < 0 && val >= -MAX_CONSTANT)
 	    return negConst[(int) -val];
 
-	/* Dump two's complement binary into valArray */
+	/* 将二进制补码转储到 valArray */
 	byte valArray[] = new byte[8];
 	for (int i=0; i<8; i++, val >>= 8)
 	    valArray[7-i] = (byte)val;
@@ -273,7 +246,7 @@ public class BigInteger extends Number {
     private final static BigInteger ZERO = new BigInteger(new byte[0], 0);
 
     /**
-     * Initialize static constant array when class is loaded.
+     * 加载类时初始化静态常量数组
      */
     private final static int MAX_CONSTANT = 16;
     private static BigInteger posConst[] = new BigInteger[MAX_CONSTANT+1];
@@ -288,19 +261,17 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger with the given two's complement representation.
-     * Assumes that the input array will not be modified (the returned
-     * BigInteger will reference the input array if feasible).
+     * 返回具有给定二进制补码表示的 BigInteger。假设输入数组不会被修改（如果可行，返回的 BigInteger 将引用输入数组）。
      */
     private static BigInteger valueOf(byte val[]) {
 	return (val[0]>0 ? new BigInteger(val, 1) : new BigInteger(val));
     }
 
 
-    // Arithmetic Operations
+    // Arithmetic Operations（算术运算）
 
     /**
-     * Returns a BigInteger whose value is (this + val).
+     * 返回值为 (this + val) 的 BigInteger
      */
     public BigInteger add(BigInteger val) throws ArithmeticException {
 	if (val.signum == 0)
@@ -316,14 +287,14 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger whose value is (this - val).
+     * 返回值为 (this - val) 的 BigInteger。
      */
     public BigInteger subtract(BigInteger val) {
 	return add(new BigInteger(val.magnitude, -val.signum));
     }
 
     /**
-     * Returns a BigInteger whose value is (this * val).
+     * 返回值为 (this * val) 的 BigInteger。
      */
     public BigInteger multiply(BigInteger val) {
 
@@ -335,8 +306,7 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger whose value is (this / val).  Throws an
-     * ArithmeticException if val == 0.
+     * 返回值为 (this / val) 的 BigInteger。如果 val == 0，则引发 ArithmeticException。
      */
     public BigInteger divide(BigInteger val) throws ArithmeticException {
 
@@ -350,8 +320,7 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger whose value is (this % val).  Throws an
-     * ArithmeticException if val == 0.
+     * 返回值为 (this % val) 的 BigInteger。如果 val == 0，则引发 ArithmeticException。
      */
     public BigInteger remainder(BigInteger val) throws ArithmeticException {
 
@@ -360,17 +329,15 @@ public class BigInteger extends Number {
 	else if (this.signum == 0)
 	    return ZERO;
 	else if (this.magnitude.length < val.magnitude.length)
-	    return this; /*** WORKAROUND FOR BUG IN R1.1 OF PLUMB'S PKG ***/
+	    return this; /*** WORKAROUND FOR BUG IN R1.1 OF PLUMB'S PKG（PLUMB'S PKG R1.1 中的 BUG 解决方法） ***/
 	else
 	    return new BigInteger(plumbRemainder(magnitude,val.magnitude),
 				  signum);
     }
 
     /**
-     * Returns an array of two BigIntegers. The first ([0]) element of
-     * the return value is the quotient (this / val), and the second ([1])
-     * element is the remainder (this % val).  Throws an ArithmeticException
-     * if val == 0.
+     * 返回两个 BigInteger 的数组。返回值的第一个 ([0]) 元素是商 (this / val)，
+	 * 第二个 ([1]) 元素是余数 (this % val)。如果 val == 0，则引发 ArithmeticException。
      */
     public BigInteger[] divideAndRemainder(BigInteger val)
     throws ArithmeticException {
@@ -381,7 +348,7 @@ public class BigInteger extends Number {
 	} else if (this.signum == 0) {
 	    result[0] = result[1] = ZERO;
 	} else if (this.magnitude.length < val.magnitude.length) {
-	    /*** WORKAROUND FOR A BUG IN R1.1 OF PLUMB'S PACKAGE ***/
+	    /*** WORKAROUND FOR A BUG IN R1.1 OF PLUMB'S PACKAGE（PLUMB 软件包 R1.1 中的一个错误的解决方法） ***/
 	    result[0] = ZERO;
 	    result[1] = this;
 	} else {
@@ -394,10 +361,9 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger whose value is (this ** exponent).  Throws
-     * an ArithmeticException if exponent < 0 (as the operation would yield
-     * a non-integer value). Note that exponent is an integer rather than
-     * a BigInteger.
+     * 返回值为 (this ** exponent) 的 BigInteger。
+	 * 如果 exponent < 0，则抛出 ArithmeticException（因为该操作将产生非整数值）。
+	 * 请注意，指数是整数而不是 BigInteger。
      */
     public BigInteger pow(int exponent) throws ArithmeticException {
 	if (exponent < 0)
@@ -405,7 +371,7 @@ public class BigInteger extends Number {
 	if (signum==0)
 	    return (exponent==0 ? ONE : this);
 
-	/* Perform exponetiation using repeated squaring trick */
+	/* 使用重复平方技巧执行求幂 */
 	BigInteger result = valueOf(exponent<0 && (exponent&1)==1 ? -1 : 1);
 	BigInteger baseToPow2 = this;
 	while (exponent != 0) {
@@ -419,8 +385,7 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger whose value is the greatest common denominator
-     * of abs(this) and abs(val).  Returns 0 if this == 0 && val == 0.
+     * 返回一个 BigInteger，其值为 abs(this) 和 abs(val) 的最大公分母。如果 this == 0 && val == 0，则返回 0。
      */
     public BigInteger gcd(BigInteger val) {
 	if (val.signum == 0)
@@ -432,33 +397,30 @@ public class BigInteger extends Number {
     }
 
    /**
-    * Returns a BigInteger whose value is the absolute value of this
-    * number.
+    * 返回一个 BigInteger，其值为该数字的绝对值。
     */
     public BigInteger abs() {
 	return (signum >= 0 ? this : this.negate());
     }
 
     /**
-     * Returns a BigInteger whose value is (-1 * this).
+     * 回值为 (-1 * this) 的 BigInteger。
      */
     public BigInteger negate() {
 	return new BigInteger(this.magnitude, -this.signum);
     }
 
     /**
-     * Returns the signum function of this number (i.e., -1, 0 or 1 as
-     * the value of this number is negative, zero or positive).
+     * 返回此数字的符号函数（即，-1、0 或 1，因为此数字的值为负、零或正）。
      */
     public int signum() {
 	return this.signum;
     }
 
-    // Modular Arithmetic Operations
+    // Modular Arithmetic Operations(模块化算术运算)
 
     /**
-     * Returns a BigInteger whose value is this mod m. Throws an
-     * ArithmeticException if m <= 0.
+     * 返回一个 BigInteger，其值为这个 mod m。如果 m <= 0，则引发 ArithmeticException。
      */
     public BigInteger mod(BigInteger m) {
 	if (m.signum <= 0)
@@ -469,16 +431,14 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger whose value is (this ** exponent) mod m.  (If
-     * exponent == 1, the returned value is (this mod m).  If exponent < 0,
-     * the returned value is the modular multiplicative inverse of
-     * (this ** -exponent).)  Throws an ArithmeticException if m <= 0.
+     * 返回一个 BigInteger，其值为 (this ** exponent) mod m。 （如果 exponent == 1，则返回值为 (this mod m)。
+	 * 如果 exponent < 0，则返回值为 (this ** -exponent) 的模乘逆。）如果 m <= 0，则抛出 ArithmeticException。
      */
     public BigInteger modPow(BigInteger exponent, BigInteger m) {
 	if (m.signum <= 0)
 	    throw new ArithmeticException("BigInteger: modulus not positive");
 
-	/* Workaround for a bug in Plumb: x^0 (y) dumps core for x != 0 */
+	/* Plumb 中的一个错误的解决方法：x^0 (y) 为 x != 0 转储核心 */
 	if (exponent.signum == 0)
 	    return ONE;
 
@@ -489,30 +449,28 @@ public class BigInteger extends Number {
 	BigInteger base = (this.signum < 0 || this.compareTo(m) >= 0 
 			   ? this.mod(m) : this);
 	BigInteger result;
-	if (m.testBit(0)) { /* Odd modulus: just pass it on to Plumb */
+	if (m.testBit(0)) { /* 奇数模数：只需将其传递给 Plumb */
 	    result = new BigInteger
 	     (plumbModPow(base.magnitude, exponent.magnitude, m.magnitude), 1);
 	} else {
 	    /*
-	     * Even modulus.  Plumb only supports odd, so tear it into
-	     * "odd part" (m1) and power of two (m2), use Plumb to exponentiate
-	     * mod m1, manually exponentiate mod m2, and use Chinese Remainder
-	     * Theorem to combine results.
+	     * 偶数模数。 Plumb 只支持奇数，所以拆成“奇数部分”（m1）和二的幂（m2），
+	     * 用 Plumb 对 mod m1 取幂，手动对 mod m2 取幂，用中国剩余定理组合结果。
 	     */
 
-	    /* Tear m apart into odd part (m1) and power of 2 (m2) */
-	    int p = m.getLowestSetBit();      /* Max pow of 2 that divides m */
+	    /* 将 m 分成奇数部分 (m1) 和 2 的幂 (m2) */
+	    int p = m.getLowestSetBit();      /* 划分的最大 pow 为 2 m */
 	    BigInteger m1 = m.shiftRight(p);  /* m/2**p */
 	    BigInteger m2 = ONE.shiftLeft(p); /* 2**p */
 
-	    /* Caculate (base ** exponent) mod m1 */
+	    /* 计算（基指数）mod m1 */
 	    BigInteger a1 = new BigInteger
 	     (plumbModPow(base.magnitude, exponent.magnitude, m1.magnitude),1);
 
-	    /* Caculate (this ** exponent) mod m2 */
+	    /* 计算（指数）mod m2 */
 	    BigInteger a2 = base.modPow2(exponent, p);
 
-	    /* Combine results using Chinese Remainder Theorem */
+	    /* 使用中国剩余定理(Chinese Remainder Theorem)组合结果 */
 	    BigInteger y1 = m2.modInverse(m1);
 	    BigInteger y2 = m1.modInverse(m2);
 	    result = a1.multiply(m2).multiply(y1).add
@@ -527,8 +485,7 @@ public class BigInteger extends Number {
      */
     private BigInteger modPow2(BigInteger exponent, int p) {
 	/*
-	 * Perform exponetiation using repeated squaring trick, chopping off
-	 * high order bits as indicated by modulus.
+	 * 使用重复平方技巧执行求幂运算，如模数所示切掉高阶位。
 	 */
 	BigInteger result = valueOf(1);
 	BigInteger baseToPow2 = this.mod2(p);
@@ -544,19 +501,19 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns this mod(2**p).  Assumes that this BigInteger >= 0 and p > 0.
+     * 返回此 mod(2**p)。假设这个 BigInteger >= 0 并且 p > 0。
      */
     private BigInteger mod2(int p) {
 	if (bitLength() <= p)
 	    return this;
 
-	/* Copy remaining bytes of magnitude */
+	/* 复制剩余字节的大小 */
 	int numBytes = (p+7)/8;
 	byte[] mag = new byte[numBytes];
 	for (int i=0; i<numBytes; i++)
 	    mag[i] = magnitude[i + (magnitude.length - numBytes)];
 
-	/* Mask out any excess bits */
+	/* 屏蔽掉任何多余的位 */
 	int excessBits = 8*numBytes - p;
 	mag[0] &= (1 << (8-excessBits)) - 1;
 
@@ -564,15 +521,13 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns modular multiplicative inverse of this, mod m.  Throws an
-     * ArithmeticException if m <= 0 or this has no multiplicative inverse
-     * mod m (i.e., gcd(this, m) != 1).
+     * 返回这个的模乘逆，mod m。如果 m <= 0 或 this 没有乘法逆模 m（即 gcd(this, m) != 1），则抛出 ArithmeticException
      */
     public BigInteger modInverse(BigInteger m) throws ArithmeticException {
 	if (m.signum != 1)
 	    throw new ArithmeticException("BigInteger: modulus not positive");
 
-	/* Calculate (this mod m) */
+	/* 计算（这个 mod m） */
 	BigInteger modVal = this.remainder(m);
 	if (modVal.signum < 0)
 	    modVal = modVal.add(m);
@@ -583,11 +538,10 @@ public class BigInteger extends Number {
     }
 
 
-    // Shift Operations
+    // Shift Operations（班次操作）
 
     /**
-     * Returns a BigInteger whose value is (this << n).  (Computes
-     * floor(this * 2**n).)
+     * 返回值为 (this << n) 的 BigInteger。 （计算地板（this * 2**n）。）
      */
     public BigInteger shiftLeft(int n) {
 	if (n==0)
@@ -614,8 +568,7 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger whose value is (this >> n).  Sign extension is
-     * performed.  (Computes floor(this / 2**n).)
+     * 返回值为 (this >> n) 的 BigInteger。执行符号扩展。 （计算地板（this / 2**n）。）
      */
     public BigInteger shiftRight(int n) {
 	if (n==0)
@@ -645,8 +598,7 @@ public class BigInteger extends Number {
     // Bitwise Operations
 
     /**
-     * Returns a BigInteger whose value is (this & val).  (This method
-     * returns a negative number iff this and val are both negative.)
+     * 返回值为 (this & val) 的 BigInteger。 （如果 this 和 val 都是负数，此方法返回负数。）
      */
     public BigInteger and(BigInteger val) {
 	byte[] result = new byte[Math.max(byteLength(), val.byteLength())];
@@ -658,8 +610,7 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger whose value is (this | val).  (This method
-     * returns a negative number iff either this or val is negative.)
+     * 返回值为 (this | val) 的 BigInteger。 （如果 this 或 val 为负，则此方法返回负数。）
      */
     public BigInteger or(BigInteger val) {
 	byte[] result = new byte[Math.max(byteLength(), val.byteLength())];
@@ -671,9 +622,7 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger whose value is (this ^ val).  (This method
-     * returns a negative number iff exactly one of this and val are 
-     * negative.)
+     * 返回值为 (this ^ val) 的 BigInteger。 （如果 this 和 val 恰好其中之一为负，则此方法返回负数。）
      */
     public BigInteger xor(BigInteger val) {
 	byte[] result = new byte[Math.max(byteLength(), val.byteLength())];
@@ -685,8 +634,7 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger whose value is (~this).  (This method returns
-     * a negative value iff this number is non-negative.)
+     * 返回值为 (~this) 的 BigInteger。 （如果此数字为非负数，则此方法返回负值。）
      */
     public BigInteger not() {
 	byte[] result = new byte[byteLength()];
@@ -697,10 +645,8 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger whose value is (this & ~val).  This method,
-     * which is equivalent to and(val.not()), is provided as a convenience
-     * for masking operations.  (This method returns a negative number iff
-     * this is negative and val is positive.)
+     * 返回值为 (this & ~val) 的 BigInteger。此方法等效于 and(val.not())，是为了方便屏蔽操作而提供的。
+	 * （如果 this 为负且 val 为正，则此方法返回一个负数。）
      */
     public BigInteger andNot(BigInteger val) {
 	byte[] result = new byte[Math.max(byteLength(), val.byteLength())];
@@ -712,11 +658,10 @@ public class BigInteger extends Number {
     }
 
 
-    // Single Bit Operations
+    // Single Bit Operations（单位操作）
 
     /**
-     * Returns true iff the designated bit is set. (Computes
-     * ((this & (1<<n)) != 0).)  Throws an ArithmeticException if n < 0.
+     * 如果设置了指定位，则返回 true。 （计算 ((this & (1<<n)) != 0)。）如果 n < 0，则引发 ArithmeticException。
      */
     public boolean testBit(int n) throws ArithmeticException {
 	if (n<0)
@@ -726,9 +671,7 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger whose value is equivalent to this number
-     * with the designated bit set.  (Computes (this | (1<<n)).)
-     * Throws an ArithmeticException if n < 0.
+     * 返回一个 BigInteger，其值等于设置了指定位的此数字。 （计算 (this | (1<<n))。）如果 n < 0，则引发 ArithmeticException。
      */
     public BigInteger setBit(int n) throws ArithmeticException {
 	if (n<0)
@@ -746,9 +689,7 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger whose value is equivalent to this number
-     * with the designated bit cleared. (Computes (this & ~(1<<n)).)
-     * Throws an ArithmeticException if n < 0.
+     * 返回一个 BigInteger，其值等于此数字，指定位已清除。 （计算 (this & ~(1<<n))。）如果 n < 0，则引发 ArithmeticException。
      */
     public BigInteger clearBit(int n) throws ArithmeticException {
 	if (n<0)
@@ -766,9 +707,7 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns a BigInteger whose value is equivalent to this number
-     * with the designated bit flipped.  (Computes (this ^ (1<<n)).)
-     * Throws an ArithmeticException if n < 0.
+     * 返回一个 BigInteger，其值与指定位翻转后的此数字等效。 （计算 (this ^ (1<<n))。）如果 n < 0，则引发 ArithmeticException。
      */
     public BigInteger flipBit(int n) throws ArithmeticException {
 	if (n<0)
@@ -786,22 +725,18 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns the index of the rightmost (lowest-order) one bit in this
-     * number (i.e., the number of zero bits to the right of the rightmost
-     * one bit).  Returns -1 if this number contains no one bits.
-     * (Computes (this==0? -1 : log2(this & -this)).)
+     * 返回此数字中最右侧（最低位）一位的索引（即，最右侧一位右侧的零位的数量）。如果此数字不包含一位，则返回 -1。
+	 * （计算 (this==0?-1 : log2(this & -this))。）
      */
     public int getLowestSetBit() {
 	/*
-	 * Initialize lowestSetBit field the first time this method is
-	 * executed. This method depends on the atomicity of int modifies;
-	 * without this guarantee, it would have to be synchronized.
+	 * 第一次执行此方法时初始化最低设置位字段。该方法依赖于 int 修改的原子性；如果没有这个保证，它就必须同步。
 	 */
 	if (lowestSetBit == -2) {
 	    if (signum == 0) {
 		lowestSetBit = -1;
 	    } else {
-		/* Search for lowest order nonzero byte */
+		/* 搜索最低阶非零字节 */
 		int i;
 		byte b;
 		for (i=0; (b = getByte(i))==0; i++)
@@ -813,31 +748,26 @@ public class BigInteger extends Number {
     }
 
 
-    // Miscellaneous Bit Operations
+    // Miscellaneous Bit Operations（其他位操作）
 
     /**
-     * Returns the number of bits in the minimal two's-complement
-     * representation of this number, *excluding* a sign bit, i.e.,
-     * (ceil(log2(this < 0 ? -this : this + 1))).  (For positive
-     * numbers, this is equivalent to the number of bits in the
-     * ordinary binary representation.)
+     * 返回此数字的最小二进制补码表示中的位数，*不包括*符号位，即 (ceil(log2(this < 0 ? -this : this + 1)))。
+	 * （对于正数，这相当于普通二进制表示中的位数。）
      */
     public int bitLength() {
 	/*
-	 * Initialize bitLength field the first time this method is executed.
-	 * This method depends on the atomicity of int modifies; without
-	 * this guarantee, it would have to be synchronized.
+	 * 第一次执行此方法时初始化 bitLength 字段。该方法依赖于 int 修改的原子性；如果没有这个保证，它就必须同步。
 	 */
 	if (bitLength == -1) {
 	    if (signum == 0) {
 		bitLength = 0;
 	    } else {
-		/* Calculate the bit length of the magnitude */
+		/* 计算幅度的位长 */
 		int magBitLength = 8*(magnitude.length-1)
 		    		   + bitLen[magnitude[0] & 0xff];
 
 		if (signum < 0) {
-		    /* Check if magnitude is a power of two */
+		    /* 检查幅度是否是 2 的幂 */
 		    boolean pow2 = (bitCnt[magnitude[0]&0xff] == 1);
 		    for(int i=1; i<magnitude.length && pow2; i++)
 			pow2 = (magnitude[i]==0);
@@ -852,7 +782,7 @@ public class BigInteger extends Number {
     }
 
     /*
-     * bitLen[i] is the number of bits in the binary representaion of i.
+     * bitLen[i] 是 i 的二进制表示中的位数。
      */
     private final static byte bitLen[] = {
 	0, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4,
@@ -873,24 +803,20 @@ public class BigInteger extends Number {
 	8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8};
 
     /**
-     * Returns the number of bits in the two's complement representation
-     * of this number that differ from its sign bit.  This method is
-     * useful when implementing bit-vector style sets atop BigIntegers.
+     * 返回此数字的二进制补码表示中与其符号位不同的位数。在 BigInteger 上实现位向量样式集时，此方法很有用。
      */
     public int bitCount() {
 	/*
-	 * Initialize bitCount field the first time this method is executed.
-	 * This method depends on the atomicity of int modifies; without
-	 * this guarantee, it would have to be synchronized.
+	 * 第一次执行此方法时初始化 bitCount 字段。该方法依赖于 int 修改的原子性；如果没有这个保证，它就必须同步。
 	 */
 	if (bitCount == -1) {
-	    /* Count the bits in the magnitude */
+	    /* 计算幅度中的位数 */
 	    int magBitCount = 0;
 	    for (int i=0; i<magnitude.length; i++)
 		magBitCount += bitCnt[magnitude[i] & 0xff];
 
 	    if (signum < 0) {
-		/* Count the trailing zeros in the magnitude */
+		/* 计算幅度中的尾随零 */
 		int magTrailingZeroCount = 0, j;
 		for (j=magnitude.length-1; magnitude[j]==0; j--)
 		    magTrailingZeroCount += 8;
@@ -905,7 +831,7 @@ public class BigInteger extends Number {
     }
 
     /*
-     * bitCnt[i] is the number of 1 bits in the binary representation of i.
+     * bitCnt[i] 是 i 的二进制表示中 1 的位数。
      */
     private final static byte bitCnt[] = {
 	0, 1, 1, 2, 1, 2, 2, 3, 1, 2, 2, 3, 2, 3, 3, 4,
@@ -926,8 +852,7 @@ public class BigInteger extends Number {
 	4, 5, 5, 6, 5, 6, 6, 7, 5, 6, 6, 7, 6, 7, 7, 8};
 
     /*
-     * trailingZeroCnt[i] is the number of trailing zero bits in the binary
-     * representaion of i.
+     * trailing Zero not[i] 是 i 的二进制表示中的尾随零位数。
      */
     private final static byte trailingZeroCnt[] = {
 	8, 0, 1, 0, 2, 0, 1, 0, 3, 0, 1, 0, 2, 0, 1, 0,
@@ -949,19 +874,16 @@ public class BigInteger extends Number {
 
 
 
-    // Primality Testing
+    // Primality Testing(素性测试)
 
     /**
-     * Returns true if this BigInteger is probably prime, false if it's
-     * definitely composite.  The certainty parameter is a measure 
-     * of the uncertainty that the caller is willing to tolerate:
-     * the method returns true if the probability that this number is
-     * is prime exceeds 1 - 1/2**certainty.  The execution time is
-     * proportional to the value of the certainty parameter.
+     * 如果这个 BigInteger 可能是素数，则返回 true，如果它肯定是复合的，则返回 false。
+	 * 确定性参数是调用者愿意容忍的不确定性的度量：如果这个数是素数的概率超过 1 - 1/2**确定性，则该方法返回 true。
+	 * 执行时间与确定性参数的值成正比。
      */
     public boolean isProbablePrime(int certainty) {
 	/*
-	 * This test is taken from the DSA spec.
+	 * 此测试取自 DSA 规范。
 	 */
 	int n = certainty/2;
 	if (n <= 0)
@@ -972,7 +894,7 @@ public class BigInteger extends Number {
 	if (!w.testBit(0) || w.equals(ONE))
 	    return false;
 
-	/* Find a and m such that m is odd and w == 1 + 2**a * m */
+	/* 找到 a 和 m 使得 m 是奇数并且 w == 1 + 2**a * m */
 	BigInteger m = w.subtract(ONE);
 	int a = m.getLowestSetBit();
 	m = m.shiftRight(a);
@@ -980,7 +902,7 @@ public class BigInteger extends Number {
 	/* Do the tests */
 	Random rnd = new Random();
 	for(int i=0; i<n; i++) {
-	    /* Generate a uniform random on (1, w) */
+	    /* 在 (1, w) 上生成均匀随机数 */
 	    BigInteger b;
 	    do {
 		b = new BigInteger(w.bitLength(), rnd);
@@ -998,15 +920,12 @@ public class BigInteger extends Number {
     }
 
 
-    // Comparison Operations
+    // Comparison Operations（比较操作）
 
     /**
-     * Returns -1, 0 or 1 as this number is less than, equal to, or
-     * greater than val.  This method is provided in preference to
-     * individual methods for each of the six boolean comparison operators
-     * (<, ==, >, >=, !=, <=).  The suggested idiom for performing these
-     * comparisons is:  (x.compareTo(y) <op> 0), where <op> is one of the
-     * six comparison operators.
+	 * 返回 -1、0 或 1，因为此数字小于、等于或大于 val。
+	 * 此方法优先于六个布尔比较运算符（<、==、>、>=、!=、<=）中的每一个的单独方法提供。
+	 * 执行这些比较的建议习语是：(x.compareTo(y) <op> 0), 其中 <op> 是六个比较运算符之一。
      */
     public int compareTo(BigInteger val) {
 	return (signum==val.signum
@@ -1015,8 +934,7 @@ public class BigInteger extends Number {
     }
 
     /*
-     * Returns -1, 0 or +1 as big-endian unsigned byte array arg1 is
-     * <, == or > arg2.
+     * 返回 -1、0 或 +1，因为大端无符号字节数组 arg1 是 <、== 或 > arg2。
      */
     private static int byteArrayCmp(byte[] arg1, byte[] arg2) {
 	if (arg1.length < arg2.length)
@@ -1024,7 +942,7 @@ public class BigInteger extends Number {
 	if (arg1.length > arg2.length)
 	    return 1;
 
-	/* Argument lengths are equal; compare the values */
+	/* 参数长度相等；比较值 */
 	for (int i=0; i<arg1.length; i++) {
 	    int b1 = arg1[i] & 0xff;
 	    int b2 = arg2[i] & 0xff;
@@ -1037,8 +955,7 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns true iff x is a BigInteger whose value is equal to this number.
-     * This method is provided so that BigIntegers can be used as hash keys.
+     * 如果 x 是一个 BigInteger，其值等于该数字，则返回 true。提供此方法以便 BigIntegers 可以用作哈希键。
      */
     public boolean equals(Object x) {
 	if (!(x instanceof BigInteger))
@@ -1048,7 +965,7 @@ public class BigInteger extends Number {
 	if (xInt.signum != signum || xInt.magnitude.length != magnitude.length)
 	    return false;
 
-	/* This test is just an optimization, which may or may not help */
+	/* 这个测试只是一个优化，可能有帮助也可能没有帮助 */
 	if (xInt == this)
 	    return true;
 
@@ -1060,16 +977,14 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns the BigInteger whose value is the lesser of this and val.
-     * If the values are equal, either may be returned.
+     * 返回值为 this 和 val 中较小值的 BigInteger。如果值相等，则可以返回任何一个。
      */
     public BigInteger min(BigInteger val) {
 	return (compareTo(val)<0 ? this : val);
     }
 
     /**
-     * Returns the BigInteger whose value is the greater of this and val.
-     * If the values are equal, either may be returned.
+     * 返回值为 this 和 val 中较大者的 BigInteger。如果值相等，则可以返回任何一个。
      */
     public BigInteger max(BigInteger val) {
 	return (compareTo(val)>0 ? this : val);
@@ -1079,7 +994,7 @@ public class BigInteger extends Number {
     // Hash Function
 
     /**
-     * Computes a hash code for this object.
+     * Computes a hash code for this object.(计算此对象的哈希码。)
      */
     public int hashCode() {
 	int hashCode = 0;
@@ -1090,16 +1005,14 @@ public class BigInteger extends Number {
 	return hashCode * signum;
     }
 
-    // Format Converters
+    // Format Converters(格式转换器)
 
     /**
-     * Returns the string representation of this number in the given radix.
-     * If the radix is outside the range from Character.MIN_RADIX(2) to
-     * Character.MAX_RADIX(36) inclusive, it will default to 10 (as is the
-     * case for Integer.toString).  The digit-to-character mapping provided
-     * by Character.forDigit is used, and a minus sign is prepended if
-     * appropriate.  (This representation is compatible with the (String, int)
-     * constructor.)
+     * 返回给定基数中此数字的字符串表示形式。
+	 * 如果基数超出从 Character.MIN_RADIX(2) 到 Character.MAX_RADIX(36) 的范围，
+	 * 它将默认为 10（如 Integer.toString 的情况）。
+	 * 使用 Character.forDigit 提供的数字到字符的映射，并在适当的情况下添加减号。
+	 * （此表示与 (String, int) 构造函数兼容。）
      */
     public String toString(int radix) {
 	if (signum == 0)
@@ -1107,11 +1020,11 @@ public class BigInteger extends Number {
 	if (radix < Character.MIN_RADIX || radix > Character.MAX_RADIX)
 	    radix = 10;
 
-	/* Compute upper bound on number of digit groups and allocate space */
+	/* 计算数字组数的上限并分配空间 */
 	int maxNumDigitGroups = (magnitude.length + 6)/7;
 	String digitGroup[] = new String[maxNumDigitGroups];
 
-	/* Translate number to string, a digit group at a time */
+	/* 将数字转换为字符串，一次转换一个数字组 */
 	BigInteger tmp = this.abs();
 	int numGroups = 0;
 	while (tmp.signum != 0) {
@@ -1120,15 +1033,15 @@ public class BigInteger extends Number {
 	    tmp = b[0];
 	}
 
-	/* Put sign (if any) and first digit group into result buffer */
+	/* 将符号（如果有）和第一个数字组放入结果缓冲区 */
 	StringBuffer buf = new StringBuffer(numGroups*digitsPerLong[radix]+1);
 	if (signum<0)
 	    buf.append('-');
 	buf.append(digitGroup[numGroups-1]);
 
-	/* Append remaining digit groups padded with leading zeros */
+	/* 附加用前导零填充的剩余数字组 */
 	for (int i=numGroups-2; i>=0; i--) {
-	    /* Prepend (any) leading zeros for this digit group */
+	    /* 为此数字组添加（任何）前导零 */
 	    int numLeadingZeros = digitsPerLong[radix]-digitGroup[i].length();
 	    if (numLeadingZeros != 0)
 		buf.append(zeros[numLeadingZeros]);
@@ -1138,7 +1051,7 @@ public class BigInteger extends Number {
 	return buf.toString();
     }
 
-    /* zero[i] is a string of i consecutive zeros. */
+    /* zero[i] 是由 i 个连续的零组成的字符串。 */
     private static String zeros[] = new String[64];
     static {
 	zeros[63] =
@@ -1148,22 +1061,16 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns the string representation of this number, radix 10.  The
-     * digit-to-character mapping provided by Character.forDigit is used,
-     * and a minus sign is prepended if appropriate.  (This representation
-     * is compatible with the (String) constructor, and allows for string
-     * concatenation with Java's + operator.)
+     * 返回此数字的字符串表示形式，基数为 10。使用 Character.forDigit 提供的数字到字符映射，并在适当的情况下添加减号。
+	 * （此表示与 (String) 构造函数兼容，并允许使用 Java 的 + 运算符进行字符串连接。）
      */
     public String toString() {
 	return toString(10);
     }
 
     /**
-     * Returns the two's-complement representation of this number.  The array
-     * is big-endian (i.e., the most significant byte is in the [0] position).
-     * The array contains the minimum number of bytes required to represent
-     * the number (ceil((this.bitLength() + 1)/8)).  (This representation is
-     * compatible with the (byte[]) constructor.) 
+     * 返回此数字的二进制补码表示。该数组是大端的（即最高有效字节位于 [0] 位置）。
+	 * 该数组包含表示数字所需的最小字节数 (ceil((this.bitLength() + 1)/8))。 （此表示与 (byte[]) 构造函数兼容。）
      */
     public byte[] toByteArray() {
 	byte[] result = new byte[byteLength()];
@@ -1174,8 +1081,7 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Converts this number to an int.  Standard narrowing primitive conversion
-     * as per The Java Language Specification.
+     * 将此数字转换为 int。根据 Java 语言规范的标准缩小原语转换。
      */
     public int intValue() {
 	int result = 0;
@@ -1186,8 +1092,7 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Converts this number to a long.  Standard narrowing primitive conversion
-     * as per The Java Language Specification.
+     * 将此数字转换为长整数。根据 Java 语言规范的标准缩小原语转换。
      */
     public long longValue() {
 	long result = 0;
@@ -1198,26 +1103,21 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Converts this number to a float.  Similar to the double-to-float
-     * narrowing primitive conversion defined in The Java Language
-     * Specification: if the number has too great a magnitude to represent
-     * as a float, it will be converted to infinity or negative infinity,
-     * as appropriate.
+     * 将此数字转换为浮点数。
+	 * 类似于 Java 语言规范中定义的双浮点数缩小原语转换：如果数字的幅度太大而无法表示为浮点数，它将酌情转换为无穷大或负无穷大。
      */
     public float floatValue() {
-	/* Somewhat inefficient, but guaranteed to work. */
+	/* Somewhat inefficient, but guaranteed to work.（有点低效，但保证可以工作。） */
 	return Float.valueOf(this.toString()).floatValue();
     }
 
     /**
-     * Converts the number to a double.  Similar to the double-to-float
-     * narrowing primitive conversion defined in The Java Language
-     * Specification: if the number has too great a magnitude to represent
-     * as a double, it will be converted to infinity or negative infinity,
-     * as appropriate.
+     * 将数字转换为双精度数。
+	 * 类似于 Java 语言规范中定义的 double 到 float 的缩小原语转换：
+	 * 如果数字的幅度太大而无法表示为 double，则将酌情将其转换为无穷大或负无穷大。
      */
     public double doubleValue() {
-	/* Somewhat inefficient, but guaranteed to work. */
+	/* Somewhat inefficient, but guaranteed to work. （有点低效，但保证可以工作。）*/
 	return Double.valueOf(this.toString()).doubleValue();
     }
 
@@ -1233,16 +1133,16 @@ public class BigInteger extends Number {
     private final static char ZERO_CHAR = Character.forDigit(0, 2);
 
     /**
-     * Returns a copy of the input array stripped of any leading zero bytes.
+     * 返回去除任何前导零字节的输入数组的副本。
      */
     static private byte[] stripLeadingZeroBytes(byte a[]) {
 	int keep;
 	
-	/* Find first nonzero byte */
+	/* 查找第一个非零字节 */
 	for (keep=0; keep<a.length && a[keep]==0; keep++)
 	    ;
 
-	/* Allocate new array and copy relevant part of input array */
+	/* 分配新数组并复制输入数组的相关部分 */
 	byte result[] = new byte[a.length - keep];
 	for (int i = keep; i<a.length; i++)
 	    result[i - keep] = a[i];
@@ -1251,29 +1151,26 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Takes an array a representing a negative 2's-complement number and
-     * returns the minimal (no leading zero bytes) unsigned whose value is -a.
+     * 接受一个表示负 2 的补数的数组 a 并返回其值为 -a 的最小（无前导零字节）无符号数。
      */
     static private byte[] makePositive(byte a[]) {
 	int keep, j;
 
-	/* Find first non-sign (0xff) byte of input */
+	/* 查找输入的第一个非符号 (0xff) 字节 */
 	for (keep=0; keep<a.length && a[keep]==-1; keep++)
 	    ;
 
-	/* Allocate output array.  If all non-sign bytes are 0x00, we must
-	 * allocate space for one extra output byte. */
+	/* 分配输出数组。如果所有非符号字节都是 0x00，我们必须为一个额外的输出字节分配空间。 */
 	for (j=keep; j<a.length && a[j]==0; j++)
 	    ;
 	int extraByte = (j==a.length ? 1 : 0);
 	byte result[] = new byte[a.length - keep + extraByte];
 
-	/* Copy one's complement of input into into output, leaving extra
-	 * byte (if it exists) == 0x00 */
+	/* 将输入的补码复制到输出中，留下额外的字节（如果存在）== 0x00 */
 	for (int i = keep; i<a.length; i++)
 	    result[i - keep + extraByte] = (byte) ~a[i];
 
-	/* Add one to one's complement to generate two's complement */
+	/* 将一个补码加一以生成二进制补码 */
 	for (int i=result.length-1; ++result[i]==0; i--)
 	    ;
 
@@ -1281,15 +1178,10 @@ public class BigInteger extends Number {
     }
 
     /*
-     * The following two arrays are used for fast String conversions.  Both
-     * are indexed by radix.  The first is the number of digits of the given
-     * radix that can fit in a Java long without "going negative", i.e., the
-     * highest integer n such that radix ** n < 2 ** 63.  The second is the
-     * "long radix" that tears each number into "long digits", each of which
-     * consists of the number of digits in the corresponding element in
-     * digitsPerLong (longRadix[i] = i ** digitPerLong[i]).  Both arrays have
-     * nonsense values in their 0 and 1 elements, as radixes 0 and 1 are not
-     * used.
+     * 以下两个数组用于快速字符串转换。两者都由基数索引。
+     * 第一个是给定基数的位数，它可以适合 Java long 而不会“变为负数”，即最大整数 n 使得 基数 ** n < 2 ** 63。
+     * 第二个是撕裂每个数字的“长基数”成“长数字”，每个数字由digitsPerLong中对应元素的位数组成（longRadix[i] = i ** digitPerLong[i]）。
+     * 两个数组在它们的 0 和 1 元素中都有无意义的值，因为没有使用基数 0 和 1。
      */
 
     private static int digitsPerLong[] = {0, 0,
@@ -1318,13 +1210,11 @@ public class BigInteger extends Number {
 
 
     /**
-     * These routines provide access to the two's complement representation
-     * of BigIntegers.
+     * 这些例程提供对 BigInteger 的二进制补码表示的访问。
      */
 
     /**
-     * Returns the length of the two's complement representation in bytes,
-     * including space for at least one sign bit, 
+     * 返回二进制补码表示的字节长度，包括至少一个符号位的空间，
      */
     private int byteLength() {
 	return bitLength()/8 + 1;
@@ -1341,9 +1231,7 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns the specified byte of the little-endian two's complement
-     * representation (byte 0 is the LSB).  The byte number can be arbitrarily
-     * high (values are logically preceded by infinitely many sign bytes).
+     * 返回小端二进制补码表示的指定字节（字节 0 是 LSB）。字节数可以任意高（值在逻辑上前面有无限多个符号字节）。
      */
     private byte getByte(int n) {
 	if (n >= magnitude.length)
@@ -1356,19 +1244,15 @@ public class BigInteger extends Number {
     }
 
     /**
-     * Returns the index of the first nonzero byte in the little-endian 
-     * binary representation of the magnitude (byte 0 is the LSB).  If
-     * the magnitude is zero, return value is undefined.
+     * 返回幅度的小端二进制表示中第一个非零字节的索引（字节 0 是 LSB）。如果幅度为零，则返回值未定义。
      */
 
      private int firstNonzeroByteNum() {
 	/*
-	 * Initialize bitCount field the first time this method is executed.
-	 * This method depends on the atomicity of int modifies; without
-	 * this guarantee, it would have to be synchronized.
+	 * 第一次执行此方法时初始化 bitCount 字段。该方法依赖于 int 修改的原子性；如果没有这个保证，它就必须同步。
 	 */
 	if (firstNonzeroByteNum == -2) {
-	    /* Search for the first nonzero byte */
+	    /* 搜索第一个非零字节 */
 	    int i;
 	    for (i=magnitude.length-1; i>=0 && magnitude[i]==0; i--)
 		;
@@ -1379,21 +1263,13 @@ public class BigInteger extends Number {
 
 
     /**
-     * Native method wrappers for Colin Plumb's big positive integer package.
-     * Each of these wrappers (except for plumbInit) behaves as follows:
-     *
-     * 	1) Translate input arguments from java byte arrays into plumbNums.
-     *
-     *  2) Perform the requested computation.
-     *
-     *  3) Translate result(s) into Java byte array(s).  (The subtract
-     *	   operation translates its result into a BigInteger, as its result
-     *	   is, effectively, signed.)
-     *
-     *	4) Deallocate all of the plumbNums.
-     *
-     *  5) Return the resulting Java array(s) (or, in the case of subtract,
-     *	   BigInteger).
+     * Colin Plumb 的大正整数包的本机方法包装器。
+	 * 这些包装器中的每一个（除了plumbInit）的行为如下：
+	 *  1) 将输入参数从java 字节数组转换为plumbNums。
+	 *  2) 执行请求的计算。
+	 *  3) 将结果转换为 Java 字节数组。 （减法运算将其结果转换为 BigInteger，因为它的结果实际上是有符号的。）
+	 *  4) 释放所有的 plumbNums。
+	 *  5) 返回生成的 Java 数组（或者，在减法的情况下，返回 BigInteger）。
      */
 
     private static native void plumbInit();
@@ -1409,22 +1285,21 @@ public class BigInteger extends Number {
     private static native byte[] plumbSquare(byte[] a);
     private static native byte[] plumbGeneratePrime(byte[] a);
 
-    /** use serialVersionUID from JDK 1.1. for interoperability */
+    /** 用 JDK 1.1 中的 serialVersionUID。互操作性 */
     private static final long serialVersionUID = -8287574255936472291L;
 
     /**
-     * Reconstitute the <tt>BigInteger</tt> instance from a stream (that is,
-     * deserialize it).
+     * 从流中重构BigInteger实例（即反序列化它）。
      */
     private synchronized void readObject(java.io.ObjectInputStream s)
         throws java.io.IOException, ClassNotFoundException {
         // Read in all fields
 	s.defaultReadObject();
 
-        // Defensively copy magnitude to ensure immutability
+        // 防御性复制大小以确保不变性
         magnitude = (byte[]) magnitude.clone();
 
-        // Validate signum
+        // Validate signum（验证代码）
 	if (signum < -1 || signum > 1)
 	    throw new java.io.StreamCorruptedException(
                         "BigInteger: Invalid signum value");
@@ -1432,7 +1307,7 @@ public class BigInteger extends Number {
 	    throw new java.io.StreamCorruptedException(
                         "BigInteger: signum-magnitude mismatch");
 
-        // Set "cached computation" fields to their initial values
+        // 将“缓存计算”字段设置为其初始值
         bitCount = bitLength = -1;
         lowestSetBit = firstNonzeroByteNum = -2;
     }
