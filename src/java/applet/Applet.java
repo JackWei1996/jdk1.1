@@ -24,22 +24,21 @@ import java.util.Locale;
  */
 public class Applet extends Panel {
     /**
-     * Applets can be serialized but the following conventions MUST be followed:
+     * 小程序可以序列化，但必须遵循以下约定：
      *
-     * Before Serialization:
-     * An applet must be in STOPPED state.
+     * 序列化之前:
+     * 小程序必须处于已停止状态。
      *
-     * After Deserialization:
-     * The applet will be restored in STOPPED state (and most clients will likely
-     *    move it into RUNNING state).
-     * The stub field will be restored by the reader.
+     * 反序列化后：
+     * 小程序将恢复为 STOPPED 状态（大多数客户端可能会将其移至 RUNNING 状态）。
+     * 存根字段将由阅读器恢复。
      */
     transient private AppletStub stub;
 
     /**
-     * Sets this applet's stub. This is done automatically by the system. 
+     * 设置此小程序的存根。这是由系统自动完成的。
      * 
-     * @param   stub   the new stub.
+     * @param   stub   新的存根。
      * @since   JDK1.0
      */
     public final void setStub(AppletStub stub) {
@@ -47,12 +46,10 @@ public class Applet extends Panel {
     }
 
     /**
-     * Determines if this applet is active. An applet is marked active 
-     * just before its <code>start</code> method is called. It becomes 
-     * inactive immediately after its <code>stop</code> method is called. 
+     * 确定此小程序是否处于活动状态。小程序在其 start 方法被调用之前被标记为活动的。
+     * 它在调用 stop 方法后立即变为非活动状态。
      *
-     * @return  <code>true</code> if the applet is active;
-     *          <code>false</code> otherwise.
+     * @return  true 如果小程序处于活动状态； false 否则。
      * @see     Applet#start()
      * @see     Applet#stop()
      * @since   JDK1.0
@@ -60,17 +57,15 @@ public class Applet extends Panel {
     public boolean isActive() {
 	if (stub != null) {
 	    return stub.isActive();
-	} else {	// If stub field not filled in, applet never active
+	} else {	// 如果未填写存根字段，则小程序永远不会激活
 	    return false;
 	}
     }
     
     /**
-     * Gets the document URL. This is the URL of the document in which
-     * the applet is embedded.
+     * 获取文档 URL。这是嵌入小程序的文档的 URL。
      *
-     * @return  the <a href="java.net.URL.html#_top_"><code>URL</code></a> of
-     *          the document that contains this applet.
+     * @return  包含此小程序的文档的 <a href="java.net.URL.html_top_"> URL <a>。
      * @see     Applet#getCodeBase()
      * @since   JDK1.0
      */
