@@ -74,10 +74,9 @@ public class Applet extends Panel {
     }
 
     /**
-     * Gets the base URL. This is the URL of the applet itself. 
+     * 获取基本 URL。这是小程序本身的 URL。
      *
-     * @return  the <a href="java.net.URL.html#_top_"><code>URL</code></a> of
-     *          this applet.
+     * @return  此小程序的 <a href="java.net.URL.html_top_">URL<a>。
      * @see     Applet#getDocumentBase()
      * @since   JDK1.0
      */
@@ -86,21 +85,18 @@ public class Applet extends Panel {
     }
 
     /**
-     * Returns the value of the named parameter in the HTML tag. For 
-     * example, if this applet is specified as
-     * <ul><code>
+     * 返回 HTML 标记中命名参数的值。例如，如果这个小程序被指定为
+     * <ul>
      *	&lt;applet code="Clock" width=50 height=50&gt;<br>
      *  &lt;param name=Color value="blue"&gt;<br>
      *  &lt;/applet&gt;
-     * </code></ul>
+     * </ul>
+     * 然后调用getParameter("Color") 返回"blue"。
      * <p>
-     * then a call to <code>getParameter("Color")</code> returns the 
-     * value <code>"blue"</code>. 
-     * <p>
-     * The <code>name</code> argument is case insensitive. 
+     * name 参数不区分大小写。
      *
-     * @param   name   a parameter name.
-     * @return  the value of the named parameter.
+     * @param   name   参数名称。
+     * @return  命名参数的值。
      * @since   JDK1.0
      */
      public String getParameter(String name) {
@@ -108,13 +104,10 @@ public class Applet extends Panel {
      }
 
     /**
-     * Determines this applet's context, which allows the applet to 
-     * query and affect the environment in which it runs. 
-     * <p>
-     * This environment of an applet represents the document that 
-     * contains the applet. 
+     * 确定这个小程序的上下文，它允许小程序查询和影响它运行的环境。
+     * 小程序的这个环境表示包含小程序的文档。
      *
-     * @return  the applet's context.
+     * @return  小程序的上下文。
      * @since   JDK1.0
      */
     public AppletContext getAppletContext() {
@@ -122,10 +115,10 @@ public class Applet extends Panel {
     }
    
     /**
-     * Requests that this applet be resized. 
+     * 请求调整此小程序的大小。
      *
-     * @param   width    the new requested width for the applet.
-     * @param   height   the new requested height for the applet.
+     * @param   width    小程序的新请求宽度。
+     * @param   height   小程序的新请求高度。
      * @since   JDK1.0
      */
     public void resize(int width, int height) {
@@ -139,9 +132,9 @@ public class Applet extends Panel {
     }
 
     /**
-     * Requests that this applet be resized. 
+     * 请求调整此小程序的大小。
      *
-     * @param   d   an object giving the new width and height.
+     * @param   d   一个给出新宽度和高度的对象。
      * @since   JDK1.0
      */    
     public void resize(Dimension d) {
@@ -149,12 +142,10 @@ public class Applet extends Panel {
     }
 
     /**
-     * Requests that the argument string be displayed in the 
-     * "status window". Many browsers and applet viewers 
-     * provide such a window, where the application can inform users of 
-     * its current state. 
+     * 请求在“状态窗口”中显示参数字符串。
+     * 许多浏览器和小程序查看器都提供了这样一个窗口，应用程序可以在其中通知用户其当前状态。
      *
-     * @param   msg   a string to display in the status window.
+     * @param   msg   要在状态窗口中显示的字符串。
      * @since   JDK1.0
      */
     public void showStatus(String msg) {
@@ -162,17 +153,13 @@ public class Applet extends Panel {
     }
 
     /**
-     * Returns an <code>Image</code> object that can then be painted on 
-     * the screen. The <code>url</code> that is passed as an argument 
-     * must specify an absolute URL. 
-     * <p>
-     * This method always returns immediately, whether or not the image 
-     * exists. When this applet attempts to draw the image on the screen, 
-     * the data will be loaded. The graphics primitives that draw the 
-     * image will incrementally paint on the screen. 
+     * 返回可以在屏幕上绘制的 Image 对象。
+     * 作为参数传递的 url 必须指定一个绝对 URL。
+     * 无论图像是否存在，此方法总是立即返回。当此小程序尝试在屏幕上绘制图像时，将加载数据。
+     * 绘制图像的图形基元将逐渐在屏幕上绘制。
      *
-     * @param   url   an absolute URL giving the location of the image.
-     * @return  the image at the specified URL.
+     * @param   url   给出图像位置的绝对 URL。
+     * @return  指定 URL 处的图像。
      * @see     Image
      * @since   JDK1.0
      */
