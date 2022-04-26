@@ -168,20 +168,14 @@ public class Applet extends Panel {
     }
 
     /**
-     * Returns an <code>Image</code> object that can then be painted on 
-     * the screen. The <code>url</code> argument must specify an absolute 
-     * URL. The <code>name</code> argument is a specifier that is 
-     * relative to the <code>url</code> argument. 
-     * <p>
-     * This method always returns immediately, whether or not the image 
-     * exists. When this applet attempts to draw the image on the screen, 
-     * the data will be loaded. The graphics primitives that draw the 
-     * image will incrementally paint on the screen. 
+     * 返回可以在屏幕上绘制的 Image 对象。 url 参数必须指定一个绝对 URL。
+     * name 参数是相对于 url 参数的说明符。
+     * 无论图像是否存在，此方法总是立即返回。当此小程序尝试在屏幕上绘制图像时，将加载数据。
+     * 绘制图像的图形基元将逐渐在屏幕上绘制。
      *
-     * @param   url    an absolute URL giving the base location of the image.
-     * @param   name   the location of the image, relative to the
-     *                 <code>url</code> argument.
-     * @return  the image at the specified URL.
+     * @param   url    给出图像基本位置的绝对 URL。
+     * @param   name   图片的位置，相对于 url 参数。
+     * @return  指定 URL 处的图像。
      * @see     Image
      * @since   JDK1.0
      */
@@ -194,15 +188,11 @@ public class Applet extends Panel {
     }
 
     /**
-     * Returns the <code>AudioClip</code> object specified by the 
-     * <code>URL</code> argument. 
-     * <p>
-     * This method always returns immediately, whether or not the audio 
-     * clip exists. When this applet attempts to play the audio clip, the 
-     * data will be loaded. 
+     * 返回由 URL 参数指定的 AudioClip 对象。
+     * 无论音频剪辑是否存在，此方法总是立即返回。当此小程序尝试播放音频剪辑时，将加载数据。
      *
-     * @param   url  an absolute URL giving the location of the audio clip.
-     * @return  the audio clip at the specified URL.
+     * @param   url  给出音频剪辑位置的绝对 URL。
+     * @return  指定 URL 处的音频剪辑。
      * @see     AudioClip
      * @since   JDK1.0
      */
