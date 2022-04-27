@@ -201,18 +201,12 @@ public class Applet extends Panel {
     }
 
     /**
-     * Returns the <code>AudioClip</code> object specified by the 
-     * <code>URL</code> and <code>name</code> arguments. 
-     * <p>
-     * This method always returns immediately, whether or not the audio 
-     * clip exists. When this applet attempts to play the audio clip, the 
-     * data will be loaded. 
+     * 返回由 URL 和 name 参数指定的 AudioClip 对象。
+     * 无论音频剪辑是否存在，此方法总是立即返回。当此小程序尝试播放音频剪辑时，将加载数据。
      * 
-     * @param   url    an absolute URL giving the base location of the
-     *                 audio clip.
-     * @param   name   the location of the audio clip, relative to the
-     *                 <code>url</code> argument.
-     * @return  the audio clip at the specified URL.
+     * @param   url    一个绝对 URL，给出音频剪辑的基本位置。
+     * @param   name   音频剪辑的位置，相对于 url 参数。
+     * @return  指定 URL 处的音频剪辑。
      * @see     AudioClip
      * @since   JDK1.0
      */
@@ -225,15 +219,10 @@ public class Applet extends Panel {
     }
 
     /**
-     * Returns information about this applet. An applet should override 
-     * this method to return a <code>String</code> containing information 
-     * about the author, version, and copyright of the applet. 
-     * <p>
-     * The implementation of this method provided by the 
-     * <code>Applet</code> class returns <code>null</code>. 
+     * 返回有关此小程序的信息。小程序应覆盖此方法以返回包含有关小程序的作者、版本和版权信息的 String
+     * Applet 类提供的此方法的实现返回 null
      *
-     * @return  a string containing information about the author, version, and
-     *          copyright of the applet.
+     * @return  一个字符串，包含有关小程序的作者、版本和版权的信息。
      * @since   JDK1.0
      */
     public String getAppletInfo() {
@@ -241,11 +230,9 @@ public class Applet extends Panel {
     }
 
     /** 
-     * Gets the Locale for the applet, if it has been set.
-     * If no Locale has been set, then the default Locale 
-     * is returned.
+     * 获取小程序的区域设置（如果已设置）。如果没有设置区域设置，则返回默认区域设置。
      *
-     * @return  [Needs to be documented!]
+     * @return  [Needs to be documented!(需要备案！)]
      * @since   JDK1.1
      */
 
@@ -258,13 +245,9 @@ public class Applet extends Panel {
     }
 
     /**
-     * Returns information about the parameters than are understood by 
-     * this applet. An applet should override this method to return an 
-     * array of <code>Strings</code> describing these parameters. 
+     * 返回有关此小程序无法理解的参数的信息。小程序应覆盖此方法以返回描述这些参数的 Strings 数组。
      * <p>
-     * Each element of the array should be a set of three 
-     * <code>Strings</code> containing the name, the type, and a 
-     * description. For example:
+     * 数组的每个元素应该是一组包含名称、类型和描述的三个 Strings。例如：
      * <p><blockquote><pre>
      * String pinfo[][] = {
      *	 {"fps",    "1-10",    "frames per second"},
@@ -273,10 +256,9 @@ public class Applet extends Panel {
      * };
      * </pre></blockquote>
      * <p>
-     * The implementation of this method provided by the 
-     * <code>Applet</code> class returns <code>null</code>. 
+     * Applet 类提供的此方法的实现返回 null。
      *
-     * @return  an array describing the parameters this applet looks for.
+     * @return  描述此小程序查找的参数的数组。
      * @since   JDK1.0
      */
     public String[][] getParameterInfo() {
@@ -284,10 +266,9 @@ public class Applet extends Panel {
     }
 
     /**
-     * Plays the audio clip at the specified absolute URL. Nothing 
-     * happens if the audio clip cannot be found. 
+     * 在指定的绝对 URL 播放音频剪辑。如果找不到音频剪辑，则不会发生任何事情。
      *
-     * @param   url   an absolute URL giving the location of the audio clip.
+     * @param   url   给出音频剪辑位置的绝对 URL。
      * @since   JDK1.0
      */
     public void play(URL url) {
@@ -298,13 +279,10 @@ public class Applet extends Panel {
     }
 
     /**
-     * Plays the audio clip given the URL and a specifier that is 
-     * relative to it. Nothing happens if the audio clip cannot be found. 
+     * 播放给定 URL 和与其相关的说明符的音频剪辑。如果找不到音频剪辑，则不会发生任何事情。
      *
-     * @param   url    an absolute URL giving the base location of the
-     *                 audio clip.
-     * @param   name   the location of the audio clip, relative to the
-     *                 <code>url</code> argument.
+     * @param   url    一个绝对 URL，给出音频剪辑的基本位置。
+     * @param   name   音频剪辑的位置，相对于 url 参数。
      * @since   JDK1.0
      */
     public void play(URL url, String name) {
@@ -315,18 +293,12 @@ public class Applet extends Panel {
     }
 
     /**
-     * Called by the browser or applet viewer to inform 
-     * this applet that it has been loaded into the system. It is always 
-     * called before the first time that the <code>start</code> method is 
-     * called. 
+     * 由浏览器或小程序查看器调用以通知此小程序已加载到系统中。它总是在第一次调用 start 方法之前被调用。
      * <p>
-     * A subclass of <code>Applet</code> should override this method if 
-     * it has initialization to perform. For example, an applet with 
-     * threads would use the <code>init</code> method to create the 
-     * threads and the <code>destroy</code> method to kill them. 
+     * Applet 的子类如果要执行初始化，则应覆盖此方法。
+     * 例如，带有线程的小程序将使用 init 方法来创建线程，并使用 destroy 方法来杀死它们。
      * <p>
-     * The implementation of this method provided by the 
-     * <code>Applet</code> class does nothing. 
+     * Applet 类提供的这个方法的实现什么也不做。
      *
      * @see     Applet#destroy()
      * @see     Applet#start()
@@ -337,20 +309,13 @@ public class Applet extends Panel {
     }
 
     /**
-     * Called by the browser or applet viewer to inform 
-     * this applet that it should start its execution. It is called after 
-     * the <code>init</code> method and each time the applet is revisited 
-     * in a Web page. 
+     * 由浏览器或小程序查看器调用以通知此小程序它应该开始执行。
+     * 它在 init 方法之后以及每次在 Web 页面中重新访问 applet 时调用。
      * <p>
-     * A subclass of <code>Applet</code> should override this method if 
-     * it has any operation that it wants to perform each time the Web 
-     * page containing it is visited. For example, an applet with 
-     * animation might want to use the <code>start</code> method to 
-     * resume animation, and the <code>stop</code> method to suspend the 
-     * animation. 
+     * 如果 Applet 的子类在每次访问包含它的网页时都有想要执行的任何操作，则应该重写此方法。
+     * 例如，带有动画的小程序可能希望使用 start 方法来恢复动画，并使用 stop 方法来暂停动画。
      * <p>
-     * The implementation of this method provided by the 
-     * <code>Applet</code> class does nothing. 
+     * Applet 类提供的这个方法的实现什么也不做。
      *
      * @see     Applet#destroy()
      * @see     Applet#init()
@@ -361,20 +326,13 @@ public class Applet extends Panel {
     }
 
     /**
-     * Called by the browser or applet viewer to inform 
-     * this applet that it should stop its execution. It is called when 
-     * the Web page that contains this applet has been replaced by 
-     * another page, and also just before the applet is to be destroyed. 
+     * 由浏览器或小程序查看器调用以通知此小程序应停止执行。
+     * 当包含此小程序的网页已被另一个页面替换时，并且在小程序要被销毁之前调用它。
      * <p>
-     * A subclass of <code>Applet</code> should override this method if 
-     * it has any operation that it wants to perform each time the Web 
-     * page containing it is no longer visible. For example, an applet 
-     * with animation might want to use the <code>start</code> method to 
-     * resume animation, and the <code>stop</code> method to suspend the 
-     * animation. 
+     * 如果 Applet 的子类在每次包含它的网页不再可见时都希望执行任何操作，则应覆盖此方法。
+     * 例如，带有动画的小程序可能希望使用 start 方法来恢复动画，并使用 stop 方法来暂停动画。
      * <p>
-     * The implementation of this method provided by the 
-     * <code>Applet</code> class does nothing. 
+     * Applet 类提供的这个方法的实现什么也不做。
      *
      * @see     Applet#destroy()
      * @see     Applet#init()
@@ -384,19 +342,13 @@ public class Applet extends Panel {
     }
 
     /**
-     * Called by the browser or applet viewer to inform 
-     * this applet that it is being reclaimed and that it should destroy 
-     * any resources that it has allocated. The <code>stop</code> method 
-     * will always be called before <code>destroy</code>. 
+     * 由浏览器或小程序查看器调用以通知此小程序它正在被回收并且它应该销毁它已分配的任何资源。
+     * stop 方法总是在 destroy 之前调用。
      * <p>
-     * A subclass of <code>Applet</code> should override this method if 
-     * it has any operation that it wants to perform before it is 
-     * destroyed. For example, an applet with threads would use the 
-     * <code>init</code> method to create the threads and the 
-     * <code>destroy</code> method to kill them. 
+     * 如果 Applet 的子类在销毁之前有任何想要执行的操作，则应覆盖此方法。
+     * 例如，带有线程的小程序将使用 init 方法来创建线程，并使用 destroy 方法来杀死它们。
      * <p>
-     * The implementation of this method provided by the 
-     * <code>Applet</code> class does nothing. 
+     * Applet 类提供的这个方法的实现什么也不做。
      *
      * @see     Applet#init()
      * @see     Applet#start()
