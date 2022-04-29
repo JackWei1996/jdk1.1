@@ -13,7 +13,8 @@ public class SerializableTest {
         User user = new User();
         user.setName("Jack魏");
         user.setAge(18);
-        String fileName = "E:\\code\\tmp\\user.ser";
+        // 注意这里的目录，否则系统找不到指定的路径。
+        String fileName = "E:\\code\\tmp\\user\\user.ser";
 
         // 序列化
         FileOutputStream fos = new FileOutputStream(fileName);

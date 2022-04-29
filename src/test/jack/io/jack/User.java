@@ -10,7 +10,7 @@ import java.io.*;
  * @author Jack魏
  * @version 1.0 2022-04-20 21:05
  */
-public class User {
+public class User implements Serializable {
     private String name;
     private int age;
 
