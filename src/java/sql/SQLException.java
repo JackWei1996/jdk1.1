@@ -1,5 +1,5 @@
 /*
- * @(#)SQLException.java	1.7 01/12/12
+ * @(#)SQLException.java	1.7 2001/12/12
  *
  * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
