@@ -57,90 +57,89 @@ public interface ResultSetMetaData {
 	boolean isCurrency(int column) throws SQLException;
 
     /**
-     * Can you put a NULL in this column?		
+     * 您可以在此列中输入 NULL 吗？
      *
-     * @param column the first column is 1, the second is 2, ...
+     * @param column 第一列是 1，第二列是 2，...
      * @return columnNoNulls, columnNullable or columnNullableUnknown
-     * @exception SQLException if a database-access error occurs.
+     * @exception SQLException 如果发生数据库访问错误。
      */
 	int isNullable(int column) throws SQLException;
 
     /**
-     * Does not allow NULL values.
+     * 不允许 NULL 值。
      */
     int columnNoNulls = 0;
 
     /**
-     * Allows NULL values.
+     * 允许 NULL 值。
      */
     int columnNullable = 1;
 
     /**
-     * Nullability unknown.
+     * 可空性未知。
      */
     int columnNullableUnknown = 2;
 
     /**
-     * Is the column a signed number?
+     * 该列是带符号的数字吗？
      *
-     * @param column the first column is 1, the second is 2, ...
+     * @param column 第一列是 1，第二列是 2，...
      * @return true if so
-     * @exception SQLException if a database-access error occurs.
+     * @exception SQLException 如果发生数据库访问错误。
      */
 	boolean isSigned(int column) throws SQLException;
 
     /**
-     * What's the column's normal max width in chars?
+     * 该列的正常最大字符宽度是多少？
      *
-     * @param column the first column is 1, the second is 2, ...
+     * @param column 第一列是 1，第二列是 2，...
      * @return max width
-     * @exception SQLException if a database-access error occurs.
+     * @exception SQLException 如果发生数据库访问错误。
      */
 	int getColumnDisplaySize(int column) throws SQLException;
 
     /**
-     * What's the suggested column title for use in printouts and
-     * displays?
+     * 用于打印输出和显示的建议列标题是什么？
      *
-     * @param column the first column is 1, the second is 2, ...
+     * @param column 第一列是 1，第二列是 2，...
      * @return true if so 
-     * @exception SQLException if a database-access error occurs.
+     * @exception SQLException 如果发生数据库访问错误。
      */
 	String getColumnLabel(int column) throws SQLException;	
 
     /**
-     * What's a column's name?
+     * 列的名称是什么？
      *
-     * @param column the first column is 1, the second is 2, ...
+     * @param column 第一列是 1，第二列是 2，...
      * @return column name
-     * @exception SQLException if a database-access error occurs.
+     * @exception SQLException 如果发生数据库访问错误。
      */
 	String getColumnName(int column) throws SQLException;
 
     /**
-     * What's a column's table's schema?
+     * 什么是列的表架构？
      *
-     * @param column the first column is 1, the second is 2, ...
-     * @return schema name or "" if not applicable
-     * @exception SQLException if a database-access error occurs.
+     * @param column 第一列是 1，第二列是 2，...
+     * @return 架构名称或“”（如果不适用）
+     * @exception SQLException 如果发生数据库访问错误。
      */
 	String getSchemaName(int column) throws SQLException;
 
     /**
-     * What's a column's number of decimal digits?
+     * 一列的小数位数是多少？
      *
-     * @param column the first column is 1, the second is 2, ...
+     * @param column 第一列是 1，第二列是 2，...
      * @return precision
-     * @exception SQLException if a database-access error occurs.
+     * @exception SQLException 如果发生数据库访问错误。
      */
 	int getPrecision(int column) throws SQLException;
 
     /**
-     * What's a column's number of digits to right of the decimal point?
+     * 小数点右边一列的位数是多少？
      *
-     * @param column the first column is 1, the second is 2, ...
+     * @param column 第一列是 1，第二列是 2，...
      * @return scale
-     * @exception SQLException if a database-access error occurs.
+     * @exception SQLException 如果发生数据库访问错误。
      */
 	int getScale(int column) throws SQLException;	
 
