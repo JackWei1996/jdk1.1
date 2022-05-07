@@ -11,7 +11,7 @@ import java.io.*;
  * 当持久化数据笨重时，适合以更方便、更简洁的格式存储。
  *
  * 具体来说，这个例子考虑了三角阵列的情况。三角阵列只是一个对称的二维阵列。
- * 所以在序列化它时，最好只保存二维数组中的 12 个而不是全部。
+ * 所以在序列化它时，最好只保存二维数组中的 1/2 个而不是全部。
  *
  * 这与序列化和可序列化字段 API 示例的不同之处在于该示例不支持版本控制。
  * 此示例与使用 Externalizable 接口的不同之处在于此示例不必担心超类。
@@ -30,7 +30,7 @@ public class CustomDataExample implements Serializable {
     transient int thearray[][];
 
     /**
-     * 创建维度dim的三角数组并初始化
+     * 创建维度为dim的三角数组并初始化
      */
     CustomDataExample (int dim) {
         dimension = dim;
@@ -85,7 +85,6 @@ public class CustomDataExample implements Serializable {
      * 将二维数组的维度的1/2 写入 ObjectOutputStream 。 readObject 取决于此数据格式。
      *
      * @serialData 写入可序列化字段（如果存在）。写出对称二维数组的整数 Dimension。写出组成二维数组的 1/2 个整数。
-     *
      */
     private void writeObject(ObjectOutputStream s)
             throws IOException {
