@@ -152,57 +152,57 @@ public interface ResultSetMetaData {
 	String getTableName(int column) throws SQLException;
 
     /**
-     * What's a column's table's catalog name?
+     * 列的表的目录名称是什么？
      *
-     * @param column the first column is 1, the second is 2, ...
-     * @return column name or "" if not applicable.
-     * @exception SQLException if a database-access error occurs.
+     * @param column 第一列是 1，第二列是 2，...
+     * @return 列名或“”（如果不适用）。
+     * @exception SQLException 如果发生数据库访问错误。
      */
 	String getCatalogName(int column) throws SQLException;
 
     /**
-     * What's a column's SQL type?
+     * 什么是列的 SQL 类型？
      *
-     * @param column the first column is 1, the second is 2, ...
+     * @param column 第一列是 1，第二列是 2，...
      * @return SQL type
-     * @exception SQLException if a database-access error occurs.
+     * @exception SQLException 如果发生数据库访问错误。
      * @see Types
      */
 	int getColumnType(int column) throws SQLException;
 
     /**
-     * What's a column's data source specific type name?
+     * 什么是列的数据源特定类型名称？
      *
-     * @param column the first column is 1, the second is 2, ...
+     * @param column 第一列是 1，第二列是 2，...
      * @return type name
-     * @exception SQLException if a database-access error occurs.
+     * @exception SQLException 如果发生数据库访问错误。
      */
 	String getColumnTypeName(int column) throws SQLException;
 
     /**
-     * Is a column definitely not writable?
+     * 列肯定不可写吗？
      *
-     * @param column the first column is 1, the second is 2, ...
+     * @param column 第一列是 1，第二列是 2，...
      * @return true if so
-     * @exception SQLException if a database-access error occurs.
+     * @exception SQLException 如果发生数据库访问错误。
      */
 	boolean isReadOnly(int column) throws SQLException;
 
     /**
-     * Is it possible for a write on the column to succeed?
+     * 在列上写入是否有可能成功？
      *
-     * @param column the first column is 1, the second is 2, ...
+     * @param column 第一列是 1，第二列是 2，...
      * @return true if so
-     * @exception SQLException if a database-access error occurs.
+     * @exception SQLException 如果发生数据库访问错误。
      */
 	boolean isWritable(int column) throws SQLException;
 
     /**
-     * Will a write on the column definitely succeed?	
+     * 在专栏上写一定会成功吗？
      *
-     * @param column the first column is 1, the second is 2, ...
+     * @param column 第一列是 1，第二列是 2，...
      * @return true if so
-     * @exception SQLException if a database-access error occurs.
+     * @exception SQLException 如果发生数据库访问错误。
      */
 	boolean isDefinitelyWritable(int column) throws SQLException;
 }
