@@ -146,7 +146,7 @@ public class Timestamp extends java.util.Date {
     }
 
     /**
-     * Format a timestamp in JDBC timestamp escape format
+     * 以 JDBC 时间戳转义格式格式化时间戳
      *
      * @return a String in yyyy-mm-dd hh:mm:ss.fffffffff format
      */
@@ -198,11 +198,11 @@ public class Timestamp extends java.util.Date {
 	} else {
 	    nanosString = Integer.toString(nanos);
 
-	    // Add leading zeros
+	    // Add leading zeros(添加前导零)
 	    nanosString = zeros.substring(0,(9-nanosString.length())) + 
 		nanosString;
 	    
-	    // Truncate trailing zeros
+	    // Truncate trailing zeros(截断尾随零)
 	    char[] nanosChar = new char[nanosString.length()];
 	    nanosString.getChars(0, nanosString.length(), nanosChar, 0);
 	    int truncIndex = 8;	    
@@ -218,18 +218,18 @@ public class Timestamp extends java.util.Date {
     }
 
     /**
-     * Get the Timestamp's nanos value
+     * 获取时间戳的 nanos 值
      *
-     * @return the Timestamp's fractional seconds component
+     * @return 时间戳的小数秒组件
      */
     public int getNanos() {
 	return nanos;
     }
 
     /**
-     * Set the Timestamp's nanos value
+     * 设置时间戳的 nanos 值
      *
-     * @param n the new fractional seconds component
+     * @param n 新的小数秒组件
      */
     public void setNanos(int n) {
 	if (n > 999999999 || n < 0) {
@@ -239,9 +239,9 @@ public class Timestamp extends java.util.Date {
     }
 
     /**
-     * Test Timestamp values for equality
+     * 测试时间戳值是否相等
      *
-     * @param ts the Timestamp value to compare with
+     * @param ts 要与之比较的时间戳值
      */
     public boolean equals(Timestamp ts) {
 	if (super.equals(ts)) {
@@ -256,9 +256,9 @@ public class Timestamp extends java.util.Date {
     }
 
     /**
-     * Is this timestamp earlier than the timestamp argument?
+     * 此时间戳是否早于时间戳参数？
      *
-     * @param ts the Timestamp value to compare with
+     * @param ts 要与之比较的时间戳值
      */
     public boolean before(Timestamp ts) {
 	if (super.before(ts)) {
@@ -277,9 +277,9 @@ public class Timestamp extends java.util.Date {
     }
 
     /**
-     * Is this timestamp later than the timestamp argument?
+     * 此时间戳是否晚于时间戳参数？
      *
-     * @param ts the Timestamp value to compare with
+     * @param ts 要与之比较的时间戳值
      */
     public boolean after(Timestamp ts) {
 	if (super.after(ts)) {
