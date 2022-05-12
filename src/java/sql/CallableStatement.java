@@ -83,98 +83,96 @@ public interface CallableStatement extends PreparedStatement {
     String getString(int parameterIndex) throws SQLException;
 
     /**
-     * Get the value of a BIT parameter as a Java boolean.
+     * 获取 BIT 参数的值作为 Java 布尔值。
      *
-     * @param parameterIndex the first parameter is 1, the second is 2, ...
-     * @return the parameter value; if the value is SQL NULL, the result is false
-     * @exception SQLException if a database-access error occurs.
+     * @param parameterIndex 第一个参数是1，第二个是2，...
+     * @return 参数值；如果值为 SQL NULL，则结果为 false
+     * @exception SQLException 如果发生数据库访问错误。
      */
     boolean getBoolean(int parameterIndex) throws SQLException;
 
     /**
-     * Get the value of a TINYINT parameter as a Java byte.
+     * 将 TINYINT 参数的值作为 Java 字节获取。
      *
-     * @param parameterIndex the first parameter is 1, the second is 2, ...
-     * @return the parameter value; if the value is SQL NULL, the result is 0
-     * @exception SQLException if a database-access error occurs.
+     * @param parameterIndex 第一个参数是1，第二个是2，...
+     * @return 参数值；如果值为 SQL NULL，则结果为 0
+     * @exception SQLException 如果发生数据库访问错误。
      */
     byte getByte(int parameterIndex) throws SQLException;
 
     /**
-     * Get the value of a SMALLINT parameter as a Java short.
+     * 获取 SMALLINT 参数的值作为 Java 缩写。
      *
-     * @param parameterIndex the first parameter is 1, the second is 2, ...
-     * @return the parameter value; if the value is SQL NULL, the result is 0
-     * @exception SQLException if a database-access error occurs.
+     * @param parameterIndex 第一个参数是1，第二个是2，...
+     * @return 参数值；如果值为 SQL NULL，则结果为 0
+     * @exception SQLException 如果发生数据库访问错误。
      */
     short getShort(int parameterIndex) throws SQLException;
 
     /**
-     * Get the value of an INTEGER parameter as a Java int.
+     * 将 INTEGER 参数的值作为 Java int 获取。
      *
-     * @param parameterIndex the first parameter is 1, the second is 2, ...
-     * @return the parameter value; if the value is SQL NULL, the result is 0
-     * @exception SQLException if a database-access error occurs.
+     * @param parameterIndex 第一个参数是1，第二个是2，...
+     * @return 参数值；如果值为 SQL NULL，则结果为 0
+     * @exception SQLException 如果发生数据库访问错误。
      */
     int getInt(int parameterIndex) throws SQLException;
 
     /**
-     * Get the value of a BIGINT parameter as a Java long.
+     * 将 BIGINT 参数的值作为 Java long 获取。
      *
-     * @param parameterIndex the first parameter is 1, the second is 2, ...
-     * @return the parameter value; if the value is SQL NULL, the result is 0
-     * @exception SQLException if a database-access error occurs.
+     * @param parameterIndex 第一个参数是1，第二个是2，...
+     * @return 参数值；如果值为 SQL NULL，则结果为 0
+     * @exception SQLException 如果发生数据库访问错误。
      */
     long getLong(int parameterIndex) throws SQLException;
 
     /**
-     * Get the value of a FLOAT parameter as a Java float.
+     * 将 FLOAT 参数的值作为 Java 浮点数获取。
      *
-     * @param parameterIndex the first parameter is 1, the second is 2, ...
-     * @return the parameter value; if the value is SQL NULL, the result is 0
-     * @exception SQLException if a database-access error occurs.
+     * @param parameterIndex 第一个参数是1，第二个是2，...
+     * @return 参数值；如果值为 SQL NULL，则结果为 0
+     * @exception SQLException 如果发生数据库访问错误。
      */
     float getFloat(int parameterIndex) throws SQLException;
 
     /**
-     * Get the value of a DOUBLE parameter as a Java double.
+     * 将 DOUBLE 参数的值作为 Java double 获取。
      *
-     * @param parameterIndex the first parameter is 1, the second is 2, ...
-     * @return the parameter value; if the value is SQL NULL, the result is 0
-     * @exception SQLException if a database-access error occurs.
+     * @param parameterIndex 第一个参数是1，第二个是2，...
+     * @return 参数值；如果值为 SQL NULL，则结果为 0
+     * @exception SQLException 如果发生数据库访问错误。
      */
     double getDouble(int parameterIndex) throws SQLException;
 
     /** 
-     * Get the value of a NUMERIC parameter as a java.math.BigDecimal object.
+     * 以 java.math.BigDecimal 对象的形式获取 NUMERIC 参数的值。
      *
-     * @param parameterIndex the first parameter is 1, the second is 2, ...
+     * @param parameterIndex 第一个参数是1，第二个是2，...
      *
-     * @param scale a value greater than or equal to zero representing the
-     * desired number of digits to the right of the decimal point 
+     * @param scale 大于或等于零的值，表示小数点右侧所需的位数
      *
-     * @return the parameter value; if the value is SQL NULL, the result is
-     * null 
-     * @exception SQLException if a database-access error occurs.
+     * @return 参数值；如果值为 SQL NULL，则结果为 null
+     * @exception SQLException 如果发生数据库访问错误。
      */
     BigDecimal getBigDecimal(int parameterIndex, int scale) 
     throws SQLException;
 
     /**
-     * Get the value of a SQL BINARY or VARBINARY parameter as a Java byte[]
+     * 以 Java byte[] 形式获取 SQL BINARY 或 VARBINARY 参数的值
      *
-     * @param parameterIndex the first parameter is 1, the second is 2, ...
-     * @return the parameter value; if the value is SQL NULL, the result is null
-     * @exception SQLException if a database-access error occurs.
+     * @param parameterIndex 第一个参数是1，第二个是2，...
+     * @return 参数值；如果值为 SQL NULL，则结果为 null
+     * @exception SQLException 如果发生数据库访问错误。
      */
     byte[] getBytes(int parameterIndex) throws SQLException;
 
     /**
-     * Get the value of a SQL DATE parameter as a java.sql.Date object
+     * 将 SQL DATE 参数的值作为 java.sql.Date 对象获取
      *
-     * @param parameterIndex the first parameter is 1, the second is 2, ...
-     * @return the parameter value; if the value is SQL NULL, the result is null
-     * @exception SQLException if a database-access error occurs.
+     * @param parameterIndex 第一个参数是1，第二个是2，...
+     * @return 参数值；如果值为 SQL NULL，则结果为 null
+     * @exception SQLException 如果发生数据库访问错误。
      */
     Date getDate(int parameterIndex) throws SQLException;
 
