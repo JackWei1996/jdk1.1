@@ -177,42 +177,40 @@ public interface CallableStatement extends PreparedStatement {
     Date getDate(int parameterIndex) throws SQLException;
 
     /**
-     * Get the value of a SQL TIME parameter as a java.sql.Time object.
+     * 将 SQL TIME 参数的值作为 java.sql.Time 对象获取。
      *
-     * @param parameterIndex the first parameter is 1, the second is 2, ...
-     * @return the parameter value; if the value is SQL NULL, the result is null
-     * @exception SQLException if a database-access error occurs.
+     * @param parameterIndex 第一个参数是1，第二个是2，...
+     * @return 参数值；如果值为 SQL NULL，则结果为 null
+     * @exception SQLException 如果发生数据库访问错误。
      */
     Time getTime(int parameterIndex) throws SQLException;
 
     /**
-     * Get the value of a SQL TIMESTAMP parameter as a java.sql.Timestamp object.
+     * 将 SQL TIMESTAMP 参数的值作为 java.sql.Timestamp 对象获取。
      *
-     * @param parameterIndex the first parameter is 1, the second is 2, ...
-     * @return the parameter value; if the value is SQL NULL, the result is null
-     * @exception SQLException if a database-access error occurs.
+     * @param parameterIndex 第一个参数是1，第二个是2，...
+     * @return 参数值；如果值为 SQL NULL，则结果为 null
+     * @exception SQLException 如果发生数据库访问错误。
      */
     Timestamp getTimestamp(int parameterIndex)
 	    throws SQLException;
 
     //----------------------------------------------------------------------
-    // Advanced features:
+    // 高级功能：
 
 
     /**
-     * Get the value of a parameter as a Java object.
+     * 获取作为 Java 对象的参数值。
      *
-     * <p>This method returns a Java object whose type coresponds to the SQL
-     * type that was registered for this parameter using registerOutParameter.
+     * 此方法返回一个 Java 对象，其类型对应于使用 registerOutParameter 为此参数注册的 SQL 类型。
      *
-     * <p>Note that this method may be used to read
-     * datatabase-specific, abstract data types. This is done by
-     * specifying a targetSqlType of java.sql.types.OTHER, which
-     * allows the driver to return a database-specific Java type.
+     * 请注意，此方法可用于读取特定于数据库的抽象数据类型。
+     * 这是通过指定 java.sql.types.OTHER 的 targetSqlType 来完成的，
+     * 它允许驱动程序返回特定于数据库的 Java 类型。
      *
-     * @param parameterIndex The first parameter is 1, the second is 2, ...
-     * @return A java.lang.Object holding the OUT parameter value.
-     * @exception SQLException if a database-access error occurs.
+     * @param parameterIndex 第一个参数是1，第二个是2，...
+     * @return 包含 OUT 参数值的 java.lang.Object。
+     * @exception SQLException 如果发生数据库访问错误。
      * @see Types 
      */
     Object getObject(int parameterIndex) throws SQLException;
