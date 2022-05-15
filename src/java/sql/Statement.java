@@ -156,17 +156,13 @@ public interface Statement {
      * 单个 SQL 语句可能会返回多个结果集和/或更新计数。
      * 通常你可以忽略这一点，除非你正在执行一个你知道可能返回多个结果的存储过程，
      * 或者除非你正在动态执行一个未知的 SQL 字符串。
-     * 12v b“execute”、“getMoreResults”、“getResultSet”和“getUpdateCount”方法让您可以浏览多个结果。
+     * “execute”、“getMoreResults”、“getResultSet”和“getUpdateCount”方法让您可以浏览多个结果。
      *
-     * The "execute" method executes a SQL statement and indicates the
-     * form of the first result.  You can then use getResultSet or
-     * getUpdateCount to retrieve the result, and getMoreResults to
-     * move to any subsequent result(s).
+     * “execute”方法执行一条 SQL 语句并指示第一个结果的形式。然后，您可以使用 getResultSet 或 getUpdateCount 检索结果，并使用 getMoreResults 移动到任何后续结果。
      *
      * @param sql any SQL statement
-     * @return true if the next result is a ResultSet; false if it is
-     * an update count or there are no more results
-     * @exception SQLException if a database-access error occurs.
+     * @return 如果下一个结果是 ResultSet，则为 true；如果是更新计数或没有更多结果，则为 false
+     * @exception SQLException 如果发生数据库访问错误。
      * @see #getResultSet
      * @see #getUpdateCount
      * @see #getMoreResults 
@@ -174,38 +170,31 @@ public interface Statement {
     boolean execute(String sql) throws SQLException;
 	
     /**
-     *  getResultSet returns the current result as a ResultSet.  It
-     *  should only be called once per result.
+     * getResultSet 将当前结果作为 ResultSet 返回。每个结果只应调用一次。
      *
-     * @return the current result as a ResultSet; null if the result
-     * is an update count or there are no more results
-     * @exception SQLException if a database-access error occurs.
+     * @return 当前结果为 ResultSet；如果结果是更新计数或没有更多结果，则为 null
+     * @exception SQLException 如果发生数据库访问错误。
      * @see #execute 
      */
     ResultSet getResultSet() throws SQLException; 
 
     /**
-     *  getUpdateCount returns the current result as an update count;
-     *  if the result is a ResultSet or there are no more results, -1
-     *  is returned.  It should only be called once per result.
+     * getUpdateCount 返回当前结果作为更新计数；
+     * 如果结果是 ResultSet 或没有更多结果，则返回 -1。每个结果只应调用一次。
      * 
-     * @return the current result as an update count; -1 if it is a
-     * ResultSet or there are no more results
+     * @return 当前结果作为更新计数； -1 如果是 ResultSet 或没有更多结果
      * @exception SQLException if a database-access error occurs.
      * @see #execute 
      */
     int getUpdateCount() throws SQLException; 
 
     /**
-     * getMoreResults moves to a Statement's next result.  It returns true if 
-     * this result is a ResultSet.  getMoreResults also implicitly
-     * closes any current ResultSet obtained with getResultSet.
+     * getMoreResults 移动到语句的下一个结果。如果此结果是 ResultSet，则返回 true。
+     * getMoreResults 还隐式关闭使用 getResultSet 获得的任何当前 ResultSet。
      *
-     * There are no more results when (!getMoreResults() &&
-     * (getUpdateCount() == -1)
+     * 当 (!getMoreResults() && (getUpdateCount() == -1) 时没有更多结果
      *
-     * @return true if the next result is a ResultSet; false if it is
-     * an update count or there are no more results
+     * @return 如果下一个结果是 ResultSet，则为 true；如果是更新计数或没有更多结果，则为 false
      * @exception SQLException if a database-access error occurs.
      * @see #execute 
      */
