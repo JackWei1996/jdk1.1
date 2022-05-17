@@ -49,31 +49,23 @@ public interface Connection {
 	    throws SQLException;
 
     /**
-     * A SQL stored procedure call statement is handled by creating a
-     * CallableStatement for it. The CallableStatement provides
-     * methods for setting up its IN and OUT parameters, and
-     * methods for executing it.
+     * SQL 存储过程调用语句是通过为其创建 CallableStatement 来处理的。
+     * CallableStatement 提供了设置其 IN 和 OUT 参数的方法，以及执行它的方法。
      *
-     * <P><B>Note:</B> This method is optimized for handling stored
-     * procedure call statements. Some drivers may send the call
-     * statement to the database when the prepareCall is done; others
-     * may wait until the CallableStatement is executed. This has no
-     * direct affect on users; however, it does affect which method
-     * throws certain SQLExceptions.
+     * Note: 此方法针对处理存储过程调用语句进行了优化。
+     * 一些驱动程序可能会在 prepareCall 完成时将调用语句发送到数据库；
+     * 其他人可能会等到 CallableStatement 被执行。这对用户没有直接影响；
+     * 但是，它确实会影响哪个方法抛出某些 SQLExceptions。
      *
-     * @param sql a SQL statement that may contain one or more '?'
-     * parameter placeholders. Typically this  statement is a JDBC
-     * function call escape string.
-     * @return a new CallableStatement object containing the
-     * pre-compiled SQL statement 
+     * @param sql 可能包含一个或多个“？”的 SQL 语句参数占位符。通常，此语句是 JDBC 函数调用转义字符串。
+     * @return 包含预编译 SQL 语句的新 CallableStatement 对象
      * @exception SQLException if a database-access error occurs.
      */
     CallableStatement prepareCall(String sql) throws SQLException;
 						
     /**
-     * A driver may convert the JDBC sql grammar into its system's
-     * native SQL grammar prior to sending it; nativeSQL returns the
-     * native form of the statement that the driver would have sent.
+     * 驱动程序可以在发送之前将 JDBC sql 语法转换为其系统的本机 SQL 语法；
+     * nativeSQL 返回驱动程序将发送的语句的本机形式。
      *
      * @param sql a SQL statement that may contain one or more '?'
      * parameter placeholders
@@ -83,21 +75,12 @@ public interface Connection {
     String nativeSQL(String sql) throws SQLException;
 
     /**
-     * If a connection is in auto-commit mode, then all its SQL
-     * statements will be executed and committed as individual
-     * transactions.  Otherwise, its SQL statements are grouped into
-     * transactions that are terminated by either commit() or
-     * rollback().  By default, new connections are in auto-commit
-     * mode.
+     * 如果连接处于自动提交模式，则其所有 SQL 语句将作为单独的事务执行和提交。
+     * 否则，它的 SQL 语句将被分组为由 commit() 或 rollback() 终止的事务。默认情况下，新连接处于自动提交模式。
      *
-     * The commit occurs when the statement completes or the next
-     * execute occurs, whichever comes first. In the case of
-     * statements returning a ResultSet, the statement completes when
-     * the last row of the ResultSet has been retrieved or the
-     * ResultSet has been closed. In advanced cases, a single
-     * statement may return multiple results as well as output
-     * parameter values. Here the commit occurs when all results and
-     * output param values have been retrieved.
+     * 提交发生在语句完成或下一次执行发生时，以先到者为准。
+     * 对于返回 ResultSet 的语句，当检索到 ResultSet 的最后一行或关闭 ResultSet 时，语句完成。
+     * 在高级情况下，单个语句可能会返回多个结果以及输出参数值。当检索到所有结果和输出参数值时，就会发生提交。
      *
      * @param autoCommit true enables auto-commit; false disables
      * auto-commit.  
@@ -115,10 +98,8 @@ public interface Connection {
     boolean getAutoCommit() throws SQLException;
 
     /**
-     * Commit makes all changes made since the previous
-     * commit/rollback permanent and releases any database locks
-     * currently held by the Connection. This method should only be
-     * used when auto commit has been disabled.
+     * Commit 使自上次 commitrollback 以来所做的所有更改永久化，
+     * 并释放 Connection 当前持有的所有数据库锁。此方法仅应在禁用自动提交时使用。
      *
      * @exception SQLException if a database-access error occurs.
      * @see #setAutoCommit 
@@ -126,10 +107,8 @@ public interface Connection {
     void commit() throws SQLException;
 
     /**
-     * Rollback drops all changes made since the previous
-     * commit/rollback and releases any database locks currently held
-     * by the Connection. This method should only be used when auto
-     * commit has been disabled.
+     * 回滚删除自上次提交回滚以来所做的所有更改，并释放连接当前持有的所有数据库锁。
+     * 此方法仅应在禁用自动提交时使用。
      *
      * @exception SQLException if a database-access error occurs.
      * @see #setAutoCommit 
@@ -137,14 +116,9 @@ public interface Connection {
     void rollback() throws SQLException;
 
     /**
-     * In some cases, it is desirable to immediately release a
-     * Connection's database and JDBC resources instead of waiting for
-     * them to be automatically released; the close method provides this
-     * immediate release. 
+     * 在某些情况下，希望立即释放 Connection 的数据库和 JDBC 资源，而不是等待它们自动释放； close 方法提供了这个即时发布。
      *
-     * <P><B>Note:</B> A Connection is automatically closed when it is
-     * garbage collected. Certain fatal errors also result in a closed
-     * Connection.
+     * Note: 垃圾收集时连接会自动关闭。某些致命错误也会导致连接关闭。
      *
      * @exception SQLException if a database-access error occurs.
      */
@@ -159,14 +133,11 @@ public interface Connection {
     boolean isClosed() throws SQLException;;
 
     //======================================================================
-    // Advanced features:
+    // Advanced features（高级功能）:
 
     /**
-     * A Connection's database is able to provide information
-     * describing its tables, its supported SQL grammar, its stored
-     * procedures, the capabilities of this connection, etc. This
-     * information is made available through a DatabaseMetaData
-     * object.
+     * 连接的数据库能够提供描述其表、其支持的 SQL 语法、其存储过程、此连接的功能等的信息。
+     * 这些信息通过 DatabaseMetaData 对象提供。
      *
      * @return a DatabaseMetaData object for this Connection 
      * @exception SQLException if a database-access error occurs.
@@ -174,11 +145,9 @@ public interface Connection {
     DatabaseMetaData getMetaData() throws SQLException;;
 
     /**
-     * You can put a connection in read-only mode as a hint to enable 
-     * database optimizations.
+     * 您可以将连接置于只读模式作为启用数据库优化的提示。
      *
-     * <P><B>Note:</B> setReadOnly cannot be called while in the
-     * middle of a transaction.
+     * Note: 在事务中间不能调用 setReadOnly。
      *
      * @param readOnly true enables read-only mode; false disables
      * read-only mode.  
@@ -195,16 +164,14 @@ public interface Connection {
     boolean isReadOnly() throws SQLException;
 
     /**
-     * A sub-space of this Connection's database may be selected by setting a
-     * catalog name. If the driver does not support catalogs it will
-     * silently ignore this request.
+     * 可以通过设置目录名称来选择此连接数据库的子空间。如果驱动程序不支持目录，它将默默地忽略此请求。
      *
      * @exception SQLException if a database-access error occurs.
      */
     void setCatalog(String catalog) throws SQLException;
 
     /**
-     * Return the Connection's current catalog name.
+     * Return the Connection's current catalog name.（返回连接的当前目录名称。）
      *
      * @return the current catalog name or null
      * @exception SQLException if a database-access error occurs.
@@ -212,49 +179,47 @@ public interface Connection {
     String getCatalog() throws SQLException;
 
     /**
-     * Transactions are not supported. 
+     * Transactions are not supported. （不支持交易）
      */
     int TRANSACTION_NONE	     = 0;
 
     /**
      * Dirty reads, non-repeatable reads and phantom reads can occur.
+     * 可能会出现脏读、不可重复读和幻读。
      */
     int TRANSACTION_READ_UNCOMMITTED = 1;
 
     /**
      * Dirty reads are prevented; non-repeatable reads and phantom
      * reads can occur.
+     * 防止脏读；可能发生不可重复读取和幻读。
      */
     int TRANSACTION_READ_COMMITTED   = 2;
 
     /**
-     * Dirty reads and non-repeatable reads are prevented; phantom
-     * reads can occur.     
+     * 防止脏读和不可重复读；可能发生幻读。
      */
     int TRANSACTION_REPEATABLE_READ  = 4;
 
     /**
      * Dirty reads, non-repeatable reads and phantom reads are prevented.
+     * 防止脏读、不可重复读和幻读。
      */
     int TRANSACTION_SERIALIZABLE     = 8;
 
     /**
-     * You can call this method to try to change the transaction
-     * isolation level using one of the TRANSACTION_* values.
+     * 您可以调用此方法来尝试使用 TRANSACTION_* 值之一更改事务隔离级别。
      *
-     * <P><B>Note:</B> setTransactionIsolation cannot be called while
-     * in the middle of a transaction.
+     * Note:在事务中间不能调用 setTransactionIsolation。
      *
-     * @param level one of the TRANSACTION_* isolation values with the
-     * exception of TRANSACTION_NONE; some databases may not support
-     * other values
+     * @param level 除 TRANSACTION_NONE 外的 TRANSACTION_* 隔离值之一；一些数据库可能不支持其他值
      * @exception SQLException if a database-access error occurs.
      * @see DatabaseMetaData#supportsTransactionIsolationLevel 
      */
     void setTransactionIsolation(int level) throws SQLException;
 
     /**
-     * Get this Connection's current transaction isolation mode.
+     * 获取此 Connection 当前的事务隔离模式。
      *
      * @return the current TRANSACTION_* mode value
      * @exception SQLException if a database-access error occurs.
@@ -262,11 +227,9 @@ public interface Connection {
     int getTransactionIsolation() throws SQLException;
 
     /**
-     * The first warning reported by calls on this Connection is
-     * returned.  
+     * 返回在此 Connection 上调用报告的第一个警告。
      *
-     * <P><B>Note:</B> Subsequent warnings will be chained to this
-     * SQLWarning.
+     * Note: 随后的警告将链接到此 SQLWarning。
      *
      * @return the first SQLWarning or null 
      * @exception SQLException if a database-access error occurs.
@@ -274,8 +237,7 @@ public interface Connection {
     SQLWarning getWarnings() throws SQLException;
 
     /**
-     * After this call, getWarnings returns null until a new warning is
-     * reported for this Connection.  
+     * 在此调用之后，getWarnings 返回 null，直到为此 Connection 报告了新的警告。
      *
      * @exception SQLException if a database-access error occurs.
      */
