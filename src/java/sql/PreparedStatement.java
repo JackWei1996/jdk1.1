@@ -152,8 +152,7 @@ public interface PreparedStatement extends Statement {
 	    throws SQLException;
 
     /**
-     * Set a parameter to a java.sql.Time value.  The driver converts this
-     * to a SQL TIME value when it sends it to the database.
+     * 将参数设置为 java.sql.Time 值。驱动程序在将其发送到数据库时将其转换为 SQL TIME 值。
      *
      * @param parameterIndex the first parameter is 1, the second is 2, ...
      * @param x the parameter value
@@ -163,9 +162,7 @@ public interface PreparedStatement extends Statement {
 	    throws SQLException;
 
     /**
-     * Set a parameter to a java.sql.Timestamp value.  The driver
-     * converts this to a SQL TIMESTAMP value when it sends it to the
-     * database.
+     * 将参数设置为 java.sql.Timestamp 值。驱动程序在将其发送到数据库时将其转换为 SQL TIMESTAMP 值。
      *
      * @param parameterIndex the first parameter is 1, the second is 2, ...
      * @param x the parameter value 
@@ -175,15 +172,10 @@ public interface PreparedStatement extends Statement {
 	    throws SQLException;
 
     /**
-     * When a very large ASCII value is input to a LONGVARCHAR
-     * parameter, it may be more practical to send it via a
-     * java.io.InputStream. JDBC will read the data from the stream
-     * as needed, until it reaches end-of-file.  The JDBC driver will
-     * do any necessary conversion from ASCII to the database char format.
+     * 当向 LONGVARCHAR 参数输入非常大的 ASCII 值时，通过 java.io.InputStream 发送它可能更实际。
+     * JDBC 将根据需要从流中读取数据，直到到达文件末尾。 JDBC 驱动程序将执行从 ASCII 到数据库字符格式的任何必要转换。
      * 
-     * <P><B>Note:</B> This stream object can either be a standard
-     * Java stream object or your own subclass that implements the
-     * standard interface.
+     * Note: 此流对象可以是标准的 Java 流对象，也可以是您自己的实现标准接口的子类。
      *
      * @param parameterIndex the first parameter is 1, the second is 2, ...
      * @param x the java input stream which contains the ASCII parameter value
@@ -194,15 +186,10 @@ public interface PreparedStatement extends Statement {
 	    throws SQLException;
 
     /**
-     * When a very large UNICODE value is input to a LONGVARCHAR
-     * parameter, it may be more practical to send it via a
-     * java.io.InputStream. JDBC will read the data from the stream
-     * as needed, until it reaches end-of-file.  The JDBC driver will
-     * do any necessary conversion from UNICODE to the database char format.
+     * 当一个非常大的 UNICODE 值输入到 LONGVARCHAR 参数时，通过 java.io.InputStream 发送它可能更实际。
+     * JDBC 将根据需要从流中读取数据，直到到达文件末尾。 JDBC 驱动程序将执行从 UNICODE 到数据库字符格式的任何必要转换。
      * 
-     * <P><B>Note:</B> This stream object can either be a standard
-     * Java stream object or your own subclass that implements the
-     * standard interface.
+     * <P><B>Note: 此流对象可以是标准的 Java 流对象，也可以是您自己的实现标准接口的子类。
      *
      * @param parameterIndex the first parameter is 1, the second is 2, ...  
      * @param x the java input stream which contains the
@@ -214,14 +201,10 @@ public interface PreparedStatement extends Statement {
 	    throws SQLException;
 
     /**
-     * When a very large binary value is input to a LONGVARBINARY
-     * parameter, it may be more practical to send it via a
-     * java.io.InputStream. JDBC will read the data from the stream
-     * as needed, until it reaches end-of-file.
+     * 当一个非常大的二进制值输入到 LONGVARBINARY 参数时，通过 java.io.InputStream 发送它可能更实际。
+     * JDBC 将根据需要从流中读取数据，直到到达文件末尾。
      * 
-     * <P><B>Note:</B> This stream object can either be a standard
-     * Java stream object or your own subclass that implements the
-     * standard interface.
+     * Note: 此流对象可以是标准的 Java 流对象，也可以是您自己的实现标准接口的子类。
      *
      * @param parameterIndex the first parameter is 1, the second is 2, ...
      * @param x the java input stream which contains the binary parameter value
