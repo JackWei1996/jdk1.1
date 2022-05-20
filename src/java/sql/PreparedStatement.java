@@ -215,11 +215,8 @@ public interface PreparedStatement extends Statement {
 	    throws SQLException;
 
     /**
-     * <P>In general, parameter values remain in force for repeated use of a
-     * Statement. Setting a parameter value automatically clears its
-     * previous value.  However, in some cases it is useful to immediately
-     * release the resources used by the current parameter values; this can
-     * be done by calling clearParameters.
+     * 一般来说，参数值对语句的重复使用仍然有效。设置参数值会自动清除其先前的值。
+     * 但是，在某些情况下，立即释放当前参数值使用的资源是有用的；这可以通过调用 clearParameters 来完成。
      *
      * @exception SQLException if a database-access error occurs.
      */
@@ -229,24 +226,18 @@ public interface PreparedStatement extends Statement {
     // Advanced features:
 
     /**
-     * <p>Set the value of a parameter using an object; use the
-     * java.lang equivalent objects for integral values.
+     * 使用对象设置参数的值；将 java.lang 等效对象用于整数值。
      *
-     * <p>The given Java object will be converted to the targetSqlType
-     * before being sent to the database.
+     * 给定的 Java 对象将在发送到数据库之前转换为 targetSqlType。
      *
-     * <p>Note that this method may be used to pass datatabase-
-     * specific abstract data types. This is done by using a Driver-
-     * specific Java type and using a targetSqlType of
-     * java.sql.types.OTHER.
+     * 请注意，此方法可用于传递特定于数据库的抽象数据类型。
+     * 这是通过使用特定于驱动程序的 Java 类型和使用 java.sql.types.OTHER 的目标 Sql 类型来完成的。
      *
      * @param parameterIndex The first parameter is 1, the second is 2, ...
      * @param x The object containing the input parameter value
-     * @param targetSqlType The SQL type (as defined in java.sql.Types) to be 
-     * sent to the database. The scale argument may further qualify this type.
-     * @param scale For java.sql.Types.DECIMAL or java.sql.Types.NUMERIC types
-     *          this is the number of digits after the decimal.  For all other
-     *          types this value will be ignored,
+     * @param targetSqlType 要发送到数据库的 SQL 类型（在 java.sql.Types 中定义）。 scale 参数可以进一步限定这种类型。
+     * @param scale 对于 java.sql.Types.DECIMAL 或 java.sql.Types.NUMERIC 类型，这是小数点后的位数。
+     *              对于所有其他类型，此值将被忽略，
      * @exception SQLException if a database-access error occurs.
      * @see Types 
      */
@@ -254,24 +245,19 @@ public interface PreparedStatement extends Statement {
             throws SQLException;
 
    /**
-     * This method is like setObject above, but assumes a scale of zero.
+     * 此方法类似于上面的 setObject，但假定比例为零。
      *
      * @exception SQLException if a database-access error occurs.
      */
     void setObject(int parameterIndex, Object x, int targetSqlType) throws SQLException;
 
     /**
-     * <p>Set the value of a parameter using an object; use the
-     * java.lang equivalent objects for integral values.
+     * 使用对象设置参数的值；将 java.lang 等效对象用于整数值。
      *
-     * <p>The JDBC specification specifies a standard mapping from
-     * Java Object types to SQL types.  The given argument java object
-     * will be converted to the corresponding SQL type before being
-     * sent to the database.
+     * JDBC 规范指定了从 Java 对象类型到 SQL 类型的标准映射。
+     * 给定的参数 java 对象将在发送到数据库之前转换为相应的 SQL 类型。
      *
-     * <p>Note that this method may be used to pass datatabase
-     * specific abstract data types, by using a Driver specific Java
-     * type.
+     * 请注意，此方法可用于通过使用特定于驱动程序的 Java 类型来传递特定于数据库的抽象数据类型。
      *
      * @param parameterIndex The first parameter is 1, the second is 2, ...
      * @param x The object containing the input parameter value 
@@ -280,9 +266,8 @@ public interface PreparedStatement extends Statement {
     void setObject(int parameterIndex, Object x) throws SQLException;
 
     /**
-     * Some prepared statements return multiple results; the execute
-     * method handles these complex statements as well as the simpler
-     * form of statements handled by executeQuery and executeUpdate.
+     * 一些准备好的语句返回多个结果； execute 方法处理这些复杂的语句以及由 executeQuery
+     * 和 executeUpdate 处理的更简单的语句形式。
      *
      * @exception SQLException if a database-access error occurs.
      * @see Statement#execute
