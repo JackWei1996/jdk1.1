@@ -119,9 +119,7 @@ public class DriverManager {
     }
 
     /**
-     * Attempt to locate a driver that understands the given URL.
-     * The DriverManager attempts to select an appropriate driver from
-     * the set of registered JDBC drivers. 
+     * 尝试找到能够理解给定 URL 的驱动程序。 DriverManager 尝试从已注册的 JDBC 驱动程序集中选择合适的驱动程序。
      *
      * @param url a database url of the form jdbc:<em>subprotocol</em>:<em>subname</em>
      * @return a Driver that can connect to the URL 
@@ -134,15 +132,13 @@ public class DriverManager {
             initialize();
         }
 
-        // Figure out the current security context.
+        // Figure out the current security context.（找出当前的安全上下文。）
         Object currentSecurityContext = getSecurityContext();
 
-        // Walk through the loaded drivers attempting to locate someone
-	// who understands the given URL.
+        // 浏览加载的驱动程序，试图找到理解给定 URL 的人。
         for (int i = 0; i < drivers.size(); i++) {
             DriverInfo di = (DriverInfo)drivers.elementAt(i);
-            // If the driver isn't part of the base system and doesn't come
-            // from the same security context as the current caller, skip it.
+            // 如果驱动程序不是基本系统的一部分并且与当前调用者不来自相同的安全上下文，请跳过它。
             if (di.securityContext != null && 
                         di.securityContext != currentSecurityContext) {
                 println("    skipping: " + di);
@@ -156,7 +152,7 @@ public class DriverManager {
                     return (di.driver);
                 }
             } catch (SQLException ex) {
-		// Drop through and try the next driver.
+		// Drop through and try the next driver.（通过并尝试下一个驱动程序。）
             }
         }
 
@@ -166,8 +162,7 @@ public class DriverManager {
 
 
     /**
-     * A newly loaded driver class should call registerDriver to make itself
-     * known to the DriverManager.
+     * 新加载的驱动程序类应该调用 registerDriver 以使 DriverManager 知道它自己。
      *
      * @param driver the new JDBC Driver 
      * @exception SQLException if a database-access error occurs.
@@ -180,7 +175,7 @@ public class DriverManager {
         DriverInfo di = new DriverInfo();
         di.driver = driver;
         di.className = driver.getClass().getName();
-        // Note our current securityContext.
+        // Note our current securityContext.（注意我们当前的 securityContext。）
         di.securityContext = getSecurityContext();
         drivers.addElement(di);
         println("registerDriver: " + di);
@@ -188,18 +183,17 @@ public class DriverManager {
 
 
     /**
-     * Drop a Driver from the DriverManager's list.  Applets can only
-     * deregister Drivers from their own classloader.
+     * 从 DriverManager 的列表中删除一个驱动程序。 Applet 只能从它们自己的类加载器中注销驱动程序。
      *
      * @param driver the JDBC Driver to drop 
      * @exception SQLException if a database-access error occurs.
      */
     public static void deregisterDriver(Driver driver) throws SQLException {
-        // Figure out the current security context.
+        // Figure out the current security context.（找出当前的安全上下文。）
         Object currentSecurityContext = getSecurityContext();
         println("DriverManager.deregisterDriver: " + driver);
 
-        // Walk through the loaded drivers.
+        // Walk through the loaded drivers.（浏览加载的驱动程序。）
         int i;
         DriverInfo di = null;
         for (i = 0; i < drivers.size(); i++) {
@@ -208,32 +202,30 @@ public class DriverManager {
                 break;
             }
         }
-        // If we can't find the driver just return.
+        // If we can't find the driver just return.（如果我们找不到司机就返回。）
         if (i >= drivers.size()) {
             println("    couldn't find driver to unload");
             return;
         }
 
-            // If an applet is trying to free a driver from somewhere else
-        // throw a security exception.
+            // 如果小程序试图从其他地方释放驱动程序，则会引发安全异常。
         if (currentSecurityContext != null &&
                 di.securityContext != currentSecurityContext) {
             throw new SecurityException();
         }
 
-        // Remove the driver.  Other entries in drivers get shuffled down.
+        // Remove the driver.  Other entries in drivers get shuffled down.（卸下驱动程序。驱动程序中的其他条目被洗牌。）
         drivers.removeElementAt(i);
     
     }
 
     /**
-     * Return an Enumeration of all the currently loaded JDBC drivers
-     * which the current caller has access to.
+     * 返回当前调用者有权访问的所有当前加载的 JDBC 驱动程序的枚举。
      *
-     * <P><B>Note:</B> The classname of a driver can be found using
-     * <CODE>d.getClass().getName()</CODE>
+     * Note: 可以使用找到驱动程序的类名
+     * d.getClass().getName()
      *
-     * @return the list of JDBC Drivers loaded by the caller's class loader
+     * @return 调用者的类加载器加载的 JDBC 驱动程序列表
      */
     public static java.util.Enumeration getDrivers() {
         java.util.Vector result = new java.util.Vector();
@@ -242,14 +234,13 @@ public class DriverManager {
             initialize();
         }
 
-        // Figure out the current security context.
+        // Figure out the current security context.（找出当前的安全上下文。）
         Object currentSecurityContext = getSecurityContext();
 
-        // Walk through the loaded drivers.
+        // Walk through the loaded drivers.（浏览加载的驱动程序。）
         for (int i = 0; i < drivers.size(); i++) {
             DriverInfo di = (DriverInfo)drivers.elementAt(i);
-            // if the driver isn't part of the base system and doesn't come
-            // from the same security context as the current caller, skip it.
+            // 如果驱动程序不是基本系统的一部分并且与当前调用者不来自相同的安全上下文，则跳过它。
             if (di.securityContext != null && 
                         di.securityContext != currentSecurityContext) {
                 println("    skipping: " + di);
@@ -263,8 +254,7 @@ public class DriverManager {
 
 
     /**
-     * Set the maximum time in seconds that all drivers can wait
-     * when attempting to log in to a database.
+     * 设置所有驱动程序在尝试登录数据库时可以等待的最长时间（以秒为单位）。
      *
      * @param seconds the driver login time limit
      */
@@ -273,10 +263,9 @@ public class DriverManager {
     }
 
     /**
-     * Get the maximum time in seconds that all drivers can wait
-     * when attempting to log in to a database.
+     * 获取所有驱动程序在尝试登录数据库时可以等待的最长时间（以秒为单位）。
      *
-     * @return the driver login time limit
+     * @return the driver login time limit（司机登录时间限制）
      */
     public static int getLoginTimeout() {
         return (loginTimeout);
@@ -284,29 +273,27 @@ public class DriverManager {
 
 
     /**
-     * Set the logging/tracing PrintStream that is used by the DriverManager
-     * and all drivers.
+     * 设置 DriverManager 和所有驱动程序使用的 loggingtracing PrintStream。
      *
-     * @param out the new logging/tracing PrintStream; to disable, set to null
+     * @param out 新的日志跟踪打印流；禁用，设置为空
      */
     public static void setLogStream(java.io.PrintStream out) {
         logStream = out;
     }
 
     /**
-     * Get the logging/tracing PrintStream that is used by the DriverManager
-     * and all drivers.
+     * 获取 DriverManager 和所有驱动程序使用的 loggingtracing PrintStream。
      *
-     * @return the logging/tracing PrintStream; if disabled, is null
+     * @return 日志跟踪打印流；如果禁用，则为空
      */
     public static java.io.PrintStream getLogStream() {
         return (logStream);
     }
 
     /**
-     * Print a message to the current JDBC log stream
+     * 将消息打印到当前 JDBC 日志流
      *
-     * @param message a log or tracing message
+     * @param message a log or tracing message（日志或跟踪消息）
      */
     public static void println(String message) {
         if (logStream != null) {
@@ -317,8 +304,7 @@ public class DriverManager {
     //-------------------------------------------------------------------------
 
     private static Object getSecurityContext() {
-        // Get the securityContext for our caller.  For applets this
-        // will be the applet classloader base URL.
+        // 为我们的调用者获取 securityContext。对于applet，这将是applet 类加载器的基本URL。
         SecurityManager security = System.getSecurityManager();    
         if (security == null) {
             return (null);
@@ -369,7 +355,7 @@ public class DriverManager {
         println("JDBC DriverManager initialized");
     }
 
-    // Prevent the DriverManager class from being instantiated.
+    // 防止 DriverManager 类被实例化。
     private DriverManager(){}
 
     private static java.util.Vector drivers = new java.util.Vector();
@@ -380,7 +366,7 @@ public class DriverManager {
 }
 
 
-// DriverInfo is a package-private support class.
+// DriverInfo 是一个包私有的支持类。
 class DriverInfo {
     Driver         driver;
     Object        securityContext;
