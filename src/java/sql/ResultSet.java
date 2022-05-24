@@ -153,8 +153,7 @@ public interface ResultSet {
     BigDecimal getBigDecimal(int columnIndex, int scale) throws SQLException;
 
     /**
-     * Get the value of a column in the current row as a Java byte array.
-     * The bytes represent the raw values returned by the driver.
+     * 获取当前行中列的值作为 Java 字节数组。字节代表驱动程序返回的原始值。
      *
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL NULL, the result is null
@@ -163,7 +162,7 @@ public interface ResultSet {
     byte[] getBytes(int columnIndex) throws SQLException;
 
     /**
-     * Get the value of a column in the current row as a java.sql.Date object.
+     * Get the value of a column in the current row as a java.sql.Date object.z
      *
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return the column value; if the value is SQL NULL, the result is null
@@ -190,41 +189,27 @@ public interface ResultSet {
     Timestamp getTimestamp(int columnIndex) throws SQLException;
 
     /**
-     * A column value can be retrieved as a stream of ASCII characters 
-     * and then read in chunks from the stream.  This method is particularly
-     * suitable for retrieving large LONGVARCHAR values.  The JDBC driver will
-     * do any necessary conversion from the database format into ASCII.
+     * 列值可以作为 ASCII 字符流检索，然后从流中以块的形式读取。此方法特别适用于检索较大的 LONGVARCHAR 值。
+     * JDBC 驱动程序将执行从数据库格式到 ASCII 的任何必要转换。
      *
-     * <P><B>Note:</B> All the data in the returned stream must be
-     * read prior to getting the value of any other column. The next
-     * call to a get method implicitly closes the stream. . Also, a
-     * stream may return 0 for available() whether there is data
-     * available or not.
+     * Note: 在获取任何其他列的值之前，必须读取返回流中的所有数据。对 get 方法的下一次调用会隐式关闭流。
+     * .此外，无论是否有可用数据，流都可能为 available() 返回 0。
      *
      * @param columnIndex the first column is 1, the second is 2, ...
-     * @return a Java input stream that delivers the database column value
-     * as a stream of one byte ASCII characters.  If the value is SQL NULL
-     * then the result is null.  
+     * @return 一个 Java 输入流，它将数据库列值作为一个字节的 ASCII 字符流传递。如果值为 SQL NULL，则结果为 null。
      * @exception SQLException if a database-access error occurs.
      */
     java.io.InputStream getAsciiStream(int columnIndex) throws SQLException;
 
     /**
-     * A column value can be retrieved as a stream of Unicode characters 
-     * and then read in chunks from the stream.  This method is particularly
-     * suitable for retrieving large LONGVARCHAR values.  The JDBC driver will
-     * do any necessary conversion from the database format into Unicode.
+     * 可以将列值作为 Unicode 字符流检索，然后从流中以块的形式读取。此方法特别适用于检索较大的 LONGVARCHAR 值。
+     * JDBC 驱动程序将执行从数据库格式到 Unicode 的任何必要转换。
      *
-     * <P><B>Note:</B> All the data in the returned stream must be
-     * read prior to getting the value of any other column. The next
-     * call to a get method implicitly closes the stream. . Also, a
-     * stream may return 0 for available() whether there is data
-     * available or not.
+     * Note: 在获取任何其他列的值之前，必须读取返回流中的所有数据。对 get 方法的下一次调用会隐式关闭流。
+     * .此外，无论是否有可用数据，流都可能为 available() 返回 0。
      *
      * @param columnIndex the first column is 1, the second is 2, ...
-     * @return a Java input stream that delivers the database column value
-     * as a stream of two byte Unicode characters.  If the value is SQL NULL
-     * then the result is null.  
+     * @return 一个 Java 输入流，它将数据库列值作为两字节 Unicode 字符的流传递。如果值为 SQL NULL，则结果为 null。
      * @exception SQLException if a database-access error occurs.
      */
     java.io.InputStream getUnicodeStream(int columnIndex) throws SQLException;
