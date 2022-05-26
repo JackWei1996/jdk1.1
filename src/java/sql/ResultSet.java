@@ -394,17 +394,12 @@ public interface ResultSet {
     //=====================================================================
 
     /**
-     * <p>The first warning reported by calls on this ResultSet is
-     * returned. Subsequent ResultSet warnings will be chained to this
-     * SQLWarning.
+     * 返回调用此 ResultSet 报告的第一个警告。随后的 ResultSet 警告将链接到此 SQLWarning。
      *
-     * <P>The warning chain is automatically cleared each time a new
-     * row is read.
+     * 每次读取新行时都会自动清除警告链。
      *
-     * <P><B>Note:</B> This warning chain only covers warnings caused
-     * by ResultSet methods.  Any warning caused by statement methods
-     * (such as reading OUT parameters) will be chained on the
-     * Statement object. 
+     * Note: 此警告链仅涵盖由 ResultSet 方法引起的警告。
+     * 任何由语句方法（例如读取 OUT 参数）引起的警告都将链接在 Statement 对象上。
      *
      * @return the first SQLWarning or null 
      * @exception SQLException if a database-access error occurs.
@@ -412,27 +407,20 @@ public interface ResultSet {
     SQLWarning getWarnings() throws SQLException;
 
     /**
-     * After this call getWarnings returns null until a new warning is
-     * reported for this ResultSet.  
+     * 在此调用之后，getWarnings 返回 null，直到为此 ResultSet 报告新的警告。
      *
      * @exception SQLException if a database-access error occurs.
      */
     void clearWarnings() throws SQLException;
 
     /**
-     * Get the name of the SQL cursor used by this ResultSet.
+     * 获取此 ResultSet 使用的 SQL 游标的名称。
      *
-     * <P>In SQL, a result table is retrieved through a cursor that is
-     * named. The current row of a result can be updated or deleted
-     * using a positioned update/delete statement that references the
-     * cursor name. 
+     * 在 SQL 中，通过命名的游标检索结果表。可以使用引用游标名称的定位更新删除语句来更新或删除结果的当前行。
      * 
-     * <P>JDBC supports this SQL feature by providing the name of the
-     * SQL cursor used by a ResultSet. The current row of a ResultSet
-     * is also the current row of this SQL cursor.
+     * JDBC 通过提供 ResultSet 使用的 SQL 游标的名称来支持此 SQL 功能。 ResultSet 的当前行也是此 SQL 游标的当前行。
      *
-     * <P><B>Note:</B> If positioned update is not supported a
-     * SQLException is thrown
+     * Note: 如果不支持定位更新，则抛出 SQLException
      *
      * @return the ResultSet's SQL cursor name
      * @exception SQLException if a database-access error occurs.
@@ -440,8 +428,7 @@ public interface ResultSet {
     String getCursorName() throws SQLException;
 
     /**
-     * The number, types and properties of a ResultSet's columns
-     * are provided by the getMetaData method.
+     * ResultSet 列的数量、类型和属性由 getMetaData 方法提供。
      *
      * @return the description of a ResultSet's columns
      * @exception SQLException if a database-access error occurs.
@@ -451,13 +438,10 @@ public interface ResultSet {
     /**
      * <p>Get the value of a column in the current row as a Java object.
      *
-     * <p>This method will return the value of the given column as a
-     * Java object.  The type of the Java object will be the default
-     * Java Object type corresponding to the column's SQL type,
-     * following the mapping specified in the JDBC spec.
+     * 此方法将给定列的值作为 Java 对象返回。
+     * Java 对象的类型将是与列的 SQL 类型对应的默认 Java 对象类型，遵循 JDBC 规范中指定的映射。
      *
-     * <p>This method may also be used to read datatabase specific abstract
-     * data types.
+     * 此方法还可用于读取数据库特定的抽象数据类型。
      *
      * @param columnIndex the first column is 1, the second is 2, ...
      * @return A java.lang.Object holding the column value.  
@@ -468,10 +452,8 @@ public interface ResultSet {
     /**
      * <p>Get the value of a column in the current row as a Java object.
      *
-     * <p>This method will return the value of the given column as a
-     * Java object.  The type of the Java object will be the default
-     * Java Object type corresponding to the column's SQL type,
-     * following the mapping specified in the JDBC spec.
+     * 此方法将给定列的值作为 Java 对象返回。
+     * Java 对象的类型将是与列的 SQL 类型对应的默认 Java 对象类型，遵循 JDBC 规范中指定的映射。
      *
      * <p>This method may also be used to read datatabase specific abstract
      * data types.
