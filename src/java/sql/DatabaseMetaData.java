@@ -1,41 +1,33 @@
 /*
- * @(#)DatabaseMetaData.java	1.10 01/12/12
+ * @(#)DatabaseMetaData.java	1.10 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 
 package java.sql;
 
 /**
- * This class provides information about the database as a whole.
+ * 此类提供有关整个数据库的信息。
  *
- * <P>Many of the methods here return lists of information in ResultSets.
- * You can use the normal ResultSet methods such as getString and getInt 
- * to retrieve the data from these ResultSets.  If a given form of
- * metadata is not available, these methods should throw a SQLException.
+ * 此处的许多方法返回 ResultSets 中的信息列表。
+ * 您可以使用普通的 ResultSet 方法（例如 getString 和 getInt）从这些 ResultSet 中检索数据。
+ * 如果给定形式的元数据不可用，这些方法应该抛出 SQLException。
  *
- * <P>Some of these methods take arguments that are String patterns.  These
- * arguments all have names such as fooPattern.  Within a pattern String, "%"
- * means match any substring of 0 or more characters, and "_" means match
- * any one character. Only metadata entries matching the search pattern 
- * are returned. If a search pattern argument is set to a null ref, it means 
- * that argument's criteria should be dropped from the search.
+ * 其中一些方法采用字符串模式的参数。这些参数都具有诸如 fooPattern 之类的名称。
+ * 在模式字符串中，“%”表示匹配任何 0 个或多个字符的子字符串，“_”表示匹配任何一个字符。
+ * 仅返回与搜索模式匹配的元数据条目。如果搜索模式参数设置为空 ref，则意味着应从搜索中删除参数的条件。
  * 
- * <P>A SQLException will be thrown if a driver does not support a meta
- * data method.  In the case of methods that return a ResultSet,
- * either a ResultSet (which may be empty) is returned or a
- * SQLException is thrown.
+ * 如果驱动程序不支持元数据方法，将引发 SQLException。
+ * 对于返回 ResultSet 的方法，要么返回 ResultSet（可能为空），要么抛出 SQLException。
  */
 public interface DatabaseMetaData {
 
     //----------------------------------------------------------------------
-	// First, a variety of minor information about the target database.
+	// 一是关于目标数据库的各种次要信息。
 
     /**
-     * Can all the procedures returned by getProcedures be called by the
-     * current user?
+     * getProcedures 返回的所有过程都可以被当前用户调用吗？
      *
      * @return true if so
      * @exception SQLException if a database-access error occurs.
@@ -43,8 +35,7 @@ public interface DatabaseMetaData {
 	boolean allProceduresAreCallable() throws SQLException;
 
     /**
-     * Can all the tables returned by getTable be SELECTed by the
-     * current user?
+     * getTable 返回的所有表都可以被当前用户选择吗？
      *
      * @return true if so 
      * @exception SQLException if a database-access error occurs.
@@ -93,6 +84,7 @@ public interface DatabaseMetaData {
 
     /**
      * Are NULL values sorted at the start regardless of sort order?
+     * （无论排序顺序如何，NULL 值是否都在开始时排序？）
      *
      * @return true if so 
      * @exception SQLException if a database-access error occurs.
@@ -108,7 +100,7 @@ public interface DatabaseMetaData {
 	boolean nullsAreSortedAtEnd() throws SQLException;
 
     /**
-     * What's the name of this database product?
+     * What's the name of this database product?(这个数据库产品叫什么名字？)
      *
      * @return database product name
      * @exception SQLException if a database-access error occurs.
@@ -141,6 +133,7 @@ public interface DatabaseMetaData {
 
     /**
      * What's this JDBC driver's major version number?
+     * (这个 JDBC 驱动程序的主要版本号是多少？)
      *
      * @return JDBC driver major version
      */
