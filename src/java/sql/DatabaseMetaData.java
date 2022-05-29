@@ -163,8 +163,7 @@ public interface DatabaseMetaData {
 	boolean usesLocalFilePerTable() throws SQLException;
 
     /**
-     * Does the database treat mixed case unquoted SQL identifiers as
-     * case sensitive and as a result store them in mixed case?
+     * 数据库是否将混合大小写不带引号的 SQL 标识符视为区分大小写并因此以混合大小写存储它们？
      *
      * A JDBC-Compliant driver will always return false.
      *
@@ -174,8 +173,7 @@ public interface DatabaseMetaData {
 	boolean supportsMixedCaseIdentifiers() throws SQLException;
 
     /**
-     * Does the database treat mixed case unquoted SQL identifiers as
-     * case insensitive and store them in upper case?
+     * 数据库是否将混合大小写不带引号的 SQL 标识符视为不区分大小写并将它们存储为大写？
      *
      * @return true if so 
      * @exception SQLException if a database-access error occurs.
@@ -183,8 +181,7 @@ public interface DatabaseMetaData {
 	boolean storesUpperCaseIdentifiers() throws SQLException;
 
     /**
-     * Does the database treat mixed case unquoted SQL identifiers as
-     * case insensitive and store them in lower case?
+     * 数据库是否将混合大小写的不带引号的 SQL 标识符视为不区分大小写并将它们存储为小写？
      *
      * @return true if so 
      * @exception SQLException if a database-access error occurs.
@@ -192,8 +189,7 @@ public interface DatabaseMetaData {
 	boolean storesLowerCaseIdentifiers() throws SQLException;
 
     /**
-     * Does the database treat mixed case unquoted SQL identifiers as
-     * case insensitive and store them in mixed case?
+     * 数据库是否将混合大小写的不带引号的 SQL 标识符视为不区分大小写并将它们存储在混合大小写中？
      *
      * @return true if so 
      * @exception SQLException if a database-access error occurs.
@@ -201,8 +197,7 @@ public interface DatabaseMetaData {
 	boolean storesMixedCaseIdentifiers() throws SQLException;
 
     /**
-     * Does the database treat mixed case quoted SQL identifiers as
-     * case sensitive and as a result store them in mixed case?
+     * 数据库是否将混合大小写引用的 SQL 标识符视为区分大小写并因此以混合大小写存储它们？
      *
      * A JDBC-Compliant driver will always return true.
      *
@@ -212,8 +207,7 @@ public interface DatabaseMetaData {
 	boolean supportsMixedCaseQuotedIdentifiers() throws SQLException;
 
     /**
-     * Does the database treat mixed case quoted SQL identifiers as
-     * case insensitive and store them in upper case?
+     * 数据库是否将混合大小写引用的 SQL 标识符视为不区分大小写并将它们存储为大写？
      *
      * @return true if so 
      * @exception SQLException if a database-access error occurs.
@@ -221,8 +215,7 @@ public interface DatabaseMetaData {
 	boolean storesUpperCaseQuotedIdentifiers() throws SQLException;
 
     /**
-     * Does the database treat mixed case quoted SQL identifiers as
-     * case insensitive and store them in lower case?
+     * 数据库是否将混合大小写引用的 SQL 标识符视为不区分大小写并将它们存储为小写？
      *
      * @return true if so 
      * @exception SQLException if a database-access error occurs.
@@ -230,8 +223,7 @@ public interface DatabaseMetaData {
 	boolean storesLowerCaseQuotedIdentifiers() throws SQLException;
 
     /**
-     * Does the database treat mixed case quoted SQL identifiers as
-     * case insensitive and store them in mixed case?
+     * 数据库是否将混合大小写引用的 SQL 标识符视为不区分大小写并将它们存储在混合大小写中？
      *
      * @return true if so 
      * @exception SQLException if a database-access error occurs.
@@ -239,8 +231,7 @@ public interface DatabaseMetaData {
 	boolean storesMixedCaseQuotedIdentifiers() throws SQLException;
 
     /**
-     * What's the string used to quote SQL identifiers?
-     * This returns a space " " if identifier quoting isn't supported.
+     * 用于引用 SQL 标识符的字符串是什么？如果不支持标识符引用，这将返回一个空格“ ”。
      *
      * A JDBC-Compliant driver always uses a double quote character.
      *
@@ -250,8 +241,7 @@ public interface DatabaseMetaData {
 	String getIdentifierQuoteString() throws SQLException;
 
     /**
-     * Get a comma separated list of all a database's SQL keywords
-     * that are NOT also SQL92 keywords.
+     * 获取数据库的所有 SQL 关键字的逗号分隔列表，这些关键字也不是 SQL92 关键字。
      *
      * @return the list 
      * @exception SQLException if a database-access error occurs.
@@ -259,7 +249,7 @@ public interface DatabaseMetaData {
 	String getSQLKeywords() throws SQLException;
 
     /**
-     * Get a comma separated list of math functions.
+     * Get a comma separated list of math functions.（获取以逗号分隔的数学函数列表。）
      *
      * @return the list
      * @exception SQLException if a database-access error occurs.
@@ -291,12 +281,10 @@ public interface DatabaseMetaData {
 	String getTimeDateFunctions() throws SQLException;
 
     /**
-     * This is the string that can be used to escape '_' or '%' in
-     * the string pattern style catalog search parameters.
+     * 这是可用于在字符串模式样式目录搜索参数中转义“_”或“%”的字符串。
      *
-     * <P>The '_' character represents any single character.
-     * <P>The '%' character represents any sequence of zero or 
-     * more characters.
+     * The '_' character represents any single character.
+     * %' 字符代表零个或多个字符的任意序列。
      *
      * @return the string used to escape wildcard characters
      * @exception SQLException if a database-access error occurs.
@@ -304,8 +292,7 @@ public interface DatabaseMetaData {
 	String getSearchStringEscape() throws SQLException;
 
     /**
-     * Get all the "extra" characters that can be used in unquoted
-     * identifier names (those beyond a-z, A-Z, 0-9 and _).
+     * 获取所有可以在未加引号的标识符名称中使用的“额外”字符（那些超出 a-z、A-Z、0-9 和 _ 的字符）。
      *
      * @return the string containing the extra characters 
      * @exception SQLException if a database-access error occurs.
@@ -313,7 +300,7 @@ public interface DatabaseMetaData {
 	String getExtraNameCharacters() throws SQLException;
 
     //--------------------------------------------------------------------
-    // Functions describing which features are supported.
+    // 描述支持哪些功能的函数。
 
     /**
      * Is "ALTER TABLE" with add column supported?
