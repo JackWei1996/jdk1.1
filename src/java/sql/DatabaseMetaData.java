@@ -321,9 +321,7 @@ public interface DatabaseMetaData {
     /**
      * Is column aliasing supported? 
      *
-     * <P>If so, the SQL AS clause can be used to provide names for
-     * computed columns or to provide alias names for columns as
-     * required.
+     * 如果是这样，SQL AS 子句可用于为计算列提供名称或根据需要为列提供别名。
      *
      * A JDBC-Compliant driver always returns true.
      *
@@ -333,7 +331,7 @@ public interface DatabaseMetaData {
 	boolean supportsColumnAliasing() throws SQLException;
 
     /**
-     * Are concatenations between NULL and non-NULL values NULL?
+     * NULL 和非 NULL 值之间的连接是否为 NULL？
      *
      * A JDBC-Compliant driver always returns true.
      *
@@ -343,7 +341,7 @@ public interface DatabaseMetaData {
 	boolean nullPlusNonNullIsNull() throws SQLException;
 
     /**
-     * Is the CONVERT function between SQL types supported?
+     * 是否支持 SQL 类型之间的 CONVERT 函数？
      *
      * @return true if so
      * @exception SQLException if a database-access error occurs.
@@ -351,7 +349,7 @@ public interface DatabaseMetaData {
 	boolean supportsConvert() throws SQLException;
 
     /**
-     * Is CONVERT between the given SQL types supported?
+     * 是否支持给定 SQL 类型之间的 CONVERT？
      *
      * @param fromType the type to convert from
      * @param toType the type to convert to     
@@ -372,8 +370,7 @@ public interface DatabaseMetaData {
 	boolean supportsTableCorrelationNames() throws SQLException;
 
     /**
-     * If table correlation names are supported, are they restricted
-     * to be different from the names of the tables?
+     * 如果支持表相关名称，是否限制它们与表的名称不同？
      *
      * @return true if so 
      * @exception SQLException if a database-access error occurs.
@@ -413,8 +410,7 @@ public interface DatabaseMetaData {
 	boolean supportsGroupByUnrelated() throws SQLException;
 
     /**
-     * Can a "GROUP BY" clause add columns not in the SELECT
-     * provided it specifies all the columns in the SELECT?
+     * 如果“GROUP BY”子句指定了 SELECT 中的所有列，是否可以添加不在 SELECT 中的列？
      *
      * @return true if so
      * @exception SQLException if a database-access error occurs.
@@ -440,8 +436,7 @@ public interface DatabaseMetaData {
 	boolean supportsMultipleResultSets() throws SQLException;
 
     /**
-     * Can we have multiple transactions open at once (on different
-     * connections)?
+     * 我们可以一次打开多个事务（在不同的连接上）吗？
      *
      * @return true if so
      * @exception SQLException if a database-access error occurs.
@@ -535,8 +530,7 @@ public interface DatabaseMetaData {
 	boolean supportsFullOuterJoins() throws SQLException;
 
     /**
-     * Is there limited support for outer joins?  (This will be true
-     * if supportFullOuterJoins is true.)
+     * 对外部联接的支持是否有限？ （如果 supportFullOuterJoins 为真，则为真。）
      *
      * @return true if so
      * @exception SQLException if a database-access error occurs.
