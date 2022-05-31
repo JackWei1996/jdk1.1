@@ -562,8 +562,7 @@ public interface DatabaseMetaData {
 	String getCatalogTerm() throws SQLException;
 
     /**
-     * Does a catalog appear at the start of a qualified table name?
-     * (Otherwise it appears at the end)
+     * 目录是否出现在限定表名的开头？ （否则出现在最后）
      *
      * @return true if it appears at the start 
      * @exception SQLException if a database-access error occurs.
@@ -684,8 +683,7 @@ public interface DatabaseMetaData {
 	boolean supportsSelectForUpdate() throws SQLException;
 
     /**
-     * Are stored procedure calls using the stored procedure escape
-     * syntax supported?
+     * 是否支持使用存储过程转义语法的存储过程调用？
      *
      * @return true if so 
      * @exception SQLException if a database-access error occurs.
@@ -793,10 +791,8 @@ public interface DatabaseMetaData {
 	
 
     //----------------------------------------------------------------------
-    // The following group of methods exposes various limitations 
-    // based on the target database with the current driver.
-    // Unless otherwise specified, a result of zero means there is no
-    // limit, or the limit is not known.
+    // 以下一组方法基于当前驱动程序的目标数据库公开了各种限制。
+    // 除非另有说明，否则结果为零表示没有限制，或者限制未知。
 	
     /**
      * How many hex characters can you have in an inline binary literal?
@@ -919,8 +915,7 @@ public interface DatabaseMetaData {
 	int getMaxRowSize() throws SQLException;
 
     /**
-     * Did getMaxRowSize() include LONGVARCHAR and LONGVARBINARY
-     * blobs?
+     * getMaxRowSize() 是否包含 LONGVARCHAR 和 LONGVARBINARY blob？
      *
      * @return true if so 
      * @exception SQLException if a database-access error occurs.
@@ -936,8 +931,7 @@ public interface DatabaseMetaData {
 	int getMaxStatementLength() throws SQLException;
 
     /**
-     * How many active statements can we have open at one time to this
-     * database?
+     * 我们可以一次打开多少个活动语句到这个数据库？
      *
      * @return the maximum 
      * @exception SQLException if a database-access error occurs.
@@ -971,8 +965,7 @@ public interface DatabaseMetaData {
     //----------------------------------------------------------------------
 
     /**
-     * What's the database's default transaction isolation level?  The
-     * values are defined in java.sql.Connection.
+     * 数据库的默认事务隔离级别是多少？这些值在 java.sql.Connection 中定义。
      *
      * @return the default isolation level 
      * @exception SQLException if a database-access error occurs.
@@ -981,8 +974,7 @@ public interface DatabaseMetaData {
 	int getDefaultTransactionIsolation() throws SQLException;
 
     /**
-     * Are transactions supported? If not, commit is a noop and the
-     * isolation level is TRANSACTION_NONE.
+     * 是否支持交易？如果不是，commit 是 noop，隔离级别是 TRANSACTION_NONE。
      *
      * @return true if transactions are supported 
      * @exception SQLException if a database-access error occurs.
@@ -1001,8 +993,7 @@ public interface DatabaseMetaData {
 							throws SQLException;
 
     /**
-     * Are both data definition and data manipulation statements
-     * within a transaction supported?
+     * 是否支持事务中的数据定义和数据操作语句？
      *
      * @return true if so 
      * @exception SQLException if a database-access error occurs.
