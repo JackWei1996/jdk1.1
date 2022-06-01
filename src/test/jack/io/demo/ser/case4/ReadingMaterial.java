@@ -65,7 +65,7 @@ public class ReadingMaterial implements Externalizable {
     /**
      * 强制读取外部方法。将读入我们在 writeExternal 方法中写出的数据。
      * 必须按照我们写出来的顺序和类型。到调用 readExternal 时，
-     * 已经使用 public no-arg 构造函数创建了该类的对象，因此该方法用于将数据恢复到新创建对象的所有字段。
+     * 已经使用无参构造函数创建了该类的对象，因此该方法用于将数据恢复到新创建对象的所有字段。
      */
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
         author = (String)in.readObject();
