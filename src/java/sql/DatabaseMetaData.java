@@ -1001,8 +1001,7 @@ public interface DatabaseMetaData {
 	boolean supportsDataDefinitionAndDataManipulationTransactions()
 							 throws SQLException;
     /**
-     * Are only data manipulation statements within a transaction
-     * supported?
+     * 是否仅支持事务中的数据操作语句？
      *
      * @return true if so
      * @exception SQLException if a database-access error occurs.
@@ -1010,8 +1009,7 @@ public interface DatabaseMetaData {
 	boolean supportsDataManipulationTransactionsOnly()
 							throws SQLException;
     /**
-     * Does a data definition statement within a transaction force the
-     * transaction to commit?
+     * 事务中的数据定义语句是否强制事务提交？
      *
      * @return true if so 
      * @exception SQLException if a database-access error occurs.
@@ -1029,14 +1027,11 @@ public interface DatabaseMetaData {
 
 
     /**
-     * Get a description of stored procedures available in a
-     * catalog.
+     * 获取目录中可用存储过程的描述。
      *
-     * <P>Only procedure descriptions matching the schema and
-     * procedure name criteria are returned.  They are ordered by
-     * PROCEDURE_SCHEM, and PROCEDURE_NAME.
+     * 仅返回与模式和过程名称标准匹配的过程描述。它们按 PROCEDURE_SCHEM 和 PROCEDURE_NAME 排序。
      *
-     * <P>Each procedure description has the the following columns:
+     * 每个过程描述都有以下列：
      *  <OL>
      *	<LI><B>PROCEDURE_CAT</B> String => procedure catalog (may be null)
      *	<LI><B>PROCEDURE_SCHEM</B> String => procedure schema (may be null)
@@ -1053,10 +1048,8 @@ public interface DatabaseMetaData {
      *      </UL>
      *  </OL>
      *
-     * @param catalog a catalog name; "" retrieves those without a
-     * catalog; null means drop catalog name from the selection criteria
-     * @param schemaPattern a schema name pattern; "" retrieves those
-     * without a schema
+     * @param catalog 目录名称； "" 检索那些没有目录的； null 表示从选择条件中删除目录名称
+     * @param schemaPattern 模式名称模式； "" 检索那些没有架构的
      * @param procedureNamePattern a procedure name pattern 
      * @return ResultSet - each row is a procedure description 
      * @exception SQLException if a database-access error occurs.
@@ -1079,17 +1072,12 @@ public interface DatabaseMetaData {
 	int procedureReturnsResult	= 2;
 
     /**
-     * Get a description of a catalog's stored procedure parameters
-     * and result columns.
+     * 获取目录的存储过程参数和结果列的描述。
      *
-     * <P>Only descriptions matching the schema, procedure and
-     * parameter name criteria are returned.  They are ordered by
-     * PROCEDURE_SCHEM and PROCEDURE_NAME. Within this, the return value,
-     * if any, is first. Next are the parameter descriptions in call
-     * order. The column descriptions follow in column number order.
+     * 仅返回与模式、过程和参数名称标准匹配的描述。它们按 PROCEDURE_SCHEM 和 PROCEDURE_NAME 排序。
+     * 在此范围内，返回值（如果有）是第一位的。接下来是调用顺序中的参数说明。列说明按照列号顺序排列。
      *
-     * <P>Each row in the ResultSet is a parameter description or
-     * column description with the following fields:
+     * ResultSet 中的每一行都是参数描述或列描述，包含以下字段：
      *  <OL>
      *	<LI><B>PROCEDURE_CAT</B> String => procedure catalog (may be null)
      *	<LI><B>PROCEDURE_SCHEM</B> String => procedure schema (may be null)
@@ -1119,18 +1107,13 @@ public interface DatabaseMetaData {
      *	<LI><B>REMARKS</B> String => comment describing parameter/column
      *  </OL>
      *
-     * <P><B>Note:</B> Some databases may not return the column
-     * descriptions for a procedure. Additional columns beyond
-     * REMARKS can be defined by the database.
+     * Note: 某些数据库可能不会返回过程的列描述。数据库可以定义 REMARKS 之外的其他列。
      *
-     * @param catalog a catalog name; "" retrieves those without a
-     * catalog; null means drop catalog name from the selection criteria
-     * @param schemaPattern a schema name pattern; "" retrieves those
-     * without a schema 
+     * @param catalog 目录名称； "" 检索那些没有目录的； null 表示从选择条件中删除目录名称
+     * @param schemaPattern 模式名称模式； "" 检索那些没有架构的
      * @param procedureNamePattern a procedure name pattern 
      * @param columnNamePattern a column name pattern 
-     * @return ResultSet - each row is a stored procedure parameter or 
-     *      column description 
+     * @return ResultSet - 每行是一个存储过程参数或列描述
      * @exception SQLException if a database-access error occurs.
      * @see #getSearchStringEscape 
      */
@@ -1185,11 +1168,9 @@ public interface DatabaseMetaData {
 
 
     /**
-     * Get a description of tables available in a catalog.
+     * 获取目录中可用表的描述。
      *
-     * <P>Only table descriptions matching the catalog, schema, table
-     * name and type criteria are returned.  They are ordered by
-     * TABLE_TYPE, TABLE_SCHEM and TABLE_NAME.
+     * 仅返回与目录、模式、表名和类型条件匹配的表描述。它们按 TABLE_TYPE、TABLE_SCHEM 和 TABLE_NAME 排序。
      *
      * <P>Each table description has the following columns:
      *  <OL>
@@ -1202,13 +1183,10 @@ public interface DatabaseMetaData {
      *	<LI><B>REMARKS</B> String => explanatory comment on the table
      *  </OL>
      *
-     * <P><B>Note:</B> Some databases may not return information for
-     * all tables.
+     * Note: 某些数据库可能不会返回所有表的信息。
      *
-     * @param catalog a catalog name; "" retrieves those without a
-     * catalog; null means drop catalog name from the selection criteria
-     * @param schemaPattern a schema name pattern; "" retrieves those
-     * without a schema
+     * @param catalog 目录名称； "" 检索那些没有目录的； null 表示从选择条件中删除目录名称
+     * @param schemaPattern 模式名称模式； "" 检索那些没有架构的
      * @param tableNamePattern a table name pattern 
      * @param types a list of table types to include; null returns all types 
      * @return ResultSet - each row is a table description
@@ -1219,38 +1197,33 @@ public interface DatabaseMetaData {
 		String tableNamePattern, String types[]) throws SQLException;
 
     /**
-     * Get the schema names available in this database.  The results
-     * are ordered by schema name.
+     * 获取此数据库中可用的模式名称。结果按模式名称排序。
      *
      * <P>The schema column is:
      *  <OL>
      *	<LI><B>TABLE_SCHEM</B> String => schema name
      *  </OL>
      *
-     * @return ResultSet - each row has a single String column that is a
-     * schema name 
+     * @return ResultSet - 每行都有一个 String 列，它是一个模式名称
      * @exception SQLException if a database-access error occurs.
      */
 	ResultSet getSchemas() throws SQLException;
 
     /**
-     * Get the catalog names available in this database.  The results
-     * are ordered by catalog name.
+     * 获取此数据库中可用的目录名称。结果按目录名称排序。
      *
      * <P>The catalog column is:
      *  <OL>
      *	<LI><B>TABLE_CAT</B> String => catalog name
      *  </OL>
      *
-     * @return ResultSet - each row has a single String column that is a
-     * catalog name 
+     * @return ResultSet - 每行都有一个 String 列，它是一个目录名称
      * @exception SQLException if a database-access error occurs.
      */
 	ResultSet getCatalogs() throws SQLException;
 
     /**
-     * Get the table types available in this database.  The results
-     * are ordered by table type.
+     * 获取此数据库中可用的表类型。结果按表类型排序。
      *
      * <P>The table type is:
      *  <OL>
@@ -1259,18 +1232,15 @@ public interface DatabaseMetaData {
      *			"LOCAL TEMPORARY", "ALIAS", "SYNONYM".
      *  </OL>
      *
-     * @return ResultSet - each row has a single String column that is a
-     * table type 
+     * @return ResultSet - 每行都有一个 String 列，它是一个表类型
      * @exception SQLException if a database-access error occurs.
      */
 	ResultSet getTableTypes() throws SQLException;
 
     /**
-     * Get a description of table columns available in a catalog.
+     * 获取目录中可用表列的描述。
      *
-     * <P>Only column descriptions matching the catalog, schema, table
-     * and column name criteria are returned.  They are ordered by
-     * TABLE_SCHEM, TABLE_NAME and ORDINAL_POSITION.
+     * 仅返回与目录、架构、表和列名条件匹配的列描述。它们按 TABLE_SCHEM、TABLE_NAME 和 ORDINAL_POSITION 排序。
      *
      * <P>Each column description has the following columns:
      *  <OL>
@@ -1305,10 +1275,8 @@ public interface DatabaseMetaData {
      *      allow NULL values.  An empty string means nobody knows.
      *  </OL>
      *
-     * @param catalog a catalog name; "" retrieves those without a
-     * catalog; null means drop catalog name from the selection criteria
-     * @param schemaPattern a schema name pattern; "" retrieves those
-     * without a schema
+     * @param catalog 目录名称； "" 检索那些没有目录的； null 表示从选择条件中删除目录名称
+     * @param schemaPattern 模式名称模式； "" 检索那些没有架构的
      * @param tableNamePattern a table name pattern 
      * @param columnNamePattern a column name pattern 
      * @return ResultSet - each row is a column description
@@ -1334,10 +1302,9 @@ public interface DatabaseMetaData {
     int columnNullableUnknown = 2;
 
     /**
-     * Get a description of the access rights for a table's columns.
+     * 获取对表列的访问权限的描述。
      *
-     * <P>Only privileges matching the column name criteria are
-     * returned.  They are ordered by COLUMN_NAME and PRIVILEGE.
+     * 仅返回与列名条件匹配的权限。它们按 COLUMN_NAME 和 PRIVILEGE 排序。
      *
      * <P>Each privilige description has the following columns:
      *  <OL>
@@ -1353,8 +1320,7 @@ public interface DatabaseMetaData {
      *      to grant to others; "NO" if not; null if unknown 
      *  </OL>
      *
-     * @param catalog a catalog name; "" retrieves those without a
-     * catalog; null means drop catalog name from the selection criteria
+     * @param catalog 目录名称； "" 检索那些没有目录的； null 表示从选择条件中删除目录名称
      * @param schema a schema name; "" retrieves those without a schema
      * @param table a table name
      * @param columnNamePattern a column name pattern 
@@ -1366,15 +1332,10 @@ public interface DatabaseMetaData {
 		String table, String columnNamePattern) throws SQLException;
 
     /**
-     * Get a description of the access rights for each table available
-     * in a catalog. Note that a table privilege applies to one or
-     * more columns in the table. It would be wrong to assume that
-     * this priviledge applies to all columns (this may be true for
-     * some systems but is not true for all.)
+     * 获取目录中每个可用表的访问权限的描述。请注意，表权限适用于表中的一个或多个列。
+     * 假设此特权适用于所有列是错误的（这对于某些系统可能是正确的，但并非对所有系统都是正确的。）
      *
-     * <P>Only privileges matching the schema and table name
-     * criteria are returned.  They are ordered by TABLE_SCHEM,
-     * TABLE_NAME, and PRIVILEGE.
+     * 仅返回与架构和表名条件匹配的权限。它们按 TABLE_SCHEM、TABLE_NAME 和 PRIVILEGE 排序。
      *
      * <P>Each privilige description has the following columns:
      *  <OL>
@@ -1389,10 +1350,8 @@ public interface DatabaseMetaData {
      *      to grant to others; "NO" if not; null if unknown 
      *  </OL>
      *
-     * @param catalog a catalog name; "" retrieves those without a
-     * catalog; null means drop catalog name from the selection criteria
-     * @param schemaPattern a schema name pattern; "" retrieves those
-     * without a schema
+     * @param catalog 目录名称； "" 检索那些没有目录的； null 表示从选择条件中删除目录名称
+     * @param schemaPattern 模式名称模式； "" 检索那些没有架构的
      * @param tableNamePattern a table name pattern 
      * @return ResultSet - each row is a table privilege description
      * @exception SQLException if a database-access error occurs.
@@ -1402,8 +1361,7 @@ public interface DatabaseMetaData {
 				String tableNamePattern) throws SQLException;
 
     /**
-     * Get a description of a table's optimal set of columns that
-     * uniquely identifies a row. They are ordered by SCOPE.
+     * 获取对唯一标识行的表的最佳列集的描述。它们由 SCOPE 订购。
      *
      * <P>Each column description has the following columns:
      *  <OL>
@@ -1428,8 +1386,7 @@ public interface DatabaseMetaData {
      *      </UL>
      *  </OL>
      *
-     * @param catalog a catalog name; "" retrieves those without a
-     * catalog; null means drop catalog name from the selection criteria
+     * @param catalog 目录名称； "" 检索那些没有目录的； null 表示从选择条件中删除目录名称
      * @param schema a schema name; "" retrieves those without a schema
      * @param table a table name
      * @param scope the scope of interest; use same values as SCOPE
@@ -1471,9 +1428,7 @@ public interface DatabaseMetaData {
 	int bestRowPseudo	= 2;
 
     /**
-     * Get a description of a table's columns that are automatically
-     * updated when any value in a row is updated.  They are
-     * unordered.
+     * 获取在更新行中的任何值时自动更新的表列的描述。它们是无序的。
      *
      * <P>Each column description has the following columns:
      *  <OL>
@@ -1493,8 +1448,7 @@ public interface DatabaseMetaData {
      *      </UL>
      *  </OL>
      *
-     * @param catalog a catalog name; "" retrieves those without a
-     * catalog; null means drop catalog name from the selection criteria
+     * @param catalog 目录名称； "" 检索那些没有目录的； null 表示从选择条件中删除目录名称
      * @param schema a schema name; "" retrieves those without a schema
      * @param table a table name
      * @return ResultSet - each row is a column description 
