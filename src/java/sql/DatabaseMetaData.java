@@ -1473,8 +1473,7 @@ public interface DatabaseMetaData {
 	int versionColumnPseudo	= 2;
 
     /**
-     * Get a description of a table's primary key columns.  They
-     * are ordered by COLUMN_NAME.
+     * 获取表的主键列的描述。它们按 COLUMN_NAME 排序。
      *
      * <P>Each primary key column description has the following columns:
      *  <OL>
@@ -1486,8 +1485,7 @@ public interface DatabaseMetaData {
      *	<LI><B>PK_NAME</B> String => primary key name (may be null)
      *  </OL>
      *
-     * @param catalog a catalog name; "" retrieves those without a
-     * catalog; null means drop catalog name from the selection criteria
+     * @param catalog 目录名称； "" 检索那些没有目录的； null 表示从选择条件中删除目录名称
      * @param schema a schema name pattern; "" retrieves those
      * without a schema
      * @param table a table name
@@ -1498,10 +1496,8 @@ public interface DatabaseMetaData {
 				String table) throws SQLException;
 
     /**
-     * Get a description of the primary key columns that are
-     * referenced by a table's foreign key columns (the primary keys
-     * imported by a table).  They are ordered by PKTABLE_CAT,
-     * PKTABLE_SCHEM, PKTABLE_NAME, and KEY_SEQ.
+     * 获取表的外键列（表导入的主键）引用的主键列的描述。
+     * 它们按 PKTABLE_CAT、PKTABLE_SCHEM、PKTABLE_NAME 和 KEY_SEQ 排序。
      *
      * <P>Each primary key column description has the following columns:
      *  <OL>
@@ -1556,10 +1552,8 @@ public interface DatabaseMetaData {
      *      </UL>
      *  </OL>
      *
-     * @param catalog a catalog name; "" retrieves those without a
-     * catalog; null means drop catalog name from the selection criteria
-     * @param schema a schema name pattern; "" retrieves those
-     * without a schema
+     * @param catalog 目录名称； "" 检索那些没有目录的； null 表示从选择条件中删除目录名称
+     * @param schema 模式名称模式； "" 检索那些没有架构的
      * @param table a table name
      * @return ResultSet - each row is a primary key column description 
      * @exception SQLException if a database-access error occurs.
@@ -1569,33 +1563,27 @@ public interface DatabaseMetaData {
 				String table) throws SQLException;
 
     /**
-     * IMPORT KEY UPDATE_RULE and DELETE_RULE - for update, change
-     * imported key to agree with primary key update; for delete,
-     * delete rows that import a deleted key.
+     * IMPORT KEY UPDATE_RULE 和 DELETE_RULE - 用于更新，更改导入的键以同意主键更新；对于删除，删除导入已删除键的行。
      */
 	int importedKeyCascade	= 0;
 
     /**
-     * IMPORT KEY UPDATE_RULE and DELETE_RULE - do not allow update or
-     * delete of primary key if it has been imported.  
+     * IMPORT KEY UPDATE_RULE 和 DELETE_RULE - 如果已导入，则不允许更新或删除主键。
      */
 	int importedKeyRestrict = 1;
 
     /**
-     * IMPORT KEY UPDATE_RULE and DELETE_RULE - change imported key to
-     * NULL if its primary key has been updated or deleted.
+     * IMPORT KEY UPDATE_RULE 和 DELETE_RULE - 如果其主键已更新或删除，则将导入的键更改为 NULL。
      */
 	int importedKeySetNull  = 2;
 
     /**
-     * IMPORT KEY UPDATE_RULE and DELETE_RULE - do not allow update or
-     * delete of primary key if it has been imported.  
+     * IMPORT KEY UPDATE_RULE 和 DELETE_RULE - 如果已导入，则不允许更新或删除主键。
      */
 	int importedKeyNoAction = 3;
 
     /**
-     * IMPORT KEY UPDATE_RULE and DELETE_RULE - change imported key to
-     * default values if its primary key has been updated or deleted.
+     * IMPORT KEY UPDATE_RULE 和 DELETE_RULE - 如果其主键已更新或删除，则将导入的键更改为默认值。
      */
 	int importedKeySetDefault  = 4;
 
