@@ -1603,10 +1603,8 @@ public interface DatabaseMetaData {
 	int importedKeyNotDeferrable  = 7;
 
     /**
-     * Get a description of the foreign key columns that reference a
-     * table's primary key columns (the foreign keys exported by a
-     * table).  They are ordered by FKTABLE_CAT, FKTABLE_SCHEM,
-     * FKTABLE_NAME, and KEY_SEQ.
+     * 获取引用表的主键列（表导出的外键）的外键列的描述。
+     * 它们按 FKTABLE_CAT、FKTABLE_SCHEM、FKTABLE_NAME 和 KEY_SEQ 排序。
      *
      * <P>Each foreign key column description has the following columns:
      *  <OL>
@@ -1661,8 +1659,7 @@ public interface DatabaseMetaData {
      *      </UL>
      *  </OL>
      *
-     * @param catalog a catalog name; "" retrieves those without a
-     * catalog; null means drop catalog name from the selection criteria
+     * @param catalog 目录名称； "" 检索那些没有目录的； null 表示从选择条件中删除目录名称
      * @param schema a schema name pattern; "" retrieves those
      * without a schema
      * @param table a table name
@@ -1674,13 +1671,9 @@ public interface DatabaseMetaData {
 				String table) throws SQLException;
 
     /**
-     * Get a description of the foreign key columns in the foreign key
-     * table that reference the primary key columns of the primary key
-     * table (describe how one table imports another's key.) This
-     * should normally return a single foreign key/primary key pair
-     * (most tables only import a foreign key from a table once.)  They
-     * are ordered by FKTABLE_CAT, FKTABLE_SCHEM, FKTABLE_NAME, and
-     * KEY_SEQ.
+     * 获取外键表中引用主键表的主键列的外键列的描述（描述一个表如何导入另一个表的键。）
+     * 这通常应该返回单个外键主键对（大多数表只导入一个表中的外键一次。）
+     * 它们按 FKTABLE_CAT、FKTABLE_SCHEM、FKTABLE_NAME 和 KEY_SEQ 排序。
      *
      * <P>Each foreign key column description has the following columns:
      *  <OL>
@@ -1755,9 +1748,8 @@ public interface DatabaseMetaData {
 		) throws SQLException;
 
     /**
-     * Get a description of all the standard SQL types supported by
-     * this database. They are ordered by DATA_TYPE and then by how
-     * closely the data type maps to the corresponding JDBC SQL type.
+     * 获取此数据库支持的所有标准 SQL 类型的描述。
+     * 它们按 DATA_TYPE 排序，然后按数据类型映射到相应 JDBC SQL 类型的紧密程度排序。
      *
      * <P>Each type description has the following columns:
      *  <OL>
@@ -1838,8 +1830,7 @@ public interface DatabaseMetaData {
 	int typeSearchable  = 3;
 
     /**
-     * Get a description of a table's indices and statistics. They are
-     * ordered by NON_UNIQUE, TYPE, INDEX_NAME, and ORDINAL_POSITION.
+     * 获取表的索引和统计信息的描述。它们按 NON_UNIQUE、TYPE、INDEX_NAME 和 ORDINAL_POSITION 排序。
      *
      * <P>Each index column description has the following columns:
      *  <OL>
@@ -1894,8 +1885,7 @@ public interface DatabaseMetaData {
 					throws SQLException;
 
     /**
-     * INDEX INFO TYPE - this identifies table statistics that are
-     * returned in conjuction with a table's index descriptions
+     * INDEX INFO TYPE - 标识与表的索引描述一起返回的表统计信息
      */
 	short tableIndexStatistic = 0;
 
