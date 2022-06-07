@@ -1,19 +1,15 @@
 /*
  * @(#)IntrospectionException.java	1.8 01/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
  
 /**
- * Thrown when an exception happens during Introspection.
- * <p>
- * Typical causes include not being able to map a string class name
- * to a Class object, not being able to resolve a string method name,
- * or specifying a method name that has the wrong type signature for
- * its intended use.
+ * 在内省期间发生异常时抛出。
+ *
+ * 典型原因包括无法将字符串类名称映射到 Class 对象、无法解析字符串方法名称或指定具有错误类型签名的方法名称用于其预期用途。
  */
 
 public
