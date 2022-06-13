@@ -1,25 +1,21 @@
 /*
- * @(#)VetoableChangeListener.java	1.8 01/12/12
+ * @(#)VetoableChangeListener.java	1.8 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
 
 /**
- * A VetoableChange event gets fired whenever a bean changes a "constrained"
- * property.  You can register a VetoableChangeListener with a source bean
- * so as to be notified of any constrained property updates.
+ * 每当 bean 更改“受约束的”属性时，都会触发 VetoableChange 事件。
+ * 您可以使用源 bean 注册 VetoableChangeListener，以便在任何受约束的属性更新时收到通知。
  */
 public interface VetoableChangeListener extends java.util.EventListener {
     /**
-     * This method gets called when a constrained property is changed.
+     * 更改受约束的属性时调用此方法。
      *
-     * @param     evt a <code>PropertyChangeEvent</code> object describing the
-     *   	      event source and the property that has changed.
-     * @exception java.beans.PropertyVetoException if the recipient wishes the property
-     *              change to be rolled back.
+     * @param     evt 描述事件源和已更改属性的 PropertyChangeEvent 对象。
+     * @exception java.beans.PropertyVetoException 如果接收者希望回滚属性更改。
      */
     void vetoableChange(PropertyChangeEvent evt)
 				throws PropertyVetoException;
