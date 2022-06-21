@@ -1,3 +1,7 @@
+/*
+ * 版权所有(c) Jack魏 2022 - 2022
+ */
+
 package jack.io;
 
 import jack.io.jack.User;
@@ -14,7 +18,7 @@ public class SerializableTest {
         user.setName("Jack魏");
         user.setAge(18);
         // 注意这里的目录，否则系统找不到指定的路径。
-        String fileName = "E:\\code\\tmp\\user\\user.ser";
+        String fileName = "E:\\code\\tmp\\user.ser";
 
         // 序列化
         FileOutputStream fos = new FileOutputStream(fileName);
