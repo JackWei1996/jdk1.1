@@ -1,28 +1,21 @@
 /*
- * @(#)PropertyChangeEvent.java	1.23 01/12/12
+ * @(#)PropertyChangeEvent.java	1.23 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
 
 /**
- * A "PropertyChange" event gets delivered whenever a bean changes a "bound"
- * or "constrained" property.  A PropertyChangeEvent object is sent as an
- * argument to the PropertyChangeListener and VetoableChangeListener methods.
- * <P>
- * Normally PropertyChangeEvents are accompanied by the name and the old
- * and new value of the changed property.  If the new value is a builtin
- * type (such as int or boolean) it must be wrapped as the 
- * corresponding java.lang.* Object type (such as Integer or Boolean).
- * <P>
- * Null values may be provided for the old and the new values if their
- * true values are not known.
- * <P>
- * An event source may send a null object as the name to indicate that an
- * arbitrary set of if its properties have changed.  In this case the
- * old and new values should also be null.
+ * 每当 bean 更改“绑定”或“约束”属性时，都会传递“PropertyChange”事件。
+ * PropertyChangeEvent 对象作为参数发送到 PropertyChangeListener 和 VetoableChangeListener 方法。
+ *
+ * 通常，PropertyChangeEvents 伴随着名称以及更改的属性的旧值和新值。
+ * 如果新值是内置类型（例如 int 或 boolean），则必须将其包装为相应的 java.lang。对象类型（例如 Integer 或 Boolean）。
+ *
+ * 如果不知道它们的真实值，则可以为旧值和新值提供空值。
+ *
+ * 事件源可以发送一个空对象作为名称，以指示其属性是否已更改的任意集合。在这种情况下，旧值和新值也应该为空。
  */
 
 public class PropertyChangeEvent extends java.util.EventObject {
@@ -43,24 +36,21 @@ public class PropertyChangeEvent extends java.util.EventObject {
     }
 
     /**
-     * @return  The programmatic name of the property that was changed.
-     *		May be null if multiple properties have changed.
+     * @return  已更改的属性的编程名称。如果多个属性已更改，则可能为 null。
      */
     public String getPropertyName() {
 	return propertyName;
     }
     
     /**
-     * @return  The new value for the property, expressed as an Object.
-     *		May be null if multiple properties have changed.
+     * @return  属性的新值，表示为 Object。如果多个属性已更改，则可能为 null。
      */
     public Object getNewValue() {
 	return newValue;
     }
 
     /**
-     * @return  The old value for the property, expressed as an Object.
-     *		May be null if multiple properties have changed.
+     * @return  属性的旧值，表示为 Object。如果多个属性已更改，则可能为 null
      */
     public Object getOldValue() {
 	return oldValue;
@@ -74,14 +64,11 @@ public class PropertyChangeEvent extends java.util.EventObject {
     }
 
     /**
-     * The "propagationId" field is reserved for future use.  In Beans 1.0
-     * the sole requirement is that if a listener catches a PropertyChangeEvent
-     * and then fires a PropertyChangeEvent of its own, then it should
-     * make sure that it propagates the propagationId field from its
-     * incoming event to its outgoing event.
+     * “propagationId”字段保留供将来使用。在 Beans 1.0 中，唯一的要求是，
+     * 如果侦听器捕获一个 PropertyChangeEvent，然后触发它自己的 PropertyChangeEvent，
+     * 那么它应该确保它将传播Id 字段从其传入事件传播到其传出事件。
      *
-     * @return the propagationId object associated with a bound/constrained
-     *		property update.
+     * @return 与 boundconstrained 属性更新关联的propagationId 对象。
      */
     public Object getPropagationId() {
 	return propagationId;
