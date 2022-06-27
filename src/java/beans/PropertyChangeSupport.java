@@ -1,8 +1,7 @@
 /*
- * @(#)PropertyChangeSupport.java	1.14 01/12/12
+ * @(#)PropertyChangeSupport.java	1.14 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
@@ -14,9 +13,7 @@ import java.io.IOException;
 
 
 /**
- * This is a utility class that can be used by beans that support bound
- * properties.  You can use an instance of this class as a member field
- * of your bean and delegate various work to it.
+ * 这是支持绑定属性的 bean 可以使用的实用程序类。您可以将此类的实例用作 bean 的成员字段并将各种工作委托给它。
  */
 
 public class PropertyChangeSupport implements Serializable {
@@ -58,8 +55,7 @@ public class PropertyChangeSupport implements Serializable {
     }
 
     /**
-     * Report a bound property update to any registered listeners.
-     * No event is fired if old and new are equal and non-null.
+     * 向任何已注册的侦听器报告绑定的属性更新。如果 old 和 new 相等且非空，则不会触发任何事件。
      *
      * @param propertyName  The programmatic name of the property
      *		that was changed.
