@@ -1,8 +1,7 @@
 /*
- * @(#)VetoableChangeSupport.java	1.15 01/12/12
+ * @(#)VetoableChangeSupport.java	1.15 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
@@ -14,9 +13,7 @@ import java.io.IOException;
 
 
 /**
- * This is a utility class that can be used by beans that support constrained
- * properties.  You can use an instance of this class as a member field
- * of your bean and delegate various work to it.
+ * 这是一个可供支持受限属性的 bean 使用的实用程序类。您可以将此类的实例用作 bean 的成员字段并将各种工作委托给它。
  */
 
 public class VetoableChangeSupport implements Serializable {
@@ -57,10 +54,9 @@ public class VetoableChangeSupport implements Serializable {
     }
 
     /**
-     * Report a vetoable property update to any registered listeners.  If
-     * anyone vetos the change, then fire a new event reverting everyone to 
-     * the old value and then rethrow the PropertyVetoException.
-     * <p>
+     * 向任何已注册的侦听器报告可否决的属性更新。
+	 * 如果有人否决更改，则触发一个新事件，将每个人恢复为旧值，然后重新抛出 PropertyVetoException。
+     *
      * No event is fired if old and new are equal and non-null.
      *
      * @param propertyName  The programmatic name of the property
