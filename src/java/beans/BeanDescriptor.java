@@ -1,26 +1,22 @@
 /*
- * @(#)BeanDescriptor.java	1.12 01/12/12
+ * @(#)BeanDescriptor.java	1.12 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
 
 /**
- * A BeanDescriptor provides global information about a "bean",
- * including its Java class, its displayName, etc.
- * <p>
- * This is one of the kinds of descriptor returned by a BeanInfo object,
- * which also returns descriptors for properties, method, and events.
+ * BeanDescriptor 提供关于“bean”的全局信息，包括它的 Java 类、它的 displayName 等。
+ *
+ * 这是 BeanInfo 对象返回的描述符类型之一，它还返回属性、方法和事件的描述符。
  */
 
 public class BeanDescriptor extends FeatureDescriptor {
 
     /**
-     * Create a BeanDescriptor for a bean that doesn't have a customizer.
-     * @param beanClass  The Class object of the Java class that implements
-     *		the bean.  For example sun.beans.OurButton.class.
+     * C为没有定制器的 bean 创建一个 BeanDescriptor。
+     * @param beanClass  实现 bean 的 Java 类的 Class 对象。例如 sun.beans.OurButton.class。
      */
     public BeanDescriptor(Class beanClass) {
 	this(beanClass, null);
@@ -28,10 +24,8 @@ public class BeanDescriptor extends FeatureDescriptor {
 
     /**
      * Create a BeanDescriptor for a bean that has a customizer.
-     * @param beanClass  The Class object of the Java class that implements
-     *		the bean.  For example sun.beans.OurButton.class.
-     * @param customizerClass  The Class object of the Java class that implements
-     *		the bean's Customizer.  For example sun.beans.OurButtonCustomizer.class.
+     * @param beanClass  实现 bean 的 Java 类的 Class 对象。例如 sun.beans.OurButton.class。
+     * @param customizerClass  实现 bean 的定制器的 Java 类的 Class 对象。例如 sun.beans.OurButtonCustomizer.class。
      */
     public BeanDescriptor(Class beanClass, Class customizerClass) {
 	this.beanClass = beanClass;
@@ -51,8 +45,7 @@ public class BeanDescriptor extends FeatureDescriptor {
     }
 
     /**
-     * @return The Class object for the bean's customizer.  This may
-     * be null if the bean doesn't have a customizer.
+     * @return Tbean 的定制器的 Class 对象。如果 bean 没有定制器，这可能为 null。
      */
     public Class getCustomizerClass() {
 	return customizerClass;
