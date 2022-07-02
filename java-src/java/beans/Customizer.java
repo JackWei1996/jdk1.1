@@ -1,39 +1,46 @@
 /*
- * @(#)Customizer.java	1.13 2001/12/12
+ * @(#)Customizer.java	1.13 01/12/12
  *
- * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
+ * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
+ * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
 package java.beans;
 
 /**
- * 定制器类为定制目标 Java Bean 提供了完整的定制 GUI。
- *
- * 每个定制器都应该从 java.awt.Component 类继承，以便可以在 AWT 对话框或面板中对其进行实例化。
- *
- * 每个定制器都应该有一个 null 构造函数。
+ * A customizer class provides a complete custom GUI for customizing
+ * a target Java Bean.
+ * <P>
+ * Each customizer should inherit from the java.awt.Component class so
+ * it can be instantiated inside an AWT dialog or panel.
+ * <P>
+ * Each customizer should have a null constructor.
  */
 
 public interface Customizer {
 
     /**
-     * 设置要自定义的对象。在将定制器添加到任何父 AWT 容器之前，该方法只应调用一次。
+     * Set the object to be customized.  This method should be called only
+     * once, before the Customizer has been added to any parent AWT container.
      * @param bean  The object to be customized.
      */
     void setObject(Object bean);
 
     /**
-     * 为 PropertyChange 事件注册一个侦听器。
-     * 每当定制器以可能需要刷新显示的属性的方式更改目标 bean 时，它都应该触发 PropertyChange 事件。
+     * Register a listener for the PropertyChange event.  The customizer
+     * should fire a PropertyChange event whenever it changes the target
+     * bean in a way that might require the displayed properties to be
+     * refreshed.
      *
-     * @param listener 触发 PropertyChange 事件时要调用的对象。
+     * @param listener  An object to be invoked when a PropertyChange
+     *		event is fired.
      */
-     void addPropertyChangeListener(PropertyChangeListener listener);
+    void addPropertyChangeListener(PropertyChangeListener listener);
 
     /**
-     * 删除 PropertyChange 事件的侦听器。
+     * Remove a listener for the PropertyChange event.
      *
-     * @param listener 要删除的 PropertyChange 侦听器。
+     * @param listener  The PropertyChange listener to be removed.
      */
     void removePropertyChangeListener(PropertyChangeListener listener);
 

@@ -1,38 +1,44 @@
 /*
- * @(#)Visibility.java	1.7 2001/12/12
+ * @(#)Visibility.java	1.7 01/12/12
  *
- * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
+ * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
+ * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
 package java.beans;
 
 /**
- * 在某些情况下，bean 可能会在没有 GUI 可用的服务器上运行。
- * 该接口可用于查询 bean 以确定它是否绝对需要 gui，并告知 bean 是否有可用的 GUI。
- *
- * 此接口适用于专家开发人员，普通的简单 bean 不需要此接口。
- * 为了避免混淆最终用户，我们避免对这些方法使用 getXXX setXXX 设计模式。
+ * Under some circumstances a bean may be run on servers where a GUI
+ * is not available.  This interface can be used to query a bean to
+ * determine whether it absolutely needs a gui, and to advise the
+ * bean whether a GUI is available.
+ * <p>
+ * This interface is for expert developers, and is not needed
+ * for normal simple beans.  To avoid confusing end-users we
+ * avoid using getXXX setXXX design patterns for these methods.
  */
 
 public interface Visibility {
 
     /**
-     * @return 如果 bean 绝对需要一个可用的 GUI 来完成其工作，则为真。
+     * @return True if the bean absolutely needs a GUI available in
+     *		order to get its work done.
      */
     boolean needsGui();
 
     /**
-     * 此方法指示 bean 它不应该使用 Gui。
+     * This method instructs the bean that it should not use the Gui.
      */
     void dontUseGui();
 
     /**
-     * 该方法指示 bean 可以使用 Gui。
+     * This method instructs the bean that it is OK to use the Gui.
      */
     void okToUseGui();
 
     /**
-     * @return 如果 bean 当前正在避免使用 Gui，则为 true。例如由于调用了 dontUseGui()。
+     * @return true if the bean is currently avoiding use of the Gui.
+     *   e.g. due to a call on dontUseGui().
      */
     boolean avoidingGui();
 
