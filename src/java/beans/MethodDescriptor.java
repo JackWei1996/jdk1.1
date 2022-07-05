@@ -1,8 +1,7 @@
 /*
- * @(#)MethodDescriptor.java	1.18 01/12/12
+ * @(#)MethodDescriptor.java	1.18 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
@@ -10,8 +9,7 @@ package java.beans;
 import java.lang.reflect.*;
 
 /**
- * A MethodDescriptor describes a particular method that a Java Bean
- * supports for external access from other components.
+ * MethodDescriptor 描述了 Java Bean 支持从其他组件进行外部访问的特定方法。
  */
 
 public class MethodDescriptor extends FeatureDescriptor {
@@ -27,8 +25,7 @@ public class MethodDescriptor extends FeatureDescriptor {
 
     /**
      * @param method    The low-level method information.
-     * @param parameterDescriptors  Descriptive information for each of the
-     *		 		method's parameters.
+     * @param parameterDescriptors  每个方法参数的描述信息。
      */
     public MethodDescriptor(Method method, 
 		ParameterDescriptor parameterDescriptors[]) {
@@ -46,19 +43,15 @@ public class MethodDescriptor extends FeatureDescriptor {
 
 
     /**
-     * @return The locale-independent names of the parameters.  May return
-     *		a null array if the parameter names aren't known.
+     * @return 参数的与语言环境无关的名称。如果参数名称未知，则可能返回空数组。
      */
     public ParameterDescriptor[] getParameterDescriptors() {
 	return parameterDescriptors;
     }
 
     /*
-     * Package-private constructor
-     * Merge two method descriptors.  Where they conflict, give the
-     * second argument (y) priority over the first argument (x).
-     * @param x  The first (lower priority) MethodDescriptor
-     * @param y  The second (higher priority) MethodDescriptor
+     * 包私有构造函数合并两个方法描述符。如果它们发生冲突，则将第二个参数 (y) 优先于第一个参数 (x)。
+     * @param x 第一个（低优先级）MethodDescriptor @param y 第二个（高优先级）MethodDescriptor
      */
 
     MethodDescriptor(MethodDescriptor x, MethodDescriptor y) {
