@@ -1,42 +1,32 @@
 /*
- * @(#)PropertyEditorManager.java	1.28 01/12/12
+ * @(#)PropertyEditorManager.java	1.28 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
 
 /**
- * The PropertyEditorManager can be used to locate a property editor for
- * any given type name.  This property editor must support the
- * java.beans.PropertyEditor interface for editing a given object.
- * <P>
- * The PropertyEditorManager uses three techniques for locating an editor
- * for a given type.  First, it provides a registerEditor method to allow
- * an editor to be specifically registered for a given type.  Second it
- * tries to locate a suitable class by adding "Editor" to the full 
- * qualified classname of the given type (e.g. "foo.bah.FozEditor").
- * Finally it takes the simple classname (without the package name) adds
- * "Editor" to it and looks in a search-path of packages for a matching
- * class.
- * <P>
- * So for an input class foo.bah.Fred, the PropertyEditorManager would
- * first look in its tables to see if an editor had been registered for
- * foo.bah.Fred and if so use that.  Then it will look for a
- * foo.bah.FredEditor class.  Then it will look for (say) 
- * standardEditorsPackage.FredEditor class.
- * <p>
- * Default PropertyEditors will be provided for the Java builtin types
- * "boolean", "byte", "short", "int", "long", "float", and "double"; and
- * for the classes java.lang.String. java.awt.Color, and java.awt.Font.
+ * PropertyEditorManager 可用于定位任何给定类型名称的属性编辑器。
+ * 此属性编辑器必须支持 java.beans.PropertyEditor 接口以编辑给定对象。
+ *
+ * PropertyEditorManager 使用三种技术来定位给定类型的编辑器。
+ * 首先，它提供了一个 registerEditor 方法，允许为给定类型专门注册一个编辑器。
+ * 其次，它尝试通过将“Editor”添加到给定类型的全限定类名（例如“foo.bah.FozEditor”）来定位合适的类。
+ * 最后，它采用简单的类名（没有包名）向其添加“编辑器”，并在包的搜索路径中查找匹配的类。
+ *
+ * 因此，对于输入类 foo.bah.Fred，PropertyEditorManager
+ * 将首先查看其表以查看是否已为 foo.bah.Fred 注册了编辑器，如果已注册，则使用它。
+ * 然后它会寻找一个 foo.bah.FredEditor 类。然后它会寻找（比如说）standardEditorsPackage.FredEditor 类。
+ *
+ * 将为 Java 内置类型“boolean”、“byte”、“short”、“int”、“long”、“float”和“double”提供默认 PropertyEditor；
+ * 对于 java.lang.String 类。 java.awt.Color 和 java.awt.Font。
  */
 
 public class PropertyEditorManager {
 
     /**
-     * Register an editor class to be used to editor values of
-     * a given target class.
+     * 注册一个编辑器类以用于编辑给定目标类的值。
      * @param targetType the Class object of the type to be edited
      * @param editorClass the Class object of the editor class.  If
      *	   this is null, then any existing definition will be removed.
@@ -121,8 +111,7 @@ public class PropertyEditorManager {
     }
 
     /**
-     * @return  The array of package names that will be searched in
-     *		order to find property editors.
+     * @return  将搜索以查找属性编辑器的包名称数组。
      * <p>     This is initially set to {"sun.beans.editors"}.
      */
 
