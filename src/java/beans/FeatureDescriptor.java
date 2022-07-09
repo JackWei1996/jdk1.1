@@ -1,21 +1,17 @@
 /*
- * @(#)FeatureDescriptor.java	1.17 01/12/12
+ * @(#)FeatureDescriptor.java	1.17 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
 
 /**
- * The FeatureDescriptor class is the common baseclass for PropertyDescriptor,
- * EventSetDescriptor, and MethodDescriptor, etc.
- * <p>
- * It supports some common information that can be set and retrieved for
- * any of the introspection descriptors.
- * <p>
- * In addition it provides an extension mechanism so that arbitrary
- * attribute/value pairs can be associated with a design feature.
+ * FeatureDescriptor 类是 PropertyDescriptor、EventSetDescriptor、MethodDescriptor 等的通用基类。
+ *
+ * 它支持一些可以为任何自省描述符设置和检索的通用信息。
+ *
+ * 此外，它还提供了一种扩展机制，以便任意属性值对可以与设计特征相关联。
  */
 
 public class FeatureDescriptor {
@@ -58,8 +54,7 @@ public class FeatureDescriptor {
     }
 
     /**
-     * The "expert" flag is used to distinguish between those features that are
-     * intended for expert users from those that are intended for normal users.
+     * "expert"标志用于区分那些为专家用户准备的功能和那些为普通用户准备的功能。
      *
      * @return True if this feature is intended for use by experts only.
      */
@@ -78,8 +73,7 @@ public class FeatureDescriptor {
     }
 
     /**
-     * The "hidden" flag is used to identify features that are intended only
-     * for tool use, and which should not be exposed to humans.
+     * "hidden" 标志用于识别仅供工具使用且不应暴露给人类的特征。
      *
      * @return True if this feature should be hidden from human users.
      */
@@ -109,8 +103,7 @@ public class FeatureDescriptor {
     }
 
     /**
-     * You can associate a short descriptive string with a feature.  Normally
-     * these descriptive strings should be less than about 40 characters.
+     * 您可以将简短的描述性字符串与功能相关联。通常这些描述性字符串应该少于大约 40 个字符。
      * @param text  A (localized) short description to be associated with
      * this property/method/event.
      */
@@ -144,8 +137,7 @@ public class FeatureDescriptor {
     }
 
     /**
-     * @return  An enumeration of the locale-independent names of any 
-     *    attributes that have been registered with setValue.
+     * @return 已使用 setValue 注册的任何属性的与区域设置无关的名称的枚举。
      */
     public java.util.Enumeration attributeNames() {
 	if (table == null) {
@@ -155,11 +147,9 @@ public class FeatureDescriptor {
     }
 
     /**
-     * Package-private constructor,
-     * Merge information from two FeatureDescriptors.
-     * The merged hidden and expert flags are formed by or-ing the values.
-     * In the event of other conflicts, the second argument (y) is
-     * given priority over the first argument (x).
+     * 包私有构造函数，合并来自两个 FeatureDescriptor 的信息。
+     * 合并的隐藏和专家标志是通过对值进行或运算形成的。
+     * 在其他冲突的情况下，第二个参数 (y) 优先于第一个参数 (x)。
      * @param x  The first (lower priority) MethodDescriptor
      * @param y  The second (higher priority) MethodDescriptor
      */
