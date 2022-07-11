@@ -28,20 +28,15 @@ package java.beans;
 public interface PropertyEditor {
 
     /**
-     * Set (or change) the object that is to be edited.  Builtin types such
-     * as "int" must be wrapped as the corresponding object type such as
-     * "java.lang.Integer".
+     * 设置（或更改）要编辑的对象。诸如“int”之类的内置类型必须包装为相应的对象类型，例如“java.lang.Integer”。
      *
-     * @param value The new target object to be edited.  Note that this
-     *     object should not be modified by the PropertyEditor, rather 
-     *     the PropertyEditor should create a new object to hold any
-     *     modified value.
+     * @param value 要编辑的新目标对象。请注意，此对象不应由 PropertyEditor 修改，
+     *              而 PropertyEditor 应创建一个新对象来保存任何修改后的值。
      */
     void setValue(Object value);
 
     /**
-     * @return The value of the property.  Builtin types such as "int" will
-     * be wrapped as the corresponding object type such as "java.lang.Integer".
+     * @return 财产的价值。诸如“int”之类的内置类型将被包装为相应的对象类型，例如“java.lang.Integer”。
      */
 
     Object getValue();
@@ -55,16 +50,11 @@ public interface PropertyEditor {
     boolean isPaintable();
 
     /**
-     * Paint a representation of the value into a given area of screen
-     * real estate.  Note that the propertyEditor is responsible for doing
-     * its own clipping so that it fits into the given rectangle.
-     * <p>
-     * If the PropertyEditor doesn't honor paint requests (see isPaintable)
-     * this method should be a silent noop.
-     * <p>
-     * The given Graphics object will have the default font, color, etc of
-     * the parent container.  The PropertyEditor may change graphics attributes
-     * such as font and color and doesn't need to restore the old values.
+     * 将值的表示绘制到屏幕空间的给定区域。请注意，propertyEditor 负责进行自己的剪辑，以使其适合给定的矩形。
+     *
+     * 如果 PropertyEditor 不支持绘制请求（请参阅 isPaintable），则此方法应该是静默 noop。
+     *
+     * 给定的 Graphics 对象将具有父容器的默认字体、颜色等。 PropertyEditor 可以更改字体和颜色等图形属性，不需要恢复旧值。
      *
      * @param gfx  Graphics object to paint into.
      * @param box  Rectangle within graphics object into which we should paint.
@@ -74,15 +64,11 @@ public interface PropertyEditor {
     //----------------------------------------------------------------------
 
     /**
-     * This method is intended for use when generating Java code to set
-     * the value of the property.  It should return a fragment of Java code
-     * that can be used to initialize a variable with the current property
-     * value.
-     * <p>
+     * 此方法旨在在生成 Java 代码以设置属性值时使用。它应该返回一段 Java 代码，该代码可用于使用当前属性值初始化变量。
+     *
      * Example results are "2", "new Color(127,127,34)", "Color.orange", etc.
      *
-     * @return A fragment of Java code representing an initializer for the
-     *   	current value.
+     * @return 表示当前值的初始值设定项的 Java 代码片段。
      */
     String getJavaInitializationString();
 
@@ -97,10 +83,8 @@ public interface PropertyEditor {
     String getAsText();
 
     /**
-     * Set the property value by parsing a given String.  May raise
-     * java.lang.IllegalArgumentException if either the String is
-     * badly formatted or if this kind of property can't be expressed
-     * as text.
+     * 通过解析给定的字符串来设置属性值。如果字符串格式错误或此类属性无法表示为文本，
+     * 则可能引发 java.lang.IllegalArgumentException。
      * @param text  The string to be parsed.
      */
     void setAsText(String text) throws IllegalArgumentException;
@@ -108,15 +92,11 @@ public interface PropertyEditor {
     //----------------------------------------------------------------------
 
     /**
-     * If the property value must be one of a set of known tagged values, 
-     * then this method should return an array of the tags.  This can
-     * be used to represent (for example) enum values.  If a PropertyEditor
-     * supports tags, then it should support the use of setAsText with
-     * a tag value as a way of setting the value and the use of getAsText
-     * to identify the current value.
+     * 如果属性值必须是一组已知标记值之一，则此方法应返回标记数组。这可用于表示（例如）枚举值。
+     * 如果 PropertyEditor 支持标签，那么它应该支持使用带有标签值的
+     * setAsText 作为设置值的一种方式，并支持使用 getAsText 来识别当前值。
      *
-     * @return The tag values for this property.  May be null if this 
-     *   property cannot be represented as a tagged value.
+     * @return 此属性的标记值。如果此属性不能表示为标记值，则可能为 null。
      *	
      */
     String[] getTags();
@@ -124,18 +104,12 @@ public interface PropertyEditor {
     //----------------------------------------------------------------------
 
     /**
-     * A PropertyEditor may choose to make available a full custom Component
-     * that edits its property value.  It is the responsibility of the
-     * PropertyEditor to hook itself up to its editor Component itself and
-     * to report property value changes by firing a PropertyChange event.
-     * <P>
-     * The higher-level code that calls getCustomEditor may either embed
-     * the Component in some larger property sheet, or it may put it in
-     * its own individual dialog, or ...
+     * PropertyEditor 可以选择提供一个完整的自定义组件来编辑其属性值。
+     * PropertyEditor 负责将自己连接到其编辑器组件本身并通过触发 PropertyChange 事件来报告属性值更改。
      *
-     * @return A java.awt.Component that will allow a human to directly
-     *      edit the current property value.  May be null if this is
-     *	    not supported.
+     * 调用 getCustomEditor 的高级代码可以将组件嵌入到一些更大的属性表中，也可以将其放在自己的单独对话框中，或者...
+     *
+     * @return 允许人类直接编辑当前属性值的 java.awt.Component。如果不支持，则可能为 null。
      */
 
     java.awt.Component getCustomEditor();
@@ -148,10 +122,8 @@ public interface PropertyEditor {
     //----------------------------------------------------------------------
 
     /**
-     * Register a listener for the PropertyChange event.  When a
-     * PropertyEditor changes its value it should fire a PropertyChange
-     * event on all registered PropertyChangeListeners, specifying the
-     * null value for the property name and itself as the source.
+     * 为 PropertyChange 事件注册一个侦听器。当 PropertyEditor 更改其值时，
+     * 它应在所有已注册的 PropertyChangeListener 上触发 PropertyChange 事件，指定属性名称的 null 值并将其自身指定为源。
      *
      * @param listener  An object to be invoked when a PropertyChange
      *		event is fired.
