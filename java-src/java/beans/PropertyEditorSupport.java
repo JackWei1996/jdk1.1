@@ -1,8 +1,7 @@
 /*
- * @(#)PropertyEditorSupport.java	1.8 01/12/12
+ * @(#)PropertyEditorSupport.java	1.8 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
@@ -36,10 +35,8 @@ public class PropertyEditorSupport implements PropertyEditor {
 
     /**
      * Set (or change) the object that is to be edited.
-     * @param value The new target object to be edited.  Note that this
-     *     object should not be modified by the PropertyEditor, rather 
-     *     the PropertyEditor should create a new object to hold any
-     *     modified value.
+     * @param value 要编辑的新目标对象。请注意，此对象不应由 PropertyEditor 修改，
+     *              而 PropertyEditor 应创建一个新对象来保存任何修改后的值。
      */
     public void setValue(Object value) {
 	this.value = value;
@@ -65,12 +62,9 @@ public class PropertyEditorSupport implements PropertyEditor {
     }
 
     /**
-     * Paint a representation of the value into a given area of screen
-     * real estate.  Note that the propertyEditor is responsible for doing
-     * its own clipping so that it fits into the given rectangle.
-     * <p>
-     * If the PropertyEditor doesn't honor paint requests (see isPaintable)
-     * this method should be a silent noop.
+     * 将值的表示绘制到屏幕空间的给定区域。请注意，propertyEditor 负责进行自己的剪辑，以使其适合给定的矩形。
+     *
+     * 如果 PropertyEditor 不支持绘制请求（请参阅 isPaintable），则此方法应该是静默 noop。
      *
      * @param gfx  Graphics object to paint into.
      * @param box  Rectangle within graphics object into which we should paint.
@@ -81,11 +75,8 @@ public class PropertyEditorSupport implements PropertyEditor {
     //----------------------------------------------------------------------
 
     /**
-     * This method is intended for use when generating Java code to set
-     * the value of the property.  It should return a fragment of Java code
-     * that can be used to initialize a variable with the current property
-     * value.
-     * <p>
+     * 此方法旨在在生成 Java 代码以设置属性值时使用。它应该返回一段 Java 代码，该代码可用于使用当前属性值初始化变量。
+     *
      * Example results are "2", "new Color(127,127,34)", "Color.orange", etc.
      *
      * @return A fragment of Java code representing an initializer for the
@@ -101,8 +92,7 @@ public class PropertyEditorSupport implements PropertyEditor {
      * @return The property value as a string suitable for presentation
      *       to a human to edit.
      * <p>   Returns "null" is the value can't be expressed as a string.
-     * <p>   If a non-null value is returned, then the PropertyEditor should
-     *	     be prepared to parse that string back in setAsText().
+     * <p>   如果返回非空值，则 PropertyEditor 应准备好在 setAsText() 中解析该字符串。
      */
     public String getAsText() {
 	if (value instanceof String) {
@@ -112,10 +102,8 @@ public class PropertyEditorSupport implements PropertyEditor {
     }
 
     /**
-     * Set the property value by parsing a given String.  May raise
-     * java.lang.IllegalArgumentException if either the String is
-     * badly formatted or if this kind of property can't be expressed
-     * as text.
+     * 通过解析给定的字符串来设置属性值。如果字符串格式错误或此类属性无法表示为文本，
+     * 则可能引发 java.lang.IllegalArgumentException。
      * @param text  The string to be parsed.
      */
     public void setAsText(String text) throws java.lang.IllegalArgumentException {
