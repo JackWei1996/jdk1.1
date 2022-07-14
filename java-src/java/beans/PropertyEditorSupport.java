@@ -117,14 +117,10 @@ public class PropertyEditorSupport implements PropertyEditor {
     //----------------------------------------------------------------------
 
     /**
-     * If the property value must be one of a set of known tagged values, 
-     * then this method should return an array of the tag values.  This can
-     * be used to represent (for example) enum values.  If a PropertyEditor
-     * supports tags, then it should support the use of setAsText with
-     * a tag value as a way of setting the value.
+     * 如果属性值必须是一组已知标记值之一，则此方法应返回标记值数组。这可用于表示（例如）枚举值。
+     * 如果 PropertyEditor 支持标签，那么它应该支持使用带有标签值的 setAsText 作为设置值的一种方式。
      *
-     * @return The tag values for this property.  May be null if this 
-     *   property cannot be represented as a tagged value.
+     * @return 此属性的标记值。如果此属性不能表示为标记值，则可能为 null。
      *	
      */
     public String[] getTags() {
@@ -134,18 +130,12 @@ public class PropertyEditorSupport implements PropertyEditor {
     //----------------------------------------------------------------------
 
     /**
-     * A PropertyEditor may chose to make available a full custom Component
-     * that edits its property value.  It is the responsibility of the
-     * PropertyEditor to hook itself up to its editor Component itself and
-     * to report property value changes by firing a PropertyChange event.
-     * <P>
-     * The higher-level code that calls getCustomEditor may either embed
-     * the Component in some larger property sheet, or it may put it in
-     * its own individual dialog, or ...
+     * PropertyEditor 可以选择提供编辑其属性值的完整自定义组件。
+     * PropertyEditor 负责将自己连接到其编辑器组件本身并通过触发 PropertyChange 事件来报告属性值更改。
      *
-     * @return A java.awt.Component that will allow a human to directly
-     *      edit the current property value.  May be null if this is
-     *	    not supported.
+     * 调用 getCustomEditor 的高级代码可以将组件嵌入到一些更大的属性表中，也可以将其放在自己的单独对话框中，或者...
+     *
+     * @return 允许人类直接编辑当前属性值的 java.awt.Component。如果不支持，则可能为 null。
      */
 
     public java.awt.Component getCustomEditor() {
@@ -162,8 +152,7 @@ public class PropertyEditorSupport implements PropertyEditor {
     //----------------------------------------------------------------------
 
     /**
-     * Register a listener for the PropertyChange event.  The class will
-     * fire a PropertyChange value whenever the value is updated.
+     * 为 PropertyChange 事件注册一个侦听器。每当更新值时，该类都会触发 PropertyChange 值。
      *
      * @param listener  An object to be invoked when a PropertyChange
      *		event is fired.
