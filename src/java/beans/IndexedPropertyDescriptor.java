@@ -1,8 +1,7 @@
 /*
- * @(#)IndexedPropertyDescriptor.java	1.25 01/12/12
+ * @(#)IndexedPropertyDescriptor.java	1.25 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
@@ -10,26 +9,19 @@ package java.beans;
 import java.lang.reflect.*;
 
 /**
- * An IndexedPropertyDescriptor describes a property that acts like an
- * array and has an indexed read and/or indexed write method to access
- * specific elements of the array.
- * <p>
- * An indexed property may also provide simple non-indexed read and write
- * methods.  If these are present, they read and write arrays of the type
- * returned by the indexed read method.
+ * IndexedPropertyDescriptor 描述了一个类似于数组的属性，并具有索引读取和或索引写入方法来访问数组的特定元素。
+ *
+ * 索引属性还可以提供简单的非索引读取和写入方法。如果这些存在，它们将读取和写入索引读取方法返回的类型的数组。
  */
 
 public class IndexedPropertyDescriptor extends PropertyDescriptor {
 
     /**
-     * This constructor constructs an IndexedPropertyDescriptor for a property
-     * that follows the standard Java conventions by having getFoo and setFoo 
-     * accessor methods, for both indexed access and array access.
-     * <p>
-     * Thus if the argument name is "fred", it will assume that there
-     * is an indexed reader method "getFred", a non-indexed (array) reader
-     * method also called "getFred", an indexed writer method "setFred",
-     * and finally a non-indexed writer method "setFred".
+     * 此构造函数通过具有 getFoo 和 setFoo 访问器方法为索引访问和数组访问构建遵循标准
+	 * Java 约定的属性的 IndexedPropertyDescriptor。
+     *
+     * 因此，如果参数名称是“fred”，它将假定有一个索引读取器方法“getFred”，
+	 * 一个非索引（数组）读取器方法也称为“getFred”，一个索引写入器方法“setFred”，最后一个非索引编写器方法“setFred”。
      *
      * @param propertyName The programmatic name of the property.
      * @param beanClass The Class object for the target bean.
