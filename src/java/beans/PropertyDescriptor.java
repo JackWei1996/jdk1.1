@@ -1,8 +1,7 @@
 /*
- * @(#)PropertyDescriptor.java	1.38 01/12/12
+ * @(#)PropertyDescriptor.java	1.38 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
@@ -10,19 +9,15 @@ package java.beans;
 import java.lang.reflect.*;
 
 /**
- * A PropertyDescriptor describes one property that a Java Bean
- * exports via a pair of accessor methods.
+ * PropertyDescriptor 描述了 Java Bean 通过一对访问器方法导出的一个属性。
  */
 
 public class PropertyDescriptor extends FeatureDescriptor {
 
     /**
-     * Constructs a PropertyDescriptor for a property that follows
-     * the standard Java convention by having getFoo and setFoo 
-     * accessor methods.  Thus if the argument name is "fred", it will
-     * assume that the reader method is "getFred" and the writer method 
-     * is "setFred".  Note that the property name should start with a lower
-     * case character, which will be capitalized in the method names.
+     * 通过具有 getFoo 和 setFoo 访问器方法，为遵循标准 Java 约定的属性构造 PropertyDescriptor。
+	 * 因此，如果参数名称是“fred”，它将假定读取器方法是“getFred”，写入器方法是“setFred”。
+	 * 请注意，属性名称应以小写字符开头，在方法名称中将大写。
      *
      * @param propertyName The programmatic name of the property.
      * @param beanClass The Class object for the target bean.  For
