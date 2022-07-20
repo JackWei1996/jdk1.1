@@ -44,8 +44,7 @@ public class PropertyDescriptor extends FeatureDescriptor {
     }
 
     /**
-     * This constructor takes the name of a simple property, and method
-     * names for reading and writing the property.
+     * 此构造函数采用简单属性的名称，以及用于读取和写入该属性的方法名称。
      *
      * @param propertyName The programmatic name of the property.
      * @param beanClass The Class object for the target bean.  For
@@ -87,10 +86,8 @@ public class PropertyDescriptor extends FeatureDescriptor {
     }
     
     /**
-     * @return The Java type info for the property.  Note that
-     * the "Class" object may describe a built-in Java type such as "int".
-     * The result may be "null" if this is an indexed property that
-     * does not support non-indexed access.
+     * @return 属性的 Java 类型信息。请注意，“Class”对象可能描述了一个内置的 Java 类型，例如“int”。
+	 * 如果这是一个不支持非索引访问的索引属性，则结果可能为“null”。
      * <p>
      * This is the type that will be returned by the ReadMethod.
      */
@@ -99,8 +96,7 @@ public class PropertyDescriptor extends FeatureDescriptor {
     }
 
     /**
-     * @return The method that should be used to read the property value.
-     * May return null if the property can't be read.
+     * @return 应该用来读取属性值的方法。如果无法读取该属性，则可能返回 null。
      */
     public Method getReadMethod() {
 	return readMethod;
@@ -115,8 +111,7 @@ public class PropertyDescriptor extends FeatureDescriptor {
     }
 
     /**
-     * Updates to "bound" properties will cause a "PropertyChange" event to
-     * get fired when the property is changed.
+	 * 对“bound”属性的更新将导致在属性更改时触发“PropertyChange”事件。
      *
      * @return True if this is a bound property.
      */
@@ -156,10 +151,8 @@ public class PropertyDescriptor extends FeatureDescriptor {
 
 
     /**
-     * Normally PropertyEditors will be found using the PropertyEditorManager.
-     * However if for some reason you want to associate a particular
-     * PropertyEditor with a given property, then you can do it with
-     * this method.
+     * 通常使用 PropertyEditorManager 可以找到 PropertyEditor。
+	 * 但是，如果由于某种原因您想将特定的 PropertyEditor 与给定的属性相关联，那么您可以使用此方法来完成。
      * @param propertyEditorClass  The Class for the desired PropertyEditor.
      */
     public void setPropertyEditorClass(Class propertyEditorClass) {
@@ -167,22 +160,16 @@ public class PropertyDescriptor extends FeatureDescriptor {
     }
 
     /**
-     * @return Any explicit PropertyEditor Class that has been registered
-     *		for this property.  Normally this will return "null",
-     *		indicating that no special editor has been registered,
-     *		so the PropertyEditorManager should be used to locate
-     *		a suitable PropertyEditor.
+     * @return 已为此属性注册的任何显式 PropertyEditor 类。
+	 * 通常这将返回“null”，表示没有注册任何特殊的编辑器，因此应该使用 PropertyEditorManager 来定位合适的 PropertyEditor。
      */
     public Class getPropertyEditorClass() {
 	return propertyEditorClass;
     }
 
     /*
-     * Package-private constructor.
-     * Merge two property descriptors.  Where they conflict, give the
-     * second argument (y) priority over the first argumnnt (x).
-     * @param x  The first (lower priority) PropertyDescriptor
-     * @param y  The second (higher priority) PropertyDescriptor
+     * 包私有构造函数。合并两个属性描述符。在它们发生冲突的地方，将第二个参数 (y) 优先于第一个参数 (x)。
+     * @param x 第一个（低优先级）PropertyDescriptor @param y 第二个（高优先级）PropertyDescriptor
      */
 
     PropertyDescriptor(PropertyDescriptor x, PropertyDescriptor y) {
