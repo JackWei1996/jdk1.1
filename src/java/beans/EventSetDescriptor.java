@@ -1,8 +1,7 @@
 /*
- * @(#)EventSetDescriptor.java	1.41 01/12/12
+ * @(#)EventSetDescriptor.java	1.41 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
@@ -10,25 +9,20 @@ package java.beans;
 import java.lang.reflect.*;
 
 /**
- * An EventSetDescriptor describes a group of events that a given Java
- * bean fires.
- * <P>
- * The given group of events are all delivered as method calls on a single
- * event listener interface, and an event listener object can be registered
- * via a call on a registration method supplied by the event source.
+ * EventSetDescriptor 描述给定 Java bean 触发的一组事件。
+ *
+ * 给定的事件组都作为单个事件侦听器接口上的方法调用传递，并且可以通过对事件源提供的注册方法的调用来注册事件侦听器对象。
  */
 
 
 public class EventSetDescriptor extends FeatureDescriptor {
 
     /**
-     * This constructor creates an EventSetDescriptor assuming that you are
-     * following the most simple standard design pattern where a named
-     * event "fred" is (1) delivered as a call on the single method of
-     * interface FredListener, (2) has a single argument of type FredEvent,
-     * and (3) where the FredListener may be registered with a call on an
-     * addFredListener method of the source component and removed with a
-     * call on a removeFredListener method.
+     * 此构造函数创建一个 EventSetDescriptor 假设您遵循最简单的标准设计模式，
+	 * 其中命名事件“fred”
+	 * （1）作为对接口 FredListener 的单个方法的调用传递，
+	 * （2）有一个 FredEvent 类型的参数，
+	 * (3)其中FredListener可以通过对源组件的addFredListener方法的调用来注册并且通过对removeFredListener方法的调用来移除。
      *
      * @param sourceClass  The class firing the event.
      * @param eventSetName  The programmatic name of the event.  E.g. "fred".
