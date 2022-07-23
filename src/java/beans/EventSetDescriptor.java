@@ -116,13 +116,9 @@ public class EventSetDescriptor extends FeatureDescriptor {
      *
      * @param eventSetName The programmatic name of the event set.
      * @param listenerType The Class for the listener interface.
-     * @param listenerMethodDescriptors  An array of MethodDescriptor objects
-     *		 describing each of the event handling methods in the
-     *           target listener.
-     * @param addListenerMethod  The method on the event source
-     *		that can be used to register an event listener object.
-     * @param removeListenerMethod  The method on the event source
-     *		that can be used to de-register an event listener object.
+     * @param listenerMethodDescriptors  描述目标侦听器中每个事件处理方法的 MethodDescriptor 对象数组。
+     * @param addListenerMethod  事件源上可用于注册事件侦听器对象的方法。
+     * @param removeListenerMethod  事件源上可用于注销事件侦听器对象的方法。
      * @exception IntrospectionException if an exception occurs during
      *              introspection.
      */
@@ -140,17 +136,14 @@ public class EventSetDescriptor extends FeatureDescriptor {
     }
 
     /** 
-     * @return The Class object for the target interface that will
-     * get invoked when the event is fired.
+     * @return 触发事件时将调用的目标接口的 Class 对象。
      */
     public Class getListenerType() {
 	return listenerType;
     }
 
     /** 
-     * @return An array of Method objects for the target methods
-     * within the target listener interface that will get called when
-     * events are fired.
+     * @return 触发事件时将调用目标侦听器接口中目标方法的 Method 对象数组。
      */
     public Method[] getListenerMethods() {
 	if (listenerMethods == null && listenerMethodDescriptors != null) {
@@ -165,9 +158,7 @@ public class EventSetDescriptor extends FeatureDescriptor {
 
 
     /** 
-     * @return An array of MethodDescriptor objects for the target methods
-     * within the target listener interface that will get called when
-     * events are fired.
+     * @return 触发事件时将调用目标侦听器接口中目标方法的 MethodDescriptor 对象数组。
      */
     public MethodDescriptor[] getListenerMethodDescriptors() {
 	if (listenerMethodDescriptors == null && listenerMethods != null) {
@@ -207,8 +198,7 @@ public class EventSetDescriptor extends FeatureDescriptor {
     }
     
     /**
-     * Normally event sources are multicast.  However there are some 
-     * exceptions that are strictly unicast.
+     * 通常事件源是多播的。然而，有一些例外是严格单播的。
      *
      * @return  True if the event set is unicast.  Defaults to "false".
      */
@@ -218,8 +208,7 @@ public class EventSetDescriptor extends FeatureDescriptor {
     }
 
     /**
-     * Mark an event set as being in the "default" set (or not).
-     * By default this is true.
+     * 将事件集标记为“默认”集（或不在）中。默认情况下这是真的。
      *
      * @param unicast  True if the event set is unicast.
      */
@@ -239,9 +228,7 @@ public class EventSetDescriptor extends FeatureDescriptor {
     }
 
     /*
-     * Package-private constructor
-     * Merge two event set descriptors.  Where they conflict, give the
-     * second argument (y) priority over the first argument (x).
+     * 包私有构造函数合并两个事件集描述符。如果它们发生冲突，则将第二个参数 (y) 优先于第一个参数 (x)。
      * @param x  The first (lower priority) EventSetDescriptor
      * @param y  The second (higher priority) EventSetDescriptor
      */
