@@ -25,14 +25,10 @@ public class EventSetDescriptor extends FeatureDescriptor {
 	 * (3)其中FredListener可以通过对源组件的addFredListener方法的调用来注册并且通过对removeFredListener方法的调用来移除。
      *
      * @param sourceClass  The class firing the event.
-     * @param eventSetName  The programmatic name of the event.  E.g. "fred".
-     *		Note that this should normally start with a lower-case character.
-     * @param listenerType  The target interface that events
-     *		will get delivered to.
-     * @param listenerMethodName  The method that will get called when the event gets
-     *		delivered to its target listener interface.
-     * @exception IntrospectionException if an exception occurs during
-     *              introspection.
+     * @param eventSetName  事件的程序名称。例如。 “弗雷德”。请注意，这通常应以小写字符开头。
+     * @param listenerType  事件将被传递到的目标接口。
+     * @param listenerMethodName  当事件被传递到其目标侦听器接口时将调用的方法。
+     * @exception IntrospectionException 如果自省期间发生异常。
      */
     public EventSetDescriptor(Class sourceClass, String eventSetName,
 		Class listenerType, String listenerMethodName) 
@@ -60,22 +56,15 @@ public class EventSetDescriptor extends FeatureDescriptor {
     }
 
     /**
-     * This constructor creates an EventSetDescriptor from scratch using
-     * string names.
+     * 此构造函数使用字符串名称从头开始创建 EventSetDescriptor。
      *
      * @param sourceClass  The class firing the event.
-     * @param eventSetName The programmatic name of the event set.
-     *		Note that this should normally start with a lower-case character.
-     * @param listenerType  The Class of the target interface that events
-     *		will get delivered to.
-     * @param listenerMethodNames The names of the methods that will get called 
-     *		when the event gets delivered to its target listener interface.
-     * @param addListenerMethodName  The name of the method on the event source
-     *		that can be used to register an event listener object.
-     * @param removeListenerMethodName  The name of the method on the event source
-     *		that can be used to de-register an event listener object.
-     * @exception IntrospectionException if an exception occurs during
-     *              introspection.
+     * @param eventSetName 事件集的编程名称。请注意，这通常应以小写字符开头。
+     * @param listenerType  事件将被传递到的目标接口的类。
+     * @param listenerMethodNames 当事件被传递到其目标侦听器接口时将被调用的方法的名称。
+     * @param addListenerMethodName  事件源上可用于注册事件侦听器对象的方法的名称。
+     * @param removeListenerMethodName  事件源上可用于注销事件侦听器对象的方法的名称。
+     * @exception IntrospectionException 如果自省期间发生异常。
      */
     public EventSetDescriptor(Class sourceClass,
 		String eventSetName, 
@@ -100,19 +89,14 @@ public class EventSetDescriptor extends FeatureDescriptor {
     }
 
     /**
-     * This constructor creates an EventSetDescriptor from scratch using
-     * java.lang.reflect.Method and java.lang.Class objects.
+     * 此构造函数使用 java.lang.reflect.Method 和 java.lang.Class 对象从头开始创建 EventSetDescriptor。
      *
      * @param eventSetName The programmatic name of the event set.
      * @param listenerType The Class for the listener interface.
-     * @param listenerMethods  An array of Method objects describing each
-     *		of the event handling methods in the target listener.
-     * @param addListenerMethod  The method on the event source
-     *		that can be used to register an event listener object.
-     * @param removeListenerMethod  The method on the event source
-     *		that can be used to de-register an event listener object.
-     * @exception IntrospectionException if an exception occurs during
-     *              introspection.
+     * @param listenerMethods  描述目标侦听器中每个事件处理方法的 Method 对象数组。
+     * @param addListenerMethod  事件源上可用于注册事件侦听器对象的方法。
+     * @param removeListenerMethod  事件源上可用于注销事件侦听器对象的方法。
+     * @exception IntrospectionException 如果自省期间发生异常。
      */
     public EventSetDescriptor(String eventSetName, 
 		Class listenerType,
@@ -128,8 +112,7 @@ public class EventSetDescriptor extends FeatureDescriptor {
     }
 
     /**
-     * This constructor creates an EventSetDescriptor from scratch using
-     * java.lang.reflect.MethodDescriptor and java.lang.Class objects.
+     * 此构造函数使用 java.lang.reflect.MethodDescriptor 和 java.lang.Class 对象从头开始创建 EventSetDescriptor。
      *
      * @param eventSetName The programmatic name of the event set.
      * @param listenerType The Class for the listener interface.
