@@ -1,8 +1,7 @@
 /*
- * @(#)Beans.java	1.32 01/12/12
+ * @(#)Beans.java	1.32 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
@@ -14,52 +13,38 @@ import java.net.URL;
 import java.lang.reflect.Array;
 
 /**
- * This class provides some general purpose beans control methods.
+ * 此类提供了一些通用的 bean 控制方法。
  */
 
 public class Beans {
 
     /**
      * Instantiate a bean.
-     * <p>
-     * The bean is created based on a name relative to a class-loader.
-     * This name should be a dot-separated name such as "a.b.c".
-     * <p>
-     * In Beans 1.0 the given name can indicate either a serialized object
-     * or a class.  Other mechanisms may be added in the future.  In
-     * beans 1.0 we first try to treat the beanName as a serialized object
-     * name then as a class name.
-     * <p>
-     * When using the beanName as a serialized object name we convert the
-     * given beanName to a resource pathname and add a trailing ".ser" suffix.
-     * We then try to load a serialized object from that resource.
-     * <p>
-     * For example, given a beanName of "x.y", Beans.instantiate would first
-     * try to read a serialized object from the resource "x/y.ser" and if
-     * that failed it would try to load the class "x.y" and create an
-     * instance of that class.
-     * <p>
-     * If the bean is a subtype of java.applet.Applet, then it is given
-     * some special initialization.  First, it is supplied with a default
-     * AppletStub and AppletContext.  Second, if it was instantiated from 
-     * a classname the applet's "init" method is called.  (If the bean was
-     * deserialized this step is skipped.) 
-     * <p>
-     * Note that for beans which are applets, it is the caller's responsiblity
-     * to call "start" on the applet.  For correct behaviour, this should be done
-     * after the applet has been added into a visible AWT container.
-     * <p>
-     * Note that applets created via beans.instantiate run in a slightly
-     * different environment than applets running inside browsers.  In
-     * particular, bean applets have no access to "parameters", so they may 
-     * wish to provide property get/set methods to set parameter values.  We
-     * advise bean-applet developers to test their bean-applets against both
-     * the JDK appletviewer (for a reference browser environment) and the
-     * BDK BeanBox (for a reference bean container).
+     *
+	 * bean 是基于相对于类加载器的名称创建的。此名称应该是一个点分隔的名称，例如“a.b.c”。
+     *
+     * 在 Beans 1.0 中，给定名称可以指示序列化对象或类。将来可能会添加其他机制。
+	 * 在 beans 1.0 中，我们首先尝试将 beanName 视为序列化对象名称，然后将其视为类名称。
+     *
+     * 当使用 beanName 作为序列化对象名称时，我们将给定的 beanName 转换为资源路径名并添加尾随“.ser”后缀。
+	 * 然后我们尝试从该资源加载一个序列化对象。
+     *
+     * 例如，给定一个“x.y”的 beanName，Beans.instantiate 将首先尝试从资源“xy.ser”读取序列化对象，
+	 * 如果失败，它将尝试加载类“x.y”并创建该类的实例班级。
+     *
+     * 如果 bean 是 java.applet.Applet 的子类型，那么它会被赋予一些特殊的初始化。
+	 * 首先，它提供了一个默认的 AppletStub 和 AppletContext。
+	 * 其次，如果它是从类名中实例化的，则调用 applet 的“init”方法。 （如果 bean 被反序列化，则跳过此步骤。）
+     *
+     * 请注意，对于作为 applet 的 bean，调用者有责任在 applet 上调用“start”。
+	 * 为了获得正确的行为，这应该在将小程序添加到可见的 AWT 容器后完成。
+     *
+     * 请注意，通过 beans.instantiate 创建的小程序运行在与在浏览器中运行的小程序略有不同的环境中。
+	 * 特别是，bean applet 无法访问“参数”，因此它们可能希望提供属性 getset 方法来设置参数值。
+	 * 我们建议 bean-applet 开发人员针对 JDK appletviewer（用于参考浏览器环境）
+	 * 和 BDK BeanBox（用于参考 bean 容器）测试他们的 bean-applet。
      * 
-     * @param     classLoader the class-loader from which we should create
-     * 		              the bean.  If this is null, then the system
-     *                        class-loader is used.
+     * @param     classLoader 我们应该从中创建 bean 的类加载器。如果为空，则使用系统类加载器。
      * @param     beanName    the name of the bean within the class-loader.
      *   	              For example "sun.beanbox.foobah"
      * @exception ClassNotFoundException if the class of a serialized
