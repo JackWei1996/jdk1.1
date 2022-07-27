@@ -104,14 +104,9 @@ public class Beans {
 	if (result != null && result instanceof Applet) {
 	    Applet applet = (Applet) result;
 
-	    // Figure our the codebase and docbase URLs.  We do this
-	    // by locating the URL for a known resource, and then
-	    // massaging the URL.
+	    // 图我们的代码库和文档库 URL。我们通过定位已知资源的 URL，然后按摩 URL 来做到这一点。
 
-	    // First find the "resource name" corresponding to the bean
-	    // itself.  So a serialzied bean "a.b.c" would imply a resource
-	    // name of "a/b/c.ser" and a classname of "x.y" would imply
-	    // a resource name of "x/y.class".
+	    // 首先找到bean本身对应的“资源名”。因此，序列化的 bean“a.b.c”将暗示资源名称“abc.ser”，而类名“x.y”将暗示资源名称“xy.class”。
 
 	    String resourceName;
 	    if (serialized) {
@@ -132,9 +127,7 @@ public class Beans {
 		objectUrl = cls.getResource(resourceName);
 	    }
 
-	    // If we found a URL, we try to locate the docbase by taking
-	    // of the final path name component, and the code base by taking
-   	    // of the complete resourceName.
+	    // 如果我们找到一个 URL，我们会尝试通过获取最终路径名组件来定位文档库，并通过获取完整的资源名称来定位代码库。
 	    // So if we had a resourceName of "a/b/c.class" and we got an
 	    // objectURL of "file://bert/classes/a/b/c.class" then we would
 	    // want to set the codebase to "file://bert/classes/" and the
@@ -158,12 +151,9 @@ public class Beans {
 	    BeansAppletStub stub = new BeansAppletStub(applet, context, codeBase, docBase);
 	    applet.setStub(stub);
 
-	    // If it was deserialized then it was already init-ed.  Otherwise
-	    // we need to initialize it.
+	    // 如果它被反序列化，那么它已经被初始化了。否则我们需要初始化它。
 	    if (!serialized) {
-		// We need to set a reasonable initial size, as many
-		// applets are unhappy if they are started without 
-		// having been explicitly sized.
+		// 我们需要设置一个合理的初始大小，因为许多小程序在没有明确调整大小的情况下启动时会不高兴。
 		applet.setSize(100,100);
 		applet.init();
 	    }
