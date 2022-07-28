@@ -164,15 +164,11 @@ public class Beans {
 
 
     /**
-     * From a given bean, obtain an object representing a specified
-     * type view of that source object. 
-     * <p>
-     * The result may be the same object or a different object.  If
-     * the requested target view isn't available then the given
-     * bean is returned.
-     * <p>
-     * This method is provided in Beans 1.0 as a hook to allow the
-     * addition of more flexible bean behaviour in the future.
+     * 从给定的 bean 中，获取表示该源对象的指定类型视图的对象。
+     *
+     * 结果可能是相同的对象或不同的对象。如果请求的目标视图不可用，则返回给定的 bean。
+     *
+     * 此方法在 Beans 1.0 中作为钩子提供，以允许将来添加更灵活的 bean 行为。
      *
      * @param obj  Object from which we want to obtain a view.
      * @param targetType  The type of view we'd like to get.
@@ -183,10 +179,8 @@ public class Beans {
     }
  
     /**
-     * Check if a bean can be viewed as a given target type.
-     * The result will be true if the Beans.getInstanceof method
-     * can be used on the given bean to obtain an object that
-     * represents the specified targetType type view.
+     * 检查是否可以将 bean 视为给定的目标类型。如果可以在给定 bean 上使用
+	 * Beans.getInstanceof 方法来获取表示指定 targetType 类型视图的对象，则结果将为 true。
      *
      * @param bean  Bean from which we want to obtain a view.
      * @param targetType  The type of view we'd like to get.
@@ -208,21 +202,15 @@ public class Beans {
     }
 
     /**
-     * @return  True if we are running in an environment where beans
-     *	   can assume that an interactive GUI is available, so they 
-     *	   can pop up dialog boxes, etc.  This will normally return
-     *	   true in a windowing environment, and will normally return
-     *	   false in a server environment or if an application is
-     *	   running as part of a batch job.
+     * @return  如果我们在 bean 可以假定交互式 GUI 可用的环境中运行，则为 true，因此它们可以弹出对话框等。
+	 * 这通常在窗口环境中返回 true，并且通常在服务器环境中返回 false，或者如果应用程序作为批处理作业的一部分运行。
      */
     public static boolean isGuiAvailable() {
 	return guiAvailable;
     }
 
     /**
-     * Used to indicate whether of not we are running in an application
-     * builder environment.  Note that this method is security checked
-     * and is not available to (for example) untrusted applets.
+     * 用于指示我们是否在应用程序构建器环境中运行。请注意，此方法经过安全检查，不适用于（例如）不受信任的小程序。
      *
      * @param isDesignTime  True if we're in an application builder tool.
      */
