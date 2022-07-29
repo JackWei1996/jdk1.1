@@ -221,10 +221,7 @@ public class Beans {
     }
 
     /**
-     * Used to indicate whether of not we are running in an environment
-     * where GUI interaction is available.  Note that this method is 
-     * security checked and is not available to (for example) untrusted
-     * applets.
+     * 用于指示我们是否在 GUI 交互可用的环境中运行。请注意，此方法经过安全检查，不适用于（例如）不受信任的小程序。
      *
      * @param isGuiAvailable  True if GUI interaction is available.
      */
@@ -240,8 +237,7 @@ public class Beans {
 }
 
 /**
- * This subclass of ObjectInputStream delegates loading of classes to
- * an existing ClassLoader.
+ * ObjectInputStream 的这个子类将类的加载委托给现有的 ClassLoader。
  */
 
 class ObjectInputStreamWithLoader extends ObjectInputStream
@@ -313,8 +309,7 @@ class ObjectInputStreamWithLoader extends ObjectInputStream
 }
 
 /**
- * Package private support class.  This provides a default AppletContext
- * for beans which are applets.
+ * 打包私人支持课程。这为作为小程序的 bean 提供了默认的 AppletContext。
  */
 
 class BeansAppletContext implements AppletContext {
@@ -326,9 +321,7 @@ class BeansAppletContext implements AppletContext {
     }
 
     public AudioClip getAudioClip(URL url) {
-	// We don't currently support audio clips in the Beans.instantiate
-	// applet context, unless by some luck there exists a URL content
-	// class that can generate an AudioClip from the audio URL.
+	// 我们目前不支持 Beans.instantiate 小程序上下文中的音频剪辑，除非幸运的是存在可以从音频 URL 生成 AudioClip 的 URL 内容类。
 	try {
 	    return (AudioClip) url.getContent();
   	} catch (Exception ex) {
@@ -384,8 +377,7 @@ class BeansAppletContext implements AppletContext {
 }
 
 /**
- * Package private support class.  This provides an AppletStub
- * for beans which are applets.
+ * 打包私人支持课程。这为作为小程序的 bean 提供了 AppletStub。
  */
 class BeansAppletStub implements AppletStub {
     transient boolean active;
