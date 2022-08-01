@@ -1,8 +1,7 @@
 /*
- * @(#)Introspector.java	1.74 01/12/12
+ * @(#)Introspector.java	1.74 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.beans;
@@ -10,40 +9,24 @@ package java.beans;
 import java.lang.reflect.*;
 
 /**
- * The Introspector class provides a standard way for tools to learn about
- * the properties, events, and methods supported by a target Java Bean.
- * <p>
- * For each of those three kinds of information, the Introspector will
- * separately analyze the bean's class and superclasses looking for
- * either explicit or implicit information and use that information to
- * build a BeanInfo object that comprehensively describes the target bean.
- * <p>
- * For each class "Foo", explicit information may be available if there exists
- * a corresponding "FooBeanInfo" class that provides a non-null value when
- * queried for the information.   We first look for the BeanInfo class by
- * taking the full package-qualified name of the target bean class and
- * appending "BeanInfo" to form a new class name.  If this fails, then
- * we take the final classname component of this name, and look for that
- * class in each of the packages specified in the BeanInfo package search
- * path.
- * <p>
- * Thus for a class such as "sun.xyz.OurButton" we would first look for a
- * BeanInfo class called "sun.xyz.OurButtonBeanInfo" and if that failed we'd
- * look in each package in the BeanInfo search path for an OurButtonBeanInfo
- * class.  With the default search path, this would mean looking for
- * "sun.beans.infos.OurButtonBeanInfo".
- * <p>
- * If a class provides explicit BeanInfo about itself then we add that to
- * the BeanInfo information we obtained from analyzing any derived classes,
- * but we regard the explicit information as being definitive for the current
- * class and its base classes, and do not proceed any further up the superclass
- * chain.
- * <p>
- * If we don't find explicit BeanInfo on a class, we use low-level
- * reflection to study the methods of the class and apply standard design
- * patterns to identify property accessors, event sources, or public
- * methods.  We then proceed to analyze the class's superclass and add
- * in the information from it (and possibly on up the superclass chain).
+ * Introspector 类为工具提供了一种了解目标 Java Bean 支持的属性、事件和方法的标准方法。
+ *
+ * 对于这三种信息中的每一种，Introspector 将分别分析 bean 的类和超类以查找显式或隐式信息，
+ * 并使用该信息构建一个全面描述目标 bean 的 BeanInfo 对象。
+ *
+ * 对于每个类“Foo”，如果存在相应的“FooBeanInfo”类，该类在查询信息时提供非空值，则可以使用显式信息。
+ * 我们首先通过获取目标 bean 类的完整包限定名称并附加“BeanInfo”以形成新的类名来查找 BeanInfo 类。
+ * 如果这失败了，那么我们取这个名称的最终类名组件，并在 BeanInfo 包搜索路径中指定的每个包中查找该类。
+ *
+ * 因此，对于诸如“sun.xyz.OurButton”之类的类，我们将首先查找名为“sun.xyz.OurButtonBeanInfo”的 BeanInfo 类，
+ * 如果失败，我们将在 BeanInfo 搜索路径中的每个包中查找 OurButtonBeanInfo 类。
+ * 使用默认搜索路径，这意味着查找“sun.beans.infos.OurButtonBeanInfo”。
+ *
+ * 如果一个类提供了关于它自己的显式 BeanInfo，那么我们将它添加到我们通过分析任何派生类获得的 BeanInfo 信息中，
+ * 但是我们认为显式信息对于当前类及其基类是确定的，并且不再继续往下超类链。
+ *
+ * 如果我们没有在类上找到显式的 BeanInfo，我们会使用低级反射来研究类的方法并应用标准设计模式来识别属性访问器、事件源或公共方法。
+ * 然后我们继续分析类的超类并添加来自它的信息（并且可能在超类链上）。
  */
 
 public class Introspector {
