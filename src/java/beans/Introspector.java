@@ -37,8 +37,7 @@ public class Introspector {
 
 
     /**
-     * Introspect on a Java bean and learn about all its properties, exposed
-     * methods, and events.
+     * 内省 Java bean 并了解它的所有属性、公开的方法和事件。
      *
      * @param beanClass  The bean class to be analyzed.
      * @return  A BeanInfo object describing the target bean.
@@ -55,13 +54,10 @@ public class Introspector {
     }
 
     /**
-     * Introspect on a Java bean and learn all about its properties, exposed
-     * methods, below a given "stop" point.
+     * 在给定的“停止”点下对 Java bean 进行内省并了解其所有属性、公开的方法。
      *
      * @param bean The bean class to be analyzed.
-     * @param stopClass The baseclass at which to stop the analysis.  Any
-     *    methods/properties/events in the stopClass or in its baseclasses
-     *    will be ignored in the analysis.
+     * @param stopClass 停止分析的基类。在分析中将忽略 stopClass 或其基类中的任何方法属性事件。
      * @exception IntrospectionException if an exception occurs during
      *              introspection.
      */
