@@ -67,14 +67,10 @@ public class Introspector {
     }
 
     /**
-     * Utility method to take a string and convert it to normal Java variable
-     * name capitalization.  This normally means converting the first
-     * character from upper case to lower case, but in the (unusual) special
-     * case when there is more than one character and both the first and
-     * second characters are upper case, we leave it alone.
-     * <p>
-     * Thus "FooBah" becomes "fooBah" and "X" becomes "x", but "URL" stays
-     * as "URL".
+     * 获取字符串并将其转换为普通 Java 变量名大写的实用方法。这通常意味着将第一个字符从大写转换为小写，
+	 * 但是在（不寻常的）特殊情况下，当有多个字符并且第一个和第二个字符都是大写时，我们不理会它。
+     *
+     * 因此“FooBah”变为“fooBah”，“X”变为“x”，但“URL”仍为“URL”。
      *
      * @param  name The string to be decapitalized.
      * @return  The decapitalized version of the string.
@@ -93,8 +89,7 @@ public class Introspector {
     }
 
     /**
-     * @return  The array of package names that will be searched in
-     *		order to find BeanInfo classes.
+     * @return  将搜索以查找 BeanInfo 类的包名称数组。
      * <p>     This is initially set to {"sun.beans.infos"}.
      */
 
@@ -103,8 +98,7 @@ public class Introspector {
     }
 
     /**
-     * Change the list of package names that will be used for
-     *		finding BeanInfo classes.
+     * 更改将用于查找 BeanInfo 类的包名称列表。
      * @param path  Array of package names.
      */
 
@@ -157,9 +151,7 @@ public class Introspector {
    
     private BeanInfo getBeanInfo() throws IntrospectionException {
 
-	// the evaluation order here is import, as we evaluate the
-	// event sets and locate PropertyChangeListeners before we
-	// look for properties.
+	// 这里的评估顺序是导入，因为我们在查找属性之前评估事件集并定位 PropertyChangeListeners。
 	BeanDescriptor bd = getTargetBeanDescriptor();
 	EventSetDescriptor esds[] = getTargetEventInfo();
 	int defaultEvent = getTargetDefaultEventIndex();
@@ -203,14 +195,12 @@ public class Introspector {
     }
 
     /**
-     * @return An array of PropertyDescriptors describing the editable
-     * properties supported by the target bean.
+     * @return 描述目标 bean 支持的可编辑属性的 PropertyDescriptor 数组。
      */
 
     private PropertyDescriptor[] getTargetPropertyInfo() throws IntrospectionException {
 
-	// Check if the bean has its own BeanInfo that will provide
-	// explicit information.
+	// 检查 bean 是否有自己的 BeanInfo 将提供显式信息。
         PropertyDescriptor[] explicit = null;
 	if (informant != null) {
 	    explicit = informant.getPropertyDescriptors();
