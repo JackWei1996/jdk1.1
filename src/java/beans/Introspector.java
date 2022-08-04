@@ -296,16 +296,13 @@ public class Introspector {
 			}
 		    }
 		} catch (IntrospectionException ex) {
-		    // This happens if a PropertyDescriptor or IndexedPropertyDescriptor
-	            // constructor fins that the method violates details of the deisgn
-		    // pattern, e.g. by having an empty name, or a getter returning
-		    // void , or whatever.
+		    // 如果 PropertyDescriptor 或 IndexedPropertyDescriptor 构造函数发现该方法违反了设计模式的细节，
+			// 例如通过使用空名称或返回 void 的 getter 或其他方式。
 		    pd = null;
 		}
 
 		if (pd != null) {
-		    // If this class or one of its base classes is a PropertyChange
-		    // source, then we assume that any properties we discover are "bound".
+		    // 如果此类或其基类之一是 PropertyChange 源，那么我们假设我们发现的任何属性都是“绑定的”。
 		    if (propertyChangeSource) {
 			pd.setBound(true);
 		    }
@@ -355,13 +352,11 @@ public class Introspector {
 
 
     /**
-     * @return An array of EventSetDescriptors describing the kinds of 
-     * events fired by the target bean.
+     * @return EventSetDescriptor 数组，描述目标 bean 触发的事件类型。
      */
     private EventSetDescriptor[] getTargetEventInfo() throws IntrospectionException {
 
-	// Check if the bean has its own BeanInfo that will provide
-	// explicit information.
+	// 检查 bean 是否有自己的 BeanInfo 将提供显式信息。
         EventSetDescriptor[] explicit = null;
 	if (informant != null) {
 	    explicit = informant.getEventSetDescriptors();
@@ -477,8 +472,7 @@ public class Introspector {
   	        EventSetDescriptor esd = new EventSetDescriptor(eventName, argType,
 						methods, addMethod, removeMethod);
 
-		// If the adder method throws the TooManyListenersException then it
-		// is a Unicast event source.
+		// 如果 adder 方法抛出 TooManyListenersException 那么它是一个单播事件源。
 		if (throwsException(addMethod,
 			java.util.TooManyListenersException.class)) {
 		    esd.setUnicast(true);
@@ -517,8 +511,7 @@ public class Introspector {
     }
 
     /**
-     * @return An array of MethodDescriptors describing the private
-     * methods supported by the target bean.
+     * @return 描述目标 bean 支持的私有方法的 MethodDescriptor 数组。
      */
     private MethodDescriptor[] getTargetMethodInfo() throws IntrospectionException {
 
