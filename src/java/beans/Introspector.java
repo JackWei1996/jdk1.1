@@ -575,8 +575,7 @@ public class Introspector {
     }
 
     private void addMethod(MethodDescriptor md) {
-	// We have to be careful here to distinguish method by both name
-	// and argument lists.
+	// 我们必须在这里小心地通过名称和参数列表来区分方法。
 	// This method gets called a *lot, so we try to be efficient.
 
 	String name = md.getMethod().getName();
@@ -656,11 +655,8 @@ public class Introspector {
     }
 
     private boolean isEventHandler(Method m) throws IntrospectionException {
-	// Right now we assume that a method is an event handler if it
-	// has a single argument, whose type name includes the word
-	// "Event".  The real answer is that the argument type should
-	// inherit from java.util.Event or somesuch, but we're not quite
-	// there yet.
+	// 现在我们假设一个方法是一个事件处理程序，如果它有一个参数，它的类型名称包含单词“Event”。
+		// 真正的答案是参数类型应该继承自 java.util.Event 或类似的东西，但我们还没有完全做到。
 	try {
 	    Class argTypes[] = m.getParameterTypes();
 	    if (argTypes.length != 1) {
@@ -679,8 +675,7 @@ public class Introspector {
     }
 
     private static synchronized Method[] getDeclaredMethods(Class clz) {
-	// Looking up Class.getDeclaredMethods is realtively expensive,
-	// so we cache the results.
+	// 查找 Class.getDeclaredMethods 是比较昂贵的，所以我们缓存结果。
 	if (declaredMethodCache == null) {
 	   declaredMethodCache = new java.util.Hashtable();
 	}
@@ -731,14 +726,11 @@ public class Introspector {
     }
 
     /**
-     * Return true if class a is either equivalent to class b, or
-     * if class a is a subclass of class b.
+     * 如果类 a 等价于类 b，或者类 a 是类 b 的子类，则返回 true。
      * Note tht either or both "Class" objects may represent interfaces.
      */
     static  boolean isSubclass(Class a, Class b) {
-	// We rely on the fact that for any given java class or
-        // primtitive type there is a unqiue Class object, so
-	// we can use object equivalence in the comparisons.
+	// 我们依赖于这样一个事实，即对于任何给定的 java 类或原始类型都有一个 unqiue Class 对象，因此我们可以在比较中使用对象等价性。
 	if (a == b) {
 	    return true;
 	}
@@ -831,8 +823,7 @@ public class Introspector {
 //===========================================================================
 
 /**
- * Package private implementation support class for Introspector's
- * internal use.
+ * 封装私有实现支持类以供 Introspector 内部使用。
  */
 
 class GenericBeanInfo extends SimpleBeanInfo {
