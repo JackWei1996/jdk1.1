@@ -1,17 +1,13 @@
 /*
  * @(#)SocketImplFactory.java	1.10 01/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
 
 /**
- * This interface defines a factory for socket implementations. It 
- * is used by the classes <code>Socket</code> and 
- * <code>ServerSocket</code> to create actual socket 
- * implementations. 
+ * 该接口为套接字实现定义了一个工厂。 <code>Socket<code> 和 <code>ServerSocket<code> 类使用它来创建实际的套接字实现。
  *
  * @author  Arthur van Hoff
  * @version 1.10, 12/12/01
