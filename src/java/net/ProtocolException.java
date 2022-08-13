@@ -1,8 +1,7 @@
 /*
- * @(#)ProtocolException.java	1.10 01/12/12
+ * @(#)ProtocolException.java	1.10 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
@@ -10,8 +9,7 @@ package java.net;
 import java.io.IOException;
 
 /**
- * Thrown to indicate that there is an error in the underlying 
- * protocol, such as a TCP error. 
+ * 抛出表示底层协议存在错误，例如 TCP 错误。
  *
  * @author  Chris Warth
  * @version 1.10, 12/12/01
