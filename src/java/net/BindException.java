@@ -1,16 +1,13 @@
 /*
- * @(#)BindException.java	1.9 01/12/12
+ * @(#)BindException.java	1.9 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
 
 /**
- * Signals that an error occurred while attempting to bind a
- * socket to a local address and port.  Typically, the port is
- * in use, or the requested local address could not be assigned.
+ * 表示尝试将套接字绑定到本地地址和端口时发生错误的信号。通常，端口正在使用中，或者无法分配请求的本地地址。
  *
  * @since   JDK1.1
  */
@@ -18,10 +15,7 @@ package java.net;
 public class BindException extends SocketException {
 
     /**
-     * Constructs a new BindException with the specified detail 
-     * message as to why the bind error occurred.
-     * A detail message is a String that gives a specific 
-     * description of this error.
+     * 使用指定的详细消息构造一个新的 BindException，以说明发生绑定错误的原因。详细消息是一个字符串，它给出了这个错误的具体描述。
      * @param msg the detail message
      * @since   JDK1.1
      */
