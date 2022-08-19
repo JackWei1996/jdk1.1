@@ -1,8 +1,7 @@
 /*
- * @(#)MalformedURLException.java	1.10 01/12/12
+ * @(#)MalformedURLException.java	1.10 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
@@ -10,9 +9,7 @@ package java.net;
 import java.io.IOException;
 
 /**
- * Thrown to indicate that a malformed URL has occurred. Either no 
- * legal protocol could be found in a specification string or the 
- * string could not be parsed. 
+ * 抛出表示出现了格式错误的 URL。在规范字符串中找不到合法协议，或者无法解析该字符串。
  *
  * @author  Arthur van Hoff
  * @version 1.10, 12/12/01
