@@ -1,26 +1,19 @@
 /*
- * @(#)ConnectException.java	1.7 01/12/12
+ * @(#)ConnectException.java	1.7 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
 
 /**
- * Signals that an error occurred while attempting to connect a
- * socket to a remote address and port.  Typically, the connection
- * was refused remotely (e.g., no process is listening on the 
- * remote address/port).
+ * 表示尝试将套接字连接到远程地址和端口时发生错误的信号。通常，连接被远程拒绝（例如，没有进程正在侦听远程地址端口）。
  *
  * @since   JDK1.1
  */
 public class ConnectException extends SocketException {
     /**
-     * Constructs a new ConnectException with the specified detail 
-     * message as to why the connect error occurred.
-     * A detail message is a String that gives a specific 
-     * description of this error.
+     * 使用指定的详细消息构造一个新的 ConnectException，以说明发生连接错误的原因。详细消息是一个字符串，它给出了这个错误的具体描述。
      * @param msg the detail message
      * @since   JDK1.1
      */
