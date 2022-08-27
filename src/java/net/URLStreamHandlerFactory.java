@@ -1,18 +1,15 @@
 /*
- * @(#)URLStreamHandlerFactory.java	1.10 01/12/12
+ * @(#)URLStreamHandlerFactory.java	1.10 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
 
 /**
- * This interface defines a factory for <code>URL</code> stream 
- * protocol handlers. 
- * <p>
- * It is used by the <code>URL</code> class to create a 
- * <code>URLStreamHandler</code> for a specific protocol. 
+ * 此接口为 URL 流协议处理程序定义了一个工厂。
+ *
+ * URL 类使用它来为特定协议创建 URLStreamHandler。
  *
  * @author  Arthur van Hoff
  * @version 1.10, 12/12/01
