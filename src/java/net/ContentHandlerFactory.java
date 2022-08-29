@@ -1,19 +1,15 @@
 /*
- * @(#)ContentHandlerFactory.java	1.5 01/12/12
+ * @(#)ContentHandlerFactory.java	1.5 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
 
 /**
- * This interface defines a factory for content handlers. An 
- * implementation of this interface should map a MIME type into an 
- * instance of <code>ContentHandler</code>. 
+ * 该接口为内容处理程序定义了一个工厂。此接口的实现应将 MIME 类型映射到 ContentHandler 的实例。
  * <p>
- * This interface is used by the <code>URLStreamHandler</code> class 
- * to create a <code>ContentHandler</code> for a MIME type. 
+ * URLStreamHandler类使用此接口为 MIME 类型创建 ContentHandler。
  *
  * @author  James Gosling
  * @version 1.5, 12/12/01
