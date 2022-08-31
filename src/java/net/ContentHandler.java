@@ -1,8 +1,7 @@
 /*
- * @(#)ContentHandler.java	1.9 01/12/12
+ * @(#)ContentHandler.java	1.9 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
@@ -10,21 +9,13 @@ package java.net;
 import java.io.IOException;
 
 /**
- * The abstract class <code>ContentHandler</code> is the superclass 
- * of all classes that read an <code>Object</code> from a 
- * <code>URLConnection</code>. 
+ * 抽象类 ContentHandler 是从 URLConnection读取 Object 的所有类的超类。
  * <p>
- * An application does not generally call the 
- * <code>getContent</code> method in this class directly. Instead, an 
- * application calls the <code>getContent</code> method in class 
- * <code>URL</code> or in <code>URLConnection</code>.
- * The application's content handler factory (an instance of a class that 
- * implements the interface <code>ContentHandlerFactory</code> set 
- * up by a call to <code>setContentHandler</code>) is 
- * called with a <code>String</code> giving the MIME type of the 
- * object being received on the socket. The factory returns an 
- * instance of a subclass of <code>ContentHandler</code>, and its 
- * <code>getContent</code> method is called to create the object. 
+ * 应用程序通常不会直接调用此类中的 getContent 方法。
+ * 相反，应用程序调用类 URL 或 URLConnection 中的 <code>getContent<code> 方法。
+ * 应用程序的内容处理程序工厂（实现通过调用 setContentHandler 设置的接口 ContentHandlerFactory 的类的实例）
+ * 使用 String 调用，并给出 MIME在套接字上接收的对象的类型。
+ * 工厂返回一个 ContentHandler 子类的实例，并调用它的 getContent 方法来创建对象。
  *
  * @author  James Gosling
  * @version 1.9, 12/12/01
@@ -38,9 +29,7 @@ import java.io.IOException;
  */
 abstract public class ContentHandler {
     /** 
-     * Given a URL connect stream positioned at the beginning of the 
-     * representation of an object, this method reads that stream and 
-     * creates an object from it. 
+     * 给定一个位于对象表示开头的 URL 连接流，此方法读取该流并从中创建一个对象。
      *
      * @param      urlc   a URL connection.
      * @return     the object read by the <code>ContentHandler</code>.
