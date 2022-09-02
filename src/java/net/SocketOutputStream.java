@@ -1,8 +1,7 @@
 /*
- * @(#)SocketOutputStream.java	1.13 01/12/12
+ * @(#)SocketOutputStream.java	1.13 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
@@ -11,9 +10,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
- * This stream extends FileOutputStream to implement a
- * SocketOutputStream. Note that this class should <b>NOT</b> be
- * public.
+ * 此流扩展 FileOutputStream 以实现 SocketOutputStream。请注意，这个类应该 NOT是公共的。
  *
  * @version     1.13, 12/12/01
  * @author 	Jonathan Payne
@@ -25,9 +22,7 @@ class SocketOutputStream extends FileOutputStream
     private byte temp[] = new byte[1];
     
     /**
-     * Creates a new SocketOutputStream. Can only be called
-     * by a Socket. This method needs to hang on to the owner Socket so
-     * that the fd will not be closed.
+     * 创建一个新的 SocketOutputStream。只能由 Socket 调用。这个方法需要挂在所有者的 Socket 上，这样 fd 就不会被关闭。
      * @param impl the socket output stream inplemented
      */
     SocketOutputStream(SocketImpl impl) throws IOException {
