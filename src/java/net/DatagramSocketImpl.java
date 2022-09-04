@@ -1,8 +1,7 @@
 /*
- * @(#)DatagramSocketImpl.java	1.12 01/12/12
+ * @(#)DatagramSocketImpl.java	1.12 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
@@ -40,8 +39,7 @@ public abstract class DatagramSocketImpl implements SocketOptions {
     protected abstract void bind(int lport, InetAddress laddr) throws SocketException;
  
     /**
-     * Sends a datagram packet. The packet contains the data and the
-     * destination address to send the packet to.
+     * 发送一个数据报包。数据包包含数据和要将数据包发送到的目标地址。
      * @param packet to be sent.
      * @since   JDK1.1
      */
