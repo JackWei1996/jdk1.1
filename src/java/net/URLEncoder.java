@@ -1,8 +1,7 @@
 /*
- * @(#)URLEncoder.java	1.13 01/12/12
+ * @(#)URLEncoder.java	1.13 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
@@ -13,9 +12,7 @@ import java.io.IOException;
 import java.util.BitSet;
 
 /**
- * The class contains a utility method for converting a 
- * <code>String</code> into a MIME format called 
- * "<code>x-www-form-urlencoded</code>" format. 
+ * 该类包含一个实用方法，用于将 String 转换为称为“x-www-form-urlencoded”格式的 MIME 格式。
  * <p>
  * To convert a <code>String</code>, each character is examined in turn:
  * <ul>
@@ -37,8 +34,7 @@ public class URLEncoder {
     static BitSet dontNeedEncoding;
     static final int caseDiff = ('a' - 'A');
 
-    /* The list of characters that are not encoded have been determined by 
-       referencing O'Reilly's "HTML: The Definitive Guide" (page 164). */
+    /* 未编码的字符列表已通过参考 O'Reilly 的“HTML：权威指南”（第 164 页）确定。 */
        
     static {
 	dontNeedEncoding = new BitSet(256);
