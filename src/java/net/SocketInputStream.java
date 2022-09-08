@@ -1,8 +1,7 @@
 /*
- * @(#)SocketInputStream.java	1.17 01/12/12
+ * @(#)SocketInputStream.java	1.17 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
@@ -11,9 +10,7 @@ import java.io.IOException;
 import java.io.FileInputStream;
 
 /**
- * This stream extends FileInputStream to implement a
- * SocketInputStream. Note that this class should <b>NOT</b> be
- * public.
+ * 此流扩展 FileInputStream 以实现 SocketInputStream。请注意，这个类应该 NOT 是公共的。
  *
  * @version     1.17, 12/12/01
  * @author	Jonathan Payne
@@ -26,9 +23,7 @@ class SocketInputStream extends FileInputStream
     private byte temp[] = new byte[1];
 
     /**
-     * Creates a new SocketInputStream. Can only be called
-     * by a Socket. This method needs to hang on to the owner Socket so
-     * that the fd will not be closed.
+     * 创建一个新的 SocketInputStream。只能由 Socket 调用。这个方法需要挂在所有者的 Socket 上，这样 fd 就不会被关闭。
      * @param impl the implemented socket input stream
      */
     SocketInputStream(SocketImpl impl) throws IOException {
@@ -37,8 +32,7 @@ class SocketInputStream extends FileInputStream
     }
 
     /** 
-     * Reads into an array of bytes at the specified offset using
-     * the received socket primitive. 
+     * 使用接收到的套接字原语读取指定偏移量的字节数组。
      * @param b the buffer into which the data is read
      * @param off the start offset of the data
      * @param len the maximum number of bytes read
