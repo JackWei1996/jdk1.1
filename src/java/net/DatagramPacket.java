@@ -1,8 +1,7 @@
 /*
- * @(#)DatagramPacket.java	1.14 01/12/12
+ * @(#)DatagramPacket.java	1.14 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
@@ -10,11 +9,8 @@ package java.net;
 /**
  * This class represents a datagram packet. 
  * <p>
- * Datagram packets are used to implement a connectionless packet 
- * delivery service. Each message is routed from one machine to 
- * another based solely on information contained within that packet. 
- * Multiple packets sent from one machine to another might be routed 
- * differently, and might arrive in any order. 
+ * 数据报包用于实现无连接的包传递服务。每条消息仅根据该数据包中包含的信息从一台机器路由到另一台机器。
+ * 从一台机器发送到另一台机器的多个数据包可能会以不同的方式路由，并且可能以任何顺序到达。
  *
  * @author  Pavani Diwanji
  * @version 1.14, 12/12/01
@@ -23,8 +19,7 @@ package java.net;
 public final 
 class DatagramPacket {
     /*
-     * The fields of this class are package-private since DatagramSocketImpl 
-     * classes needs to access them.
+     * 此类的字段是包私有的，因为 DatagramSocketImpl 类需要访问它们。
      */
     byte[] buf;
     int length;
