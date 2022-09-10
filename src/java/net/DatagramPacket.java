@@ -48,10 +48,8 @@ class DatagramPacket {
     }
     
     /**
-     * Constructs a datagram packet for sending packets of length 
-     * <code>ilength</code> to the specified port number on the specified 
-     * host. The <code>length</code> argument must be less than or equal 
-     * to <code>ibuf.length</code>. 
+     * 构造一个数据报包，用于将长度为 ilength 的数据包发送到指定主机上的指定端口号。
+     * length参数必须小于或等于 ibuf.length。
      *
      * @param   ibuf      the packet data.
      * @param   ilength   the packet length.
@@ -75,11 +73,9 @@ class DatagramPacket {
     }
     
     /**
-     * Returns the IP address of the machine to which this datagram is being
-     * sent or from which the datagram was received.
+     * 返回此数据报被发送到或接收到数据报的机器的 IP 地址。
      *
-     * @return  the IP address of the machine to which this datagram is being
-     *          sent or from which the datagram was received.
+     * @return  发送该数据报的机器的 IP 地址或接收该数据报的机器的 IP 地址。
      * @see     InetAddress
      * @since   JDK1.0
      */
@@ -88,11 +84,9 @@ class DatagramPacket {
     }
     
     /**
-     * Returns the port number on the remote host to which this datagram is
-     * being sent or from which the datagram was received.
+     * 返回此数据报被发送到或从其接收到的远程主机上的端口号。
      *
-     * @return  the port number on the remote host to which this datagram is
-     *          being sent or from which the datagram was received.
+     * @return  发送该数据报或接收该数据报的远程主机上的端口号。
      * @since   JDK1.0
      */
     public synchronized int getPort() {
@@ -110,8 +104,7 @@ class DatagramPacket {
     }
     
     /**
-     * Returns the length of the data to be sent or the length of the
-     * data received.
+     * 返回要发送的数据的长度或接收的数据的长度。
      *
      * @return  the length of the data to be sent or the length of the
      *          data received.
