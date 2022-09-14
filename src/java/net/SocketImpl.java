@@ -1,8 +1,7 @@
 /*
- * @(#)SocketImpl.java	1.25 01/12/12
+ * @(#)SocketImpl.java	1.25 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
@@ -13,12 +12,9 @@ import java.io.OutputStream;
 import java.io.FileDescriptor;
 
 /**
- * The abstract class <code>SocketImpl</code> is a common superclass 
- * of all classes that actually implement sockets. It is used to 
- * create both client and server sockets. 
+ * 抽象类 SocketImpl 是所有实际实现套接字的类的公共超类。它用于创建客户端和服务器套接字。
  * <p>
- * A "plain" socket implements these methods exactly as 
- * described, without attempting to go through a firewall or proxy. 
+ * “普通”套接字完全按照描述实现这些方法，而不试图通过防火墙或代理。
  *
  * @author  unascribed
  * @version 1.25, 12/12/01
@@ -97,10 +93,7 @@ public abstract class SocketImpl implements SocketOptions {
     protected abstract void bind(InetAddress host, int port) throws IOException;
 
     /**
-     * Sets the maximum queue length for incoming connection indications 
-     * (a request to connect) to the <code>count</code> argument. If a 
-     * connection indication arrives when the queue is full, the 
-     * connection is refused. 
+     * 将传入连接指示（连接请求）的最大队列长度设置为 <code>count<code> 参数。如果队列满时有连接指示到达，则拒绝连接。
      *
      * @param      backlog   the maximum length of the queue.
      * @exception  IOException  if an I/O error occurs when creating the queue.
@@ -139,8 +132,7 @@ public abstract class SocketImpl implements SocketOptions {
     protected abstract OutputStream getOutputStream() throws IOException;
 
     /**
-     * Returns the number of bytes that can be read from this socket
-     * without blocking.
+     * 返回可以不阻塞地从此套接字读取的字节数。
      *
      * @return     the number of bytes that can be read from this socket
      *             without blocking.
