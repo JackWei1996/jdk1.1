@@ -1,8 +1,7 @@
 /*
- * @(#)HttpURLConnection.java	1.11 01/12/12
+ * @(#)HttpURLConnection.java	1.11 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
@@ -52,9 +51,7 @@ abstract public class HttpURLConnection extends URLConnection {
     }
     
     /**
-     * Sets whether HTTP redirects  (requests with response code 3xx) should 
-     * be automatically followed by this class.  True by default.  Applets
-     * cannot change this variable.
+     * 设置该类是否应自动跟随 HTTP 重定向（响应代码为 3xx 的请求）。默认为真。小程序无法更改此变量。
      * @since   JDK1.1
      */
     public static void setFollowRedirects(boolean set) {
@@ -94,10 +91,7 @@ abstract public class HttpURLConnection extends URLConnection {
 	if (connected) {
 	    throw new ProtocolException("Can't reset method: already connected");
 	}
-	// This restriction will prevent people from using this class to 
-	// experiment w/ new HTTP methods using java.  But it should 
-	// be placed for security - the request String could be
-	// arbitrarily long.
+	// 这个限制将阻止人们使用这个类来尝试使用 java 的新 HTTP 方法。但为了安全起见应该放置它 - 请求字符串可以任意长。
 
 	for (int i = 0; i < methods.length; i++) {
 	    if (methods[i].equals(method)) {
