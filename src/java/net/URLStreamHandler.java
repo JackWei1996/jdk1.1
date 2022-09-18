@@ -1,8 +1,7 @@
 /*
- * @(#)URLStreamHandler.java	1.24 01/12/12
+ * @(#)URLStreamHandler.java	1.24 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
@@ -14,17 +13,11 @@ import java.io.OutputStream;
 import java.util.Hashtable;
 
 /**
- * The abstract class <code>URLStreamHandler</code> is the common
- * superclass for all stream protocol handlers. A stream protocol
- * handler knows how to make a connection for a particular protocol
- * type, such as <code>http</code>, <code>ftp</code>, or
- * <code>gopher</code>.
+ * 抽象类 URLStreamHandler 是所有流协议处理程序的通用超类。
+ * 流协议处理程序知道如何为特定协议类型建立连接，例如 http、ftp 或 gopher。
  *
- * <p>In most cases, an instance of a <code>URLStreamHandler</code>
- * subclass is not created directly by an application. Rather, the
- * first time a protocol name is encountered when constructing a
- * <code>URL</code>, the appropriate stream protocol handler is
- * automatically loaded.
+ * 在大多数情况下，URLStreamHandler子类的实例不是由应用程序直接创建的。
+ * 相反，在构造 URL 时第一次遇到协议名称时，会自动加载适当的流协议处理程序。
  *
  * @author  James Gosling
  *
@@ -53,33 +46,21 @@ public abstract class URLStreamHandler {
     abstract protected URLConnection openConnection(URL u) throws IOException;
 
     /** 
-     * Parses the string representation of a <code>URL</code> into a 
-     * <code>URL</code> object. 
+     * 将 URL< 的字符串表示形式解析为 URL 对象。
      *
-     * <p>If there is any inherited context, then it has already been
-     * copied into the <code>URL</code> argument.
+     * 如果有任何继承的上下文，那么它已经被复制到 URL 参数中。
      *
-     * <p> The <code>parseURL</code> method of
-     * <code>URLStreamHandler</code> parses the string representation
-     * as if it were an <code>http</code> specification. Most URL
-     * protocol families have a similar parsing. A stream protocol
-     * handler for a protocol that has a different syntax must
-     * override this routine.
+     * URLStreamHandler 的 parseURL 方法解析字符串表示，就好像它是 http 规范一样。
+	 * 大多数 URL 协议系列都有类似的解析。具有不同语法的协议的流协议处理程序必须覆盖此例程。
      *
-     * <p>If the file component of the URL argument contains a
-     * question mark (as with CGI HTTP URLs), the context is
-     * considered to be the URL's file component up to the first /
-     * before the question mark, not including the question mark or
-     * the directory before it. For example, if the URL was:
-     *
+     * 如果 URL 参数的文件组件包含问号（与 CGI HTTP URL 一样），则上下文被认为是 URL 的文件组件，
+	 * 直到问号之前的第一个，不包括问号或它之前的目录。例如，如果 URL 是：
      * <br><pre>    http://www.foo.com/dir/cgi-bin?foo=bar/baz</pre>
      *
-     * and the spec argument was
-     *
+     * 并且规范论点是
      * <br><pre>    quux.html</pre>
      *
-     * the resulting URL would be:
-     *
+     * 生成的 URL 将是：
      * <br><pre>    http://www.foo.com/dir/quux.html</pre>.
      * 
      *
