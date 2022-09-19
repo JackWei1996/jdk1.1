@@ -70,14 +70,9 @@ public abstract class URLStreamHandler {
      * @param spec the <code>String</code> representing the URL that
      * must be parsed.
      *
-     * @param start the character index at which to begin
-     * parsing. This is just past the '<code>:</code>' (if there is
-     * one) that specifies the determination of the protocol name.
+     * @param start 开始解析的字符索引。这刚好超过指定协议名称确定的':'（如果有的话）。
      *
-     * @param limit the character position to stop parsing at. This is
-     * the end of the string or the position of the "<code>#</code>"
-     * character, if present. All information after the sharp sign
-     * indicates an anchor.
+     * @param limit 停止解析的字符位置。这是字符串的结尾或“#”字符的位置（如果存在）。尖号后面的所有信息都表示一个锚点。
      *
      * @since JDK1.0 
      */
@@ -183,9 +178,7 @@ public abstract class URLStreamHandler {
     }
 
     /**
-     * Sets the fields of the <code>URL</code> argument to the
-     * indicated values.  Only classes derived from URLStreamHandler
-     * are supposed to be able to call the set method on a URL.
+     * 将 URL 参数的字段设置为指示的值。只有从 URLStreamHandler 派生的类才应该能够调用 URL 上的 set 方法。
      *
      * @param   u         the URL to modify.
      * @param   protocol  the protocol name.
