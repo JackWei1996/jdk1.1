@@ -1,8 +1,7 @@
 /*
- * @(#)MulticastSocket.java	1.20 01/12/12
+ * @(#)MulticastSocket.java	1.20 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
@@ -11,17 +10,11 @@ import java.io.IOException;
 import java.io.InterruptedIOException;
 
 /**
- * The multicast datagram socket class is useful for sending
- * and receiving IP multicast packets.  A MulticastSocket is
- * a (UDP) DatagramSocket, with additional capabilities for
- * joining "groups" of other multicast hosts on the internet.
+ * 多播数据报套接字类对于发送和接收 IP 多播数据包很有用。
+ * MulticastSocket 是一个 (UDP) DatagramSocket，具有加入 Internet 上其他多播主机“组”的附加功能。
  * <P>
- * A multicast group is specified by a class D IP address, those
- * in the range <CODE>224.0.0.1</CODE> to <CODE>239.255.255.255</CODE>, 
- * inclusive, and by a standard UDP port number.  One would join a 
- * multicast group by first creating a MulticastSocket with the desired
- * port, then invoking the <CODE>joinGroup(InetAddress groupAddr)</CODE>
- * method:
+ * 多播组由 D 类 IP 地址指定，范围在 224.0.0.1 到 239.255.255.255（含）和标准 UDP 端口号。
+ * 可以通过首先使用所需端口创建 MulticastSocket，然后调用 joinGroup(InetAddress groupAddr) 方法来加入多播组：
  * <PRE>
  * // join a Multicast group and send the group salutations
  * ...
