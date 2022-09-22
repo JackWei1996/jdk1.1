@@ -34,17 +34,12 @@ import java.io.InterruptedIOException;
  * s.leaveGroup(group);
  * </PRE>
  * 
- * When one sends a message to a multicast group, <B>all</B> subscribing
- * recipients to that host and port receive the message (within the
- * time-to-live range of the packet, see below).  The socket needn't
- * be a member of the multicast group to send messages to it.
+ * 当一个人向多播组发送消息时，所有订阅该主机和端口的接收者都会收到该消息（在数据包的生存时间范围内，见下文）。
+ * 套接字不必是多播组的成员即可向其发送消息。
  * <P>
- * When a socket subscribes to a multicast group/port, it receives
- * datagrams sent by other hosts to the group/port, as do all other
- * members of the group and port.  A socket relinquishes membership
- * in a group by the leaveGroup(InetAddress addr) method.  <B> 
- * Multiple MulticastSocket's</B> may subscribe to a multicast group
- * and port concurrently, and they will all receive group datagrams.
+ * 当套接字订阅多播组端口时，它会接收其他主机发送到组端口的数据报，组和端口的所有其他成员也是如此。
+ * 套接字通过 leaveGroup(InetAddress addr) 方法放弃组中的成员资格。
+ * 多个MulticastSocket 的可以同时订阅一个组播组和端口，它们都将接收组数据报。
  * <P>
  * Currently applets are not allowed ot use multicast sockets.
  *
@@ -70,10 +65,8 @@ class MulticastSocket extends DatagramSocket {
 	super(port);
     }
 
-    /* do the work of creating a vanilla multicast socket.  It is
-     * important that the signature of this method not change,
-     * even though it is package-private, since it is overrides a
-     * method from DatagramSocket, which must not set SO_REUSEADDR.
+    /* 做创建香草多播套接字的工作。重要的是，此方法的签名不会更改，
+    即使它是包私有的，因为它覆盖了 DatagramSocket 中的方法，该方法不得设置 SO_REUSEADDR。
      */
     void create(int port, InetAddress ignore) throws SocketException {
 	SecurityManager security = System.getSecurityManager();
