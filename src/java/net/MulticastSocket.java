@@ -84,11 +84,8 @@ class MulticastSocket extends DatagramSocket {
     }
     
     /**
-     * Set the default time-to-live for multicast packets sent out
-     * on this socket.  The TTL sets the IP time-to-live for
-     * <code>DatagramPackets</code> sent to a MulticastGroup, which
-     * specifies how many "hops" that the packet will be forwarded
-     * on the network before it expires.
+     * 设置在此套接字上发出的多播数据包的默认生存时间。
+	 * TTL 设置发送到 MulticastGroup 的 DatagramPackets的 IP 生存时间，它指定数据包在到期之前将在网络上转发多少“跳”。
      * <P>
      * The ttl is an <b>unsigned</b> 8-bit quantity, and so <B>must</B> be
      * in the range <code> 0 < ttl <= 0xFF </code>.
@@ -141,9 +138,7 @@ class MulticastSocket extends DatagramSocket {
     }
 
     /**
-     * Set the outgoing network interface for multicast packets on this
-     * socket, to other than the system default.  Useful for multihomed
-     * hosts.
+     * 将此套接字上的多播数据包的传出网络接口设置为系统默认值以外的接口。对于多宿主主机很有用。
      * @since   JDK1.1
      */
     public void setInterface(InetAddress inf) throws SocketException {
@@ -160,16 +155,9 @@ class MulticastSocket extends DatagramSocket {
     }
     
     /**
-     * Sends a datagram packet to the destination, with a TTL (time-
-     * to-live) other than the default for the socket.  This method
-     * need only be used in instances where a particular TTL is desired;
-     * otherwise it is preferable to set a TTL once on the socket, and
-     * use that default TTL for all packets.  This method does <B>not
-     * </B> alter the default TTL for the socket.
-     * @param p	is the packet to be sent. The packet should contain
-     * the destination multicast ip address and the data to be sent.
-     * One does not need to be the member of the group to send
-     * packets to a destination multicast address.
+     * 将数据报包发送到目的地，其 TTL（生存时间）不是套接字的默认值。这种方法只需要在需要特定 TTL 的情况下使用；
+	 * 否则最好在套接字上设置一次 TTL，并为所有数据包使用该默认 TTL。此方法不会  而不是  更改套接字的默认 TTL。
+     * @param p	是要发送的数据包。数据包应包含目标多播 IP 地址和要发送的数据。无需成为组的成员即可将数据包发送到目标多播地址。
      * @param ttl optional time to live for multicast packet.
      * default ttl is 1.
      * @exception IOException is raised if an error occurs i.e
@@ -181,9 +169,7 @@ class MulticastSocket extends DatagramSocket {
     public synchronized void send(DatagramPacket p, byte ttl)
 	 throws IOException {
 
-        // Security manager makes sure that the multicast address is
-	// is allowed one and that the ttl used is less
-	// than the allowed maxttl.
+        // 安全管理器确保多播地址是允许的，并且使用的 ttl 小于允许的 maxttl。
 	SecurityManager security = System.getSecurityManager();
 	if (security != null) {
 	    if (p.getAddress().isMulticastAddress()) {
