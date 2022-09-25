@@ -23,10 +23,8 @@ package java.net;
 interface SocketOptions {
 
     /**
-     * Enable/disable the option specified by <I>optID</I>.  If the option
-     * is to be enabled, and it takes an option-specific "value",  this is 
-     * passed in <I>value</I>.  The actual type of value is option-specific,
-     * and it is an error to pass something that isn't of the expected type:
+     * 启用禁用 optID 指定的选项。如果要启用该选项，并且它需要一个特定于选项的“值”，
+     * 则在 value 中传递。值的实际类型是特定于选项的，传递不属于预期类型的内容是错误的：
      * <BR><PRE>
      * SocketImpl s;
      * ...
@@ -50,12 +48,9 @@ interface SocketOptions {
      *    // OK - disables SO_LINGER
      * </PRE>
      * <BR>
-     * For an option that requires a particular parameter, 
-     * setting its value to anything other than 
-     * <I>Boolean(false)</I> implicitly enables it.
+     * 对于需要特定参数的选项，将其值设置为 Boolean(false) 以外的任何值都会隐式启用它。
      * <BR>
-     * Throws SocketException if the option is unrecognized, 
-     * the socket is closed, or some low-level error occurred 
+     * 如果选项无法识别、套接字已关闭或发生一些低级错误，则抛出 SocketException
      * <BR>
      * @param optID identifies the option 
      * @param value the parameter of the socket option
