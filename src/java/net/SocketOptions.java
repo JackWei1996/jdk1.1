@@ -1,27 +1,19 @@
 /*
- * @(#)SocketOptions.java	1.7 01/12/12
+ * @(#)SocketOptions.java	1.7 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
 
 /**
- * Interface of methods to get/set socket options.  This interface is
- * implemented by: <B>SocketImpl</B> and  <B>DatagramSocketImpl</B>.  
- * Subclasses of these should override the methods
- * of this interface in order to support their own options.
+ * 获取套接字选项的方法接口。该接口由 SocketImpl 和 DatagramSocketImpl实现。
+ * 这些子类应该覆盖这个接口的方法，以支持他们自己的选项。
  * <P>
- * The methods and constants which specify options in this interface are
- * for implementation only.  If you're not subclassing SocketImpl or
- * DatagramSocketImpl, <B>you won't use these directly.</B> There are
- * type-safe methods to get/set each of these options in Socket, ServerSocket, 
- * DatagramSocket and MulticastSocket.
+ * 在此接口中指定选项的方法和常量仅用于实现。如果您没有继承 SocketImpl 或 DatagramSocketImpl，您将不会直接使用它们。
+ * 在 Socket、ServerSocket、DatagramSocket 和 MulticastSocket 中有类型安全的方法来设置这些选项中的每一个。
  * <P>
- * A subset of the standard BSD-style socket options are supported in the
- * JDK base classes, <B>PlainSocketImpl</B> and <B>PlainDatagramSocketImpl</B>.  
- * A brief description of each and their use is provided.
+ * JDK 基类 PlainSocketImpl 和 PlainDatagramSocketImpl 支持标准 BSD 样式套接字选项的子集。提供了每种方法及其用途的简要说明。
  * <P>
  * @version 1.7, 12/12/01
  * @author David Brown
