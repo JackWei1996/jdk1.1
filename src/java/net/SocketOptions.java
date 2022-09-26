@@ -75,9 +75,7 @@ interface SocketOptions {
      * }
      * </PRE>
      * <P>
-     * For options that take a particular type as a parameter,
-     * getOption(int) will return the paramter's value, else
-     * it will return java.lang.Boolean(false):
+     * 对于将特定类型作为参数的选项，getOption(int) 将返回参数的值，否则将返回 java.lang.Boolean(false)：
      * <PRE>
      * Object o = s.getOption(SO_LINGER);
      * if (o instanceof Integer) {
@@ -99,9 +97,7 @@ interface SocketOptions {
      */
 
     /**
-     * Disable Nagle's algorithm for this connection.  Written data
-     * to the network is not buffered pending acknowledgement of
-     * previously written data.  
+     * 禁用此连接的 Nagle 算法。写入网络的数据不会缓冲等待对先前写入数据的确认。
      *<P>
      * Valid for TCP only: SocketImpl.
      * <P>
