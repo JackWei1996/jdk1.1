@@ -108,15 +108,10 @@ interface SocketOptions {
     public final static int TCP_NODELAY = 0x0001;
 
     /**
-     * Fetch the local address binding of a socket (this option cannot
-     * be "set" only "gotten", since sockets are bound at creation time,
-     * and so the locally bound address cannot be changed).  The default local
-     * address of a socket is INADDR_ANY, meaning any local address on a
-     * multi-homed host.  A multi-homed host can use this option to accept
-     * connections to only one of its addresses (in the case of a 
-     * ServerSocket or DatagramSocket), or to specify its return address 
-     * to the peer (for a Socket or DatagramSocket).  The parameter of 
-     * this option is an InetAddress.
+     * 获取套接字的本地地址绑定（此选项不能“设置”，只能“获取”，因为套接字是在创建时绑定的，因此不能更改本地绑定地址）。
+     * 套接字的默认本地地址是 INADDR_ANY，表示多宿主主机上的任何本地地址。
+     * 多宿主主机可以使用此选项仅接受到其地址之一的连接（在 ServerSocket 或 DatagramSocket 的情况下），
+     * 或指定其到对等方的返回地址（对于 Socket 或 DatagramSocket）。此选项的参数是 InetAddress。
      * <P>
      * This option <B>must</B> be specified in the constructor.
      * <P>
