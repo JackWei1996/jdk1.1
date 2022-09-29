@@ -124,17 +124,17 @@ interface SocketOptions {
 
     public final static int SO_BINDADDR = 0x000F;
 
-    /** Sets SO_REUSEADDR for a socket.  This is used only for MulticastSockets
-     * in java, and it is set by default for MulticastSockets.
+    /**
+     * 设置套接字的SO_REUSEADDR。这仅用于MulticastSockets
+     * 在java中，默认情况下为MulticastSockets设置。
      * <P>
      * Valid for: DatagramSocketImpl
      */
 
     public final static int SO_REUSEADDR = 0x04;
 
-    /** Set which outgoing interface on which to send multicast packets.  
-     * Useful on hosts with multiple network interfaces, where applications
-     * want to use other than the system default.  Takes/returns an InetAddress.
+    /** 设置在哪个传出接口上发送多播数据包。
+     * 适用于具有多个网络接口的主机，其中应用程序要使用系统默认值以外的其他值。获取/返回InetAddress。
      * <P>
      * Valid for Multicast: DatagramSocketImpl
      * <P>
