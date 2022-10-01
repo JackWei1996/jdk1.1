@@ -145,14 +145,11 @@ interface SocketOptions {
     public final static int IP_MULTICAST_IF = 0x10;
 
     /**
-     * Specify a linger-on-close timeout.  This option disables/enables 
-     * immediate return from a <B>close()</B> of a TCP Socket.  Enabling 
-     * this option with a non-zero Integer <I>timeout</I> means that a 
-     * <B>close()</B> will block pending the transmission and acknowledgement
-     * of all data written to the peer, at which point the socket is closed
-     * <I>gracefully</I>.  Upon reaching the linger timeout, the socket is
-     * closed <I>forcefully</I>, with a TCP RST. Enabling the option with a 
-     * timeout of zero does a forceful close immediately.
+     * 指定关闭超时时的延迟。此选项禁用/启用从TCP套接字的<B>close（）</B>立即返回。
+     * 有可能此选项具有非零整数<I>超时</I>意味着<B>close（）</B>将阻塞，
+     * 等待传输和确认写入到对等方的所有数据，此时套接字关闭
+     * <I>优雅</I>。达到延迟超时时，套接字为使用TCP RST强制关闭<I>。使用
+     * 超时为零会立即强制关闭。
      * <P>
      * <B>Note:</B>The actual implementation of SO_LINGER in the OS varies 
      * across platforms.
