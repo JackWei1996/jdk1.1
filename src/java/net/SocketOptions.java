@@ -169,10 +169,8 @@ interface SocketOptions {
      * DatagramSocket.receive();
      * </PRE>
      * <P>
-     * The option must be set prior to entering a blocking operation to take effect.
-     * If the timeout expires and the operation would continue to block,
-     * <B>java.io.InterruptedIOException</B> is raised.  The Socket is not closed
-     * in this case.
+     * 必须在进入阻塞操作之前设置该选项才能生效。如果超时过期，操作将继续阻塞，
+     * <B>java.io。引发InterruptedIOException</B>。套接字未关闭在这种情况下。
      * <P>
      * Valid for all sockets: SocketImpl, DatagramSocketImpl
      * <P>
