@@ -1,8 +1,7 @@
 /*
- * @(#)DatagramSocket.java	1.27 01/12/12
+ * @(#)DatagramSocket.java	1.27 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
@@ -14,11 +13,8 @@ import java.io.InterruptedIOException;
 /**
  * This class represents a socket for sending and receiving datagram packets.
  * <p>
- * A datagram socket is the sending or receiving point for a 
- * connectionless packet delivery service. Each packet sent or 
- * received on a datagram socket is individually addressed and 
- * routed. Multiple packets sent from one machine to another may be 
- * routed differently, and may arrive in any order. 
+ * 数据报套接字是无连接数据包传送服务。发送的每个数据包或在数据报套接字上接收的是单独寻址和路由。
+ * 从一台机器发送到另一台机器的多个数据包可能是路线不同，可能以任何顺序到达。
  *
  * @author  Pavani Diwanji
  * @version 1.27, 12/12/01
