@@ -56,11 +56,9 @@ class DatagramSocket {
     }
 
     /**
-     * Constructs a datagram socket and binds it to any available port 
-     * on the local host machine. 
+     * 构造数据报套接字并将其绑定到本地主机上的任何可用端口。
      *
-     * @exception  java.net.SocketException  if the socket could not be opened,
-     *               or the socket could not bind to the specified local port.
+     * @exception  java.net.SocketException  如果无法打开套接字，或者套接字无法绑定到指定的本地端口。
      * @since      JDK1.0
      */
     public DatagramSocket() throws SocketException {
