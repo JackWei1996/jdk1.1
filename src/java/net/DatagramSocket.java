@@ -67,12 +67,10 @@ class DatagramSocket {
     }
 
     /**
-     * Constructs a datagram socket and binds it to the specified port 
-     * on the local host machine. 
+     * 构造数据报套接字并将其绑定到指定端口在本地主机上。
      *
      * @param      local   port to use.
-     * @exception  java.net.SocketException  if the socket could not be opened,
-     *               or the socket could not bind to the specified local port.
+     * @exception  java.net.SocketException  如果无法打开套接字，或者套接字无法绑定到指定的本地端口。
      * @since      JDK1.0
      */
     public DatagramSocket(int port) throws SocketException {
@@ -80,8 +78,7 @@ class DatagramSocket {
     }
 
     /**
-     * Creates a datagram socket, bound to the specified local
-     * address.  The local port must be between 0 and 65535 inclusive.
+     * 创建绑定到指定本地地址的数据报套接字。本地端口必须介于0到65535之间（包括0和65535）。
      * @param port local port to use
      * @param laddr local address to bind
      * @since   JDK1.1
