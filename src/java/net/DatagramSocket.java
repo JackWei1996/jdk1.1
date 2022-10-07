@@ -90,10 +90,8 @@ class DatagramSocket {
 	create(port, laddr);
     }
 
-    /* do the work of creating a vanilla datagramsocket.  It is
-     * important that the signature of this method not change,
-     * even though it is package-private since it is overridden by
-     * MulticastSocket, which must set SO_REUSEADDR.
+    /* 完成创建vanilla数据报套接字的工作。
+    *它是重要的是，此方法的签名不会更改，即使它是包私有的，因为它被MulticastSocket，必须设置SO_REUSEADDR。
      */
     void create(int port, InetAddress laddr) throws SocketException {
 	SecurityManager sec = System.getSecurityManager();
