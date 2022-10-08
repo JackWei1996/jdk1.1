@@ -113,10 +113,7 @@ class DatagramSocket {
     }
 
     /**
-     * Sends a datagram packet from this socket. The 
-     * <code>DatagramPacket</code> includes information indicating the 
-     * data to be sent, its length, the IP address of the remote host, 
-     * and the port number on the remote host. 
+     * 从此套接字发送数据报数据包。这个 DatagramPacket 包含指示要发送的数据、其长度、远程主机的IP地址，和远程主机上的端口号。
      *
      * @param      p   the <code>DatagramPacket</code> to be sent.
      * @exception  java.io.IOException  if an I/O error occurs.
