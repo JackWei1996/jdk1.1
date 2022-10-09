@@ -125,10 +125,7 @@ class DatagramSocket {
 	// check the address is ok wiht the security manager on every send.
 	SecurityManager security = System.getSecurityManager();
 
-	// The reason you want to synchronize on datagram packet
-	// is because you dont want an applet to change the address 
-	// while you are trying to send the packet for example 
-	// after the security check but before the send.
+	// 要同步数据报数据包的原因是因为您不希望小程序更改地址例如，当您尝试发送数据包时在安全检查之后但在发送之前。
 	synchronized (p) {
 	    if (security != null) {
 		if (p.getAddress().isMulticastAddress()) {
