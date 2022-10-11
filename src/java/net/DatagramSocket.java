@@ -141,15 +141,11 @@ class DatagramSocket {
     }
 
     /**
-     * Receives a datagram packet from this socket. When this method 
-     * returns, the <code>DatagramPacket</code>'s buffer is filled with 
-     * the data received. The datagram packet also contains the sender's 
-     * IP address, and the port number on the sender's machine. 
+     * 从这个套接字接收一个数据报包。当这种方法返回时，DatagramPacket的缓冲区被填满接收到的数据。
+	 * 数据报包还包含发送方的信息IP地址，以及发送方机器上的端口号。
      * <p>
-     * This method blocks until a datagram is received. The 
-     * <code>length</code> field of the datagram packet object contains 
-     * the length of the received message. If the message is longer than 
-     * the buffer length, the message is truncated. 
+     * 此方法阻塞，直到接收到数据报。的length字段包含的数据报对象接收消息的长度。
+	 * 如果消息的长度大于缓冲区长度，消息被截断。
      *
      * @param      p   the <code>DatagramPacket</code> into which to place
      *                 the incoming data.
