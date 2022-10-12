@@ -176,10 +176,7 @@ class DatagramSocket {
 			DatagramPacket tmp = new DatagramPacket(new byte[1], 1);
 			impl.receive(tmp);
 
-		    	// silently discard the offending packet and continue:
-			// unknown/malicious entities on nets should not make
-			// runtime throw security exception and disrupt the applet
-			// by sending random datagram packets.
+			// 悄悄丢弃有问题的数据包并继续：网络上的未知/恶意实体不应运行时抛出安全异常并中断applet通过发送随机数据包。
 			continue;
 		    } 
 		} // end of while
