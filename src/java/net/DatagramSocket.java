@@ -215,15 +215,11 @@ class DatagramSocket {
 	return impl.getLocalPort();
     }
 
-    /** Enable/disable SO_TIMEOUT with the specified timeout, in
-     *  milliseconds. With this option set to a non-zero timeout,
-     *  a call to receive() for this DatagramSocket
-     *  will block for only this amount of time.  If the timeout expires,
-     *  a <B>java.io.InterruptedIOException</B> is raised, though the
-     *  ServerSocket is still valid.  The option <B>must</B> be enabled
-     *  prior to entering the blocking operation to have effect.  The 
-     *  timeout must be > 0.
-     *  A timeout of zero is interpreted as an infinite timeout.  
+    /**
+	 * 使用指定的超时（毫秒）启用/禁用SO_TIMEOUT。当此选项设置为非零超时时，
+	 * 对此DatagramSocket的receive（）调用将仅阻塞此时间段。
+	 * 如果超时过期，将显示java.io。尽管ServerSocket仍然有效，但引发了InterruptedIOException。
+	 * 必须在进入阻塞操作之前启用选项<B>才能生效。超时必须大于0。超时为零将被解释为无限超时。
      *
      * @since   JDK1.1
      */
