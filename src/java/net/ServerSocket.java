@@ -1,8 +1,7 @@
 /*
- * @(#)ServerSocket.java	1.30 01/12/12
+ * @(#)ServerSocket.java	1.30 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有 2002 Sun Microsystems, Inc. 保留所有权利。 SUN 专有机密。使用受许可条款的约束。
  */
 
 package java.net;
@@ -11,15 +10,11 @@ import java.io.IOException;
 import java.io.FileDescriptor;
 
 /**
- * This class implements server sockets. A server socket waits for 
- * requests to come in over the network. It performs some operation 
- * based on that request, and then possibly returns a result to the requester.
+ * 此类实现服务器套接字。服务器套接字等待通过网络传入的请求。
+ * 它根据该请求执行一些操作，然后可能将结果返回给请求者。
  * <p>
- * The actual work of the server socket is performed by an instance 
- * of the <code>SocketImpl</code> class. An application can 
- * change the socket factory that creates the socket 
- * implementation to configure itself to create sockets 
- * appropriate to the local firewall. 
+ * 服务器套接字的实际工作由SocketImpl类的实例执行。
+ * 应用程序可以更改创建套接字实现的套接字工厂，以配置自身以创建适合本地防火墙的套接符。
  *
  * @author  unascribed
  * @version 1.30, 12/12/01
