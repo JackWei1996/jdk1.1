@@ -40,16 +40,11 @@ class ServerSocket {
     }
 
     /**
-     * Creates a server socket on a specified port. A port of 
-     * <code>0</code> creates a socket on any free port. 
+     * 在指定端口上创建服务器套接字。端口0在任何可用端口上创建套接字。
      * <p>
-     * The maximum queue length for incoming connection indications (a 
-     * request to connect) is set to <code>50</code>. If a connection 
-     * indication arrives when the queue is full, the connection is refused.
+     * 传入连接指示（连接请求）的最大队列长度设置为<code>50。如果在队列已满时到达连接指示，则会拒绝连接。
      * <p>
-     * If the application has specified a server socket factory, that 
-     * factory's <code>createSocketImpl</code> method is called to create 
-     * the actual socket implementation. Otherwise a "plain" socket is created.
+     * 如果应用程序指定了服务器套接字工厂，则调用该工厂的createSocketImpl方法来创建实际的套接字实现。否则将创建一个“普通”套接字。
      *
      * @param      port  the port number, or <code>0</code> to use any
      *                   free port.
