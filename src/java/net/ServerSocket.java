@@ -80,13 +80,10 @@ class ServerSocket {
     }
 
     /** 
-     * Create a server with the specified port, listen backlog, and 
-     * local IP address to bind to.  The <i>bindAddr</i> argument
-     * can be used on a multi-homed host for a ServerSocket that
-     * will only accept connect requests to one of its addresses.
-     * If <i>bindAddr</i> is null, it will default accepting
-     * connections on any/all local addresses.
-     * The port must be between 0 and 65535, inclusive.
+     * 创建一个具有指定端口、侦听积压工作（backlog）和要绑定到的本地IP地址的服务器。
+	 * bindAddr参数可用于ServerSocket的多宿主主机，该主机只接受对其一个地址的连接请求。
+	 * 如果bindAddr为空，则默认接受任何/所有本地地址上的连接。
+	 * 端口必须介于0到65535之间（包括0和65535）。
      * <P>
      * @param port the local TCP port
      * @param backlog the listen backlog
