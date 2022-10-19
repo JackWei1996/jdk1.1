@@ -143,8 +143,7 @@ class ServerSocket {
     }
 
     /**
-     * Listens for a connection to be made to this socket and accepts 
-     * it. The method blocks until a connection is made. 
+     * 侦听要建立到此套接字的连接并接受它。该方法将阻塞，直到建立连接。
      *
      * @exception  IOException  if an I/O error occurs when waiting for a
      *               connection.
