@@ -156,10 +156,9 @@ class ServerSocket {
     }
 
     /**
-     * Subclasses of ServerSocket use this method to override accept()
-     * to return their own subclass of socket.  So a FooServerSocket
-     * will typically hand this method an <i>empty</i> FooSocket().  On
-     * return from implAccept the FooSocket will be connected to a client.
+     * ServerSocket的子类使用此方法重写accept（）以返回它们自己的套接字子类。
+	 * 因此，FooServerSocket通常会将一个空FooSocket（）传递给这个方法。
+	 * 从implAccept返回时，FooSocket将连接到客户端。
      *
      * @since   JDk1.1
      */
@@ -198,14 +197,11 @@ class ServerSocket {
 	impl.close();
     }
 
-    /** Enable/disable SO_TIMEOUT with the specified timeout, in
-     *  milliseconds.  With this option set to a non-zero timeout,
-     *  a call to accept() for this ServerSocket
-     *  will block for only this amount of time.  If the timeout expires,
-     *  a <B>java.io.InterruptedIOException</B> is raised, though the
-     *  ServerSocket is still valid.  The option <B>must</B> be enabled
-     *  prior to entering the blocking operation to have effect.  The 
-     *  timeout must be > 0.
+    /**
+	 * 使用指定的超时（毫秒）启用/禁用SO_TIMEOUT。
+	 * 如果将此选项设置为非零超时，则此ServerSocket的accept（）调用将仅阻塞此时间量。
+	 * 如果超时过期，将显示java.io。尽管ServerSocket仍然有效，但引发了InterruptedIOException。
+	 * 必须在进入阻止操作之前启用该选项才能生效。超时必须大于0。
      *  A timeout of zero is interpreted as an infinite timeout.  
      *
      * @since   JDK1.1
