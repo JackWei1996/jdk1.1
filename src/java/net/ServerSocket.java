@@ -244,12 +244,8 @@ class ServerSocket {
     private static SocketImplFactory factory;
 
     /**
-     * Sets the server socket implementation factory for the 
-     * application. The factory can be specified only once. 
-     * <p>
-     * When an application creates a new server socket, the socket 
-     * implementation factory's <code>createSocketImpl</code> method is 
-     * called to create the actual socket implementation. 
+     * 为应用程序设置服务器套接字实现工厂。工厂只能指定一次。
+	 * 当应用程序创建新的服务器套接字时，将调用套接字实现工厂的createSocketImpl方法来创建ctual套接字。
      *
      * @param      fac   the desired factory.
      * @exception  IOException  if an I/O error occurs when setting the
