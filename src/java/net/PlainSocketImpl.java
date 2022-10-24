@@ -14,9 +14,7 @@ import java.io.FileDescriptor;
 import java.io.ByteArrayOutputStream;
 
 /**
- * Default Socket Implementation. This implementation does
- * not implement any security checks.  It does support SOCKS version 4.
- * Note this class should <b>NOT</b> be public.
+ * 默认套接字实现。此实现不实现任何安全检查。它确实支持SOCKS版本4。请注意，这个类应该 NOT 是公共的。
  *
  * @author  Steven B. Byrne
  * @version 1.29, 12/12/01
