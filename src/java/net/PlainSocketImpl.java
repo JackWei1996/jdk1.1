@@ -1,8 +1,7 @@
 /*
- * @(#)PlainSocketImpl.java	1.29 01/12/12
+ * @(#)PlainSocketImpl.java	1.29 2001/12/12
  *
- * Copyright 2002 Sun Microsystems, Inc. All rights reserved.
- * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ * 版权所有2002 Sun Microsystems，股份有限公司。保留所有权利。Sun专有/机密。使用受许可条款约束。
  */
 
 package java.net;
