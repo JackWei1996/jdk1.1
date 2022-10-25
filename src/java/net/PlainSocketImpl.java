@@ -51,8 +51,7 @@ class PlainSocketImpl extends SocketImpl
     }
 
     /**
-     * Creates a socket with a boolean that specifies whether this
-     * is a stream socket (true) or an unconnected UDP socket (false).
+     * 使用布尔值创建套接字，指定这是流套接字（true）还是未连接的UDP套接字。
      */
     protected synchronized void create(boolean stream) throws IOException {
 	fd = new FileDescriptor();
